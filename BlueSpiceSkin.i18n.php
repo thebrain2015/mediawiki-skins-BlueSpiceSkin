@@ -8,6 +8,23 @@
 
 $messages = array();
 $messages['en'] = array(
-	'skinname-bluespiceskin' => "BlueSpiceSkin",
-	'bluespiceskin-desc' => "Default skin of BlueSpice for MediaWiki",
+	'bs-my-account' => 'my account',
+	'bs-tools-widgets-headline' => 'WIDGETS',
+	'bs-tools-more-headline' => 'MORE',
+	'bs-tools-button' => 'tools',
+	'bs-watch' => 'watch',
+	'bs-top-bar-settings' => 'Meine Einstellungen',
+	'bs-top-bar-messages' => 'Nachrichten',
+	'bs-top-bar-review' => '$1 {{PLURAL:$1|Review|Reviews}}'
 );
+$messages['de'] = array(
+	'bs-my-account' => 'mein account',
+	'bs-tools-widgets-headline' => 'WIDGETS',
+	'bs-tools-more-headline' => 'MEHR',
+	'bs-tools-button' => 'tools',
+	'bs-watch' => 'beobachten',
+	'bs-top-bar-settings' => 'My Settings',
+	'bs-top-bar-messages' => 'Messages',
+	'bs-top-bar-review' => '$1 {{PLURAL:$1|Begutachtung|Begutachtungen}}'
+);
+$messages['de-formal'] = array();

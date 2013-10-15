@@ -1,0 +1,132 @@
+form input,
+form textarea,
+form button {
+	background-color:#EFF4FF;
+	border:1px solid #8393C3;
+	padding:3px 5px;
+	border-radius: 2px;
+	-moz-border-radius: 2px;
+	-webkit-border-radius: 2px;
+}
+
+form select {
+	vertical-align: top;
+}
+
+#content form input[type=checkbox] {
+	background:none;
+	border:none;
+	margin:0 4px 6px 12px;
+}
+
+#content form input[type=text]{
+	border:1px solid #FFAE00;
+}
+
+#content form input[type=text],
+#content form input[type=password],
+#wpName1 {
+	background:#EFF4FF;
+	border:1px solid #8393C3;
+	width:140px;
+	margin:0 4px 6px 12px;
+}
+
+
+form input:focus,
+form textarea:focus {
+	background-color:#EFF4FF;
+	border:1px solid #FFAE00;
+}
+
+form input[type=button],
+form input[type=reset],
+form input[type=submit] {
+	background-color:#D6E3FF;
+	cursor:pointer;
+	height:24px;
+	/*@embed*/
+	background:url(images/desktop/bs-button-bg.png) repeat-x;
+}
+
+form input[type=button]:hover,
+form input[type=reset]:hover,input[type=submit]:hover,
+form button[type=submit] {
+	background-color:#F0F5FF;
+	/*@embed*/
+	background:url(images/desktop/bs-button-bg_ro.png) repeat-x;
+}
+
+form input[type=checkbox] {
+	border:none;
+	background:none;
+}
+
+input#bs-search-fulltext {
+	/*@embed*/
+	background:url(images/desktop/search.png) no-repeat transparent!important;
+	background-position:0 0;
+	height:13px;
+	width:12px;
+	border:0 none;
+	cursor:pointer;
+	float:right;
+	margin:3px 3px 0;
+	
+}
+
+input#bs-search-fulltext,
+input#bs-search-fulltext:hover {
+	/*@embed*/
+	background: none no-repeat center center!important;
+	position:absolute;
+	width:33px;
+	height:23px;
+	margin-left: 334px;
+}
+
+input#wpSave,
+input#wpDiff,
+input#wpPreview {
+	margin-right:3px;
+}
+
+input#wpSummary {
+	width:75%;
+	margin:4px 0 8px;
+}
+
+input.historysubmit {
+	font-size:94%;
+	cursor:pointer;
+	height:1.7em!important;
+	margin-left:1.6em;
+	padding:0 .3em .3em!important;
+}
+
+td.mw-input select {
+	width:150px;
+	background-color:#EFF4FF;
+	border:1px solid #8393C3;
+}
+
+form textarea {
+	width:100%;
+	font-family:'Courier New', monospace;
+	font-weight:700;
+	font-size:14px;
+	color:#656565;
+	padding:3px;
+}
+
+#WikiAdminPreferencesFormwrap fieldset {
+	background:#F9F9F9;
+}
+
+#WikiAdminPreferencesFormwrap fieldset fieldset {
+	border-top:1px #ccc solid;
+	border-bottom:none;
+	border-left:none;
+	border-right:none;
+	background:#F9F9F9;
+}

@@ -1,0 +1,14 @@
+@font-face{
+	font-family: Source Sans Pro;
+	src: url("fonts/source_sans_pro_600.ttf");
+}
+
+@font-face{
+	font-family: Muli;
+	src: url("fonts/muli_regular.ttf");
+}
+
+@font-face{
+	font-family: Muli Light;
+	src: url("fonts/muli_300.ttf");
+}
