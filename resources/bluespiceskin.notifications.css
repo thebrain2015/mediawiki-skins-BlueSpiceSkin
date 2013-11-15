@@ -62,3 +62,11 @@ div.mw-echo-overlay-pokey{
 	top: 18px;
 	position: relative;
 }
+
+span.mw-badge-content{
+	color: #BABABA !important;
+}
+
+div.mw-badge-important span{
+	color: #FEB01B !important;
+}

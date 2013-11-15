@@ -16,6 +16,9 @@
 
 #bodyContent {
 	min-height:450px;
+	/*font-size: 0.8em;*/
+	/* This is vector/screen.css compliant, 
+	 but ExtJS .x-body styling breaks it*/
 }
 
 #bodyContent h1,#bodyContent h2,.mceContentBody h1,.mceContentBody h2 {
@@ -210,10 +213,6 @@
 	padding:0;
 }
 
-#bs-dataaftercontent {
-	height:33px;
-}
-
 #bs-extendedsearch-autocomplete {
 	width:350px!important;
 }
@@ -305,6 +304,7 @@
 	font-family:'Source Sans Pro', sans-serif;
 	font-size:12px;
 	color:#000;
+	text-transform: uppercase;
 }
 
 #bs-left-column #bs-nav-tabs li a:hover {
@@ -333,7 +333,7 @@
 }
 
 #bs-left-column #bs-nav-tabs li:first-child {
-	padding-left:16px;
+	padding-left:9px;
 }
 
 #bs-left-column .ui-corner-all {
@@ -657,7 +657,7 @@
 #bs-tools-btn span {
 	display:block;
 	font-size:10px;
-	padding:0 10px 0 13px;
+	text-align: center;
 }
 #bs-tools ul{
 	margin: 0;
@@ -760,6 +760,7 @@
 #ca-watch {
 	float:right;
 	margin-top:-13px !important;
+	text-transform: uppercase;
 }
 
 #ca-watch span {
@@ -938,8 +939,8 @@
 
 #p-cactions li a {
 	text-decoration:none;
-	font-family:'Source Sans Pro', sans-serif;
-	font-size:12px;
+	font-family:'Muli', sans-serif;
+	font-size:1em;
 	color:#b4b3b3;
 }
 
@@ -996,7 +997,7 @@
 	position:relative;
 }
 
-#pagehistory span.minor,#userloginlink a,#wpLoginattempt,#wpCreateaccount,span.newpage,span.minor,span.searchmatch,span.bot,table.gallery caption,table.mw_metadata caption,#wpSummaryLabel,#wpSave,div.searchdidyoumean em,.searchmatch,td.diff-lineno {
+#pagehistory span.minor,#userloginlink a,#wpLoginattempt,#wpCreateaccount,span.newpage,span.minor,span.bot,table.gallery caption,table.mw_metadata caption,#wpSummaryLabel,#wpSave,td.diff-lineno {
 	font-weight:700;
 }
 
@@ -1083,7 +1084,7 @@
 tr.collapsable,tr.sv-space td,#p-cactions li.ca-divider,.invisible,
 #bs-search-button-hidden,#bs-nav-sections div.ui-tabs-hide,#bs-nav-sections 
 #p-Navigation h5,#bs-left-column #bs-nav-sections #p-navigation h5,
-#p-cactions h5,fieldset#mw-searchoptions legend,#bs-widget-tab,#ca-more {
+#p-cactions h5,#bs-widget-tab,#ca-more {
 	display:none;
 }
 
@@ -1234,7 +1235,7 @@ tr.collapsable,tr.sv-space td,#p-cactions li.ca-divider,.invisible,
 	padding:0 .15em;
 }
 
-.TablePager_nav a,.mw-search-formheader div.search-types ul li.current a:hover {
+.TablePager_nav a{
 	text-decoration:none;
 }
 
@@ -1352,10 +1353,6 @@ tr.collapsable,tr.sv-space td,#p-cactions li.ca-divider,.invisible,
 	width:895px;
 }
 
-.bs-searchsnippet {
-	color:#ffae00;
-	font-weight:700;
-}
 .bs-sb-archive{
 	width: 15px;
 }
@@ -1778,83 +1775,6 @@ td.diff-ntitle {
 	color:#006400;
 }
 
-.mw-search-formheader {
-	background-color:#f3f3f3;
-	margin-top:1em;
-	border:1px solid silver;
-}
-
-.mw-search-formheader div.results-info {
-	float:right;
-	padding:.5em .75em .5em .5em;
-}
-
-.mw-search-formheader div.results-info ul li {
-	float:right;
-	margin:0;
-	padding:0;
-}
-
-.mw-search-formheader div.search-types {
-	float:left;
-	padding-left:.25em;
-}
-
-.mw-search-formheader div.search-types ul li a {
-	display:block;
-	padding:.5em;
-}
-
-.mw-search-formheader div.search-types ul li,
-fieldset#mw-searchoptions h4 {
-	float:left;
-	margin:0;
-	padding:0;
-}
-
-.mw-search-formheader div.search-types ul li.current a {
-	color:#333;
-	cursor:default;
-}
-
-.mw-search-formheader div.search-types ul,.mw-search-formheader div.results-info ul {
-	list-style:none!important;
-	margin:0!important;
-	padding:0!important;
-}
-
-.mw-search-interwiki-more {
-	float:right;
-	font-size:90%;
-}
-
-.mw-search-interwiki-project {
-	font-size:97%;
-	text-align:left;
-	background-color:#ececec;
-	border-top:1px solid #BBB;
-	padding:.15em .15em .2em .2em;
-}
-
-.mw-search-result-data {
-	color:green;
-	font-size:97%;
-}
-
-.mw-search-results {
-	margin-left:.4em;
-}
-
-.mw-search-results li {
-	padding-bottom:1em;
-	list-style:none;
-	list-style-image:none;
-}
-
-.mw-search-results li a {
-	font-size:108%;
-}
-
 .mw-summary-preview {
 	margin:.1em 0;
 }
@@ -1928,14 +1848,8 @@ fieldset#mw-searchoptions h4 {
 	margin:5px;
 }
 
-.right,fieldset#mw-searchoptions div#mw-search-togglebox,#bs-title-actions {
+.right,#bs-title-actions {
 	float:right;
-}
-
-.searchresults p {
-	margin-left:.4em;
-	margin-top:1em;
-	margin-bottom:1.2em;
 }
 
 .sep44 {
@@ -2050,25 +1964,6 @@ div .box-bg-wide {
 	padding:8px 10px;
 }
 
-div#bs-search-left {
-	background-position:0 0;
-	width:9px;
-}
-
-div#bs-search-left,div#bs-search-right {
-	/*@embed*/
-	background-image:url(images/desktop/bs-inputfield-leftright.png);
-	background-repeat:no-repeat;
-	height:24px;
-	float:right;
-	margin:1px 0 0;
-}
-
-div#bs-search-right {
-	background-position:-9px 0;
-	width:7px;
-}
-
 div#bs-searchbar {
 	background-color:#FFF;
 	
@@ -2101,40 +1996,9 @@ div#mw-recreate-deleted-warn ul li {
 	font-size:90%;
 }
 
-div#mw-search-interwiki {
-	float:right;
-	width:18em;
-	border:1px solid #AAA;
-	margin-top:2ex;
-}
 
-div#mw-search-interwiki-caption {
-	text-align:center;
-	font-weight:700;
-	font-size:95%;
-}
-
-div#searchTarget {
-	background:#F0F0F0;
-	border:solid 1px blue;
-	margin:5px;
-	padding:3px;
-}
-
-div#searchTarget ul li,#bs-personal-menu ul,#bs-personal-menu li, #bs-personal-menu-open ul,#bs-personal-menu-open li {
+#bs-personal-menu ul,#bs-personal-menu li, #bs-personal-menu-open ul,#bs-personal-menu-open li {
 	list-style:none;
-}
-
-div#searchTarget ul li:before {
-	color:orange;
-	content:"\00BB \0020";
-}
-
-div#searchTargetContainer {
-	left:10px;
-	top:10px;
-	width:90%;
-	background:#FFF;
 }
 
 div#userlogin .captcha,div#userloginForm .captcha {
@@ -2278,17 +2142,6 @@ div.prefsectiontip {
 	padding:.2em 2em;
 }
 
-div.searchdidyoumean {
-	font-size:127%;
-	margin-top:.8em;
-	color:#c00;
-}
-
-div.searchresult {
-	font-size:95%;
-	width:38em;
-}
-
 div.thumb {
 	margin-bottom:.5em;
 	width:auto;
@@ -2359,38 +2212,6 @@ fieldset#bluespice legend {
 	padding:0 20px 0 6px;
 }
 
-fieldset#mw-searchoptions {
-	background-color:#f9f9f9;
-	border:1px solid silver!important;
-	border-top-width:0!important;
-	margin:0;
-	padding:.5em .75em .75em!important;
-}
-
-fieldset#mw-searchoptions div#mw-search-togglebox input {
-	margin-left:.25em;
-}
-
-fieldset#mw-searchoptions div#mw-search-togglebox label {
-	margin-right:.25em;
-}
-
-fieldset#mw-searchoptions div.divider {
-	clear:both;
-	border-bottom:1px solid #DDD;
-	padding-top:.5em;
-	margin-bottom:.5em;
-}
-
-fieldset#mw-searchoptions table {
-	float:left;
-	margin-right:3em;
-}
-
-fieldset#mw-searchoptions table td {
-	padding-right:1em;
-}
-
 fieldset.bs-prefs {
 	border-left:none;
 	border-bottom:none;
@@ -2447,7 +2268,6 @@ li#ca-edit{
 	padding: 0 12px 7px !important;
 }
 li#ca-nstab-main {
-	border-left: 1px solid #3E5389;
 	margin-left: 0px;
 }
 li#ca-edit a{
@@ -2538,7 +2358,7 @@ table.gallery tr {
 	vertical-align:top;
 }
 
-span.changedby,div#mw-search-interwiki li,span.searchalttitle {
+span.changedby,span.searchalttitle {
 	font-size:95%;
 }
 
@@ -2558,7 +2378,7 @@ span.editsection a:hover {
 	margin: 0 5px 0 0;
 }
 
-span.searchmatch,.bsErrorLegend {
+span.bsErrorLegend {
 	color:red;
 }
 
@@ -2583,7 +2403,7 @@ table {
 	color:#444;
 }
 
-table#mw-search-powertable,#bs-sb-form {
+#bs-sb-form {
 	width:98%;
 }
 
@@ -2681,12 +2501,7 @@ table.small {
 	font-size:100%;
 }
 
-td#mw-search-menu {
-	padding-left:6em;
-	font-size:85%;
-}
-
-td#mw-search-togglebox,td.diff-marker {
+td.diff-marker {
 	text-align:right;
 }
 
@@ -2748,9 +2563,18 @@ div.bs-authors{
 	text-align: right;
 	/*@embed*/
 	background: url(images/desktop/userbar-icon-workflow.png) no-repeat transparent;
+	display: block;
+	font-family: 'Source Sans Pro',sans-serif;
+	font-size: 12px;
+	text-align: center;
+	text-indent: 26px;
 }
 #review-userbar-element img{
 	display: none;
+}
+#review-userbar-element a, #review-userbar-element a:hover{
+	color: #FEB01B;
+	text-decoration: none;
 }
 #review-userbar-element-open{
 	float: right;
@@ -2766,7 +2590,6 @@ div.bs-authors{
 	display: block;
 	float: left;
 	position: absolute;
-	
 }
 #bs-tools-shadow-right{
 	/*@embed*/
@@ -2834,4 +2657,7 @@ div.left_navigation_icon{
 }
 #n-external-contact div.left_navigation_icon, #n-external-contact-small { 
 	background-position: 0 96px;
+}
+#pt-notifications-open > a, #review-userbar-element-open > a{
+	margin-left: 0 !important;
 }

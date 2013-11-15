@@ -11,6 +11,7 @@
 if (!defined('MEDIAWIKI'))
 	die("This is an extension to the MediaWiki package and cannot be run standalone.");
 
+$wgSkipSkins = array( 'chick', 'cologneblue', 'common', 'modern', 'monobook', 'myskin', 'nostalgia', 'simple', 'standard', 'vector' );
 $wgAutoloadClasses['Mobile_Detect'] = dirname(__FILE__) . '/includes/lib/Mobile_Detect.php';
 global $oMobileDetect;
 $oMobileDetect = new Mobile_Detect();
@@ -120,7 +121,8 @@ $wgResourceModules['ext.bluespice.bluespiceskin.main'] = array(
 		'BlueSpiceSkin/resources/bluespiceskin.fonts.css',
 		'BlueSpiceSkin/resources/bluespiceskin.links.css',
 		'BlueSpiceSkin/resources/bluespiceskin.form.css',
-		'BlueSpiceSkin/resources/bluespiceskin.skin.main.css'
+		'BlueSpiceSkin/resources/bluespiceskin.skin.main.css',
+		'BlueSpiceSkin/resources/bluespiceskin.content.css'
 	),
 	'position' => 'top',
 	'group' => 'site',

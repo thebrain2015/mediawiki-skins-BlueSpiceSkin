@@ -32,13 +32,6 @@ form select {
 	margin:0 4px 6px 12px;
 }
 
-
-form input:focus,
-form textarea:focus {
-	background-color:#EFF4FF;
-	border:1px solid #FFAE00;
-}
-
 form input[type=button],
 form input[type=reset],
 form input[type=submit] {
