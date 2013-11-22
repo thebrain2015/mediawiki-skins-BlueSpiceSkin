@@ -42,7 +42,8 @@ class SkinBlueSpiceSkin extends SkinTemplate {
 		parent::setupSkinUserCss($out);
 		$out->addModuleStyles('ext.bluespice.bluespiceskin');
 		$out->addModuleStyles('ext.bluespice.bluespiceskin.main');
-		$out->addModuleStyles('ext.bluespice.notifications');
+		$out->addModuleStyles('ext.bluespice.bluespiceskin.content');
+		$out->addModuleStyles('ext.bluespice.extensions');
 		//$out->addHeadItem("font", "<link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro|Muli:300,400' rel='stylesheet' type='text/css' />");
 	}
 
@@ -119,17 +120,34 @@ class BlueSpiceSkinTemplate extends BaseTemplate {
 	protected function printContentActionsList(){
 		wfRunHooks( 'SkinTemplateContentActions', array( &$this->data[ 'content_actions' ] ) );
 		wfRunHooks( 'SkinTemplateTabs', array( $this->skin, &$this->data[ 'content_actions' ] ) ); // TODO RBV (12.12.11 12:46): Check for Cross-Version compat. Is there still a $this->skin in MW 1.18 ($this->getSkin()?)?
-		$aActionsNotInMoreMenu = array( 'talk', 'edit', 'viewsource', 'history', 'addsection', 'watch' );
+		$aActionsNotInMoreMenu = array( 'nstab-user', 'talk', 'edit', 'viewsource', 'history', 'addsection', 'watch', 'unwatch' );
 		// Hook to add "not in more menu" and reorder content_actions
 		wfRunHooks( 'BlueSpiceSkin:ReorderActionTabs', array( &$this->data[ 'content_actions' ], &$aActionsNotInMoreMenu ) );
 		$aOut = array();
 		$aMoreMenuOut = array();
-
-		foreach ( $this->data[ 'content_actions' ] as $sKey => $aActionTab ) {
-			$bIsNamespaceActionTab = strstr( $sKey, 'nstab' ) ? true : false;
+		$aOut[] = "<ul id='p-cactions-list-left'>";
+		foreach ($this->data['content_navigation']['namespaces'] as $sKey=>$aActionTab){
 			$sCssClass = isset( $aActionTab[ 'class' ] ) ? ' class="' . htmlspecialchars( $aActionTab[ 'class' ] ) . '"' : '';
+			$aOut[] = '<li id="ca-' . Sanitizer::escapeId( $sKey ) . '"' . $sCssClass . '>';
+			$aOut[] = ' <span>';
+			$aOut[] = '  <a href="' . htmlspecialchars( $aActionTab[ 'href' ] ) . '" ' . $aActionTab[ 'attributes' ] . ' title="' . $aActionTab[ 'text' ] . '">';
+			$aOut[] = htmlspecialchars( $aActionTab[ 'text' ] );
+			// Should be secure enough
+			$aOut[] = $aActionTab[ 'textasrawhtml' ];
+			if ( $sKey == 'talk' ) {
+				$aOut[] = $this->getDiscussionAmount();
+			}
+			$aOut[] = '  </a>';
+			$aOut[] = ' </span>';
+			$aOut[] = '</li>';
+		}
+		$aOut[] = "</ul>";
+		$aOut[] = "<ul id='p-cactions-list-right'>";
+		foreach ($this->data['content_actions'] as $sKey=>$aActionTab){
+			$bIsNamespaceActionTab = strstr( $sKey, 'nstab' ) ? true : false;
 			if ( in_array( $sKey, $aActionsNotInMoreMenu ) || $bIsNamespaceActionTab ) {
-				if ( $sKey == "watch" ) continue;
+				if ( ($sKey == "watch" || $sKey == "unwatch") && BsConfig::get( 'MW::StateBar::Show' ) === true ) continue;
+				if ( $sKey == "talk" || $aActionTab['context'] == "subject") continue;
 				$aOut[] = '<li id="ca-' . Sanitizer::escapeId( $sKey ) . '"' . $sCssClass . '>';
 				$aOut[] = ' <span>';
 				$aOut[] = '  <a href="' . htmlspecialchars( $aActionTab[ 'href' ] ) . '" ' . $aActionTab[ 'attributes' ] . ' title="' . $aActionTab[ 'text' ] . '">';
@@ -150,6 +168,13 @@ class BlueSpiceSkinTemplate extends BaseTemplate {
 				$aMoreMenuOut[] = '</li>';
 			}
 		}
+		if (BsConfig::get( 'MW::StateBar::Show' ) === false){
+			$aOut[] = "<li id='ca-more-top'>";
+			$aOut[] = "<span>".wfMessage('bs-tools-button')->plain()."</span>";
+			$aOut[] = "<ul id='p-cactions-list-more'>".implode("\n", $aMoreMenuOut)."</ul>";
+			$aOut[] = "</li>";
+		}
+		$aOut[] = "</ul>";
 
 		$this->data['more_menu'] = $aMoreMenuOut;
 
@@ -304,17 +329,17 @@ class BlueSpiceSkinTemplate extends BaseTemplate {
 						$oFile = wfFindFile($aVal[1]);
 						if ($oFile->exists()) {
 							$aOut[] = '<div style="background-image:url(' . $oFile->getFullUrl() . '); width:24px; height:24px;" class="left_navigation_icon" ></div>';
-							$aOutHidden[] = ' <li> <a href="' . htmlspecialchars($val['href']) . '" ' . $sTarget . $sRel . '>' . '<div id="' . Sanitizer::escapeId($val['id']) . '-small" class="left_navigation_icon" style="background-image:url(' . $oFile->getFullUrl() . '); width:24px; height:24px;"></div>' . '</a> </li>';
+							$aOutHidden[] = ' <li> <a href="' . htmlspecialchars($val['href']) . '" title="' . htmlspecialchars($aVal[0]) .'" ' . $sTarget . $sRel . '>' . '<div id="' . Sanitizer::escapeId($val['id']) . '-small" class="left_navigation_icon" style="background-image:url(' . $oFile->getFullUrl() . '); width:24px; height:24px;"></div>' . '</a> </li>';
 						} else {
 							//default
 							$aOut[] = '<div class="left_navigation_icon"></div>';
-							$aOutHidden[] = ' <li> <a href="' . htmlspecialchars($val['href']) . '" ' . $sTarget . $sRel . '>' . '<div id="' . Sanitizer::escapeId($val['id']) . '-small" class="left_navigation_icon" ></div>' . '</a> </li>';
+							$aOutHidden[] = ' <li> <a href="' . htmlspecialchars($val['href']) . '" title="' . htmlspecialchars($aVal[0]) .'" ' . $sTarget . $sRel . '>' . '<div id="' . Sanitizer::escapeId($val['id']) . '-small" class="left_navigation_icon" ></div>' . '</a> </li>';
 						}
-						$aOut[] = '  <a href="' . htmlspecialchars($val['href']) . '" ' . $sTarget . $sRel . '>' . htmlspecialchars($aVal[0]) . '</a>';
+						$aOut[] = '  <a href="' . htmlspecialchars($val['href']) . '" title="' . htmlspecialchars($aVal[0]) .'" ' . $sTarget . $sRel . '>' . htmlspecialchars($aVal[0]) . '</a>';
 					} else {
 						$aOut[] = '<div class="left_navigation_icon"></div>';
-						$aOutHidden[] = ' <li> <a href="' . htmlspecialchars($val['href']) . '" ' . $sTarget . $sRel . '>' . '<div id="' . Sanitizer::escapeId($val['id']) . '-small" class="left_navigation_icon" ></div>' . '</a> </li>';
-						$aOut[] = '  <a href="' . htmlspecialchars($val['href']) . '" ' . $sTarget . $sRel . '>' . htmlspecialchars($val['text']) . '</a>';
+						$aOutHidden[] = ' <li> <a href="' . htmlspecialchars($val['href']) . '" title="' . htmlspecialchars($val['text']) .'" ' . $sTarget . $sRel . '>' . '<div id="' . Sanitizer::escapeId($val['id']) . '-small" class="left_navigation_icon" ></div>' . '</a> </li>';
+						$aOut[] = '  <a href="' . htmlspecialchars($val['href']) . '" title="' . htmlspecialchars($val['text']) .'" ' . $sTarget . $sRel . '>' . htmlspecialchars($val['text']) . '</a>';
 					}
 					$aOut[] = '</li>';
 				}
@@ -436,11 +461,17 @@ class BlueSpiceSkinTemplate extends BaseTemplate {
 
 			$aOut[] = '<div id="bs-button-user">';
 			$aOut[] = '  <span>' . wfMsg('bs-my-account') . '</span>';
-			$aOut[] = $wgUser->getSkin()->link($wgUser->getUserPage(), '    <img src="' . $this->data['stylepath'] . '/' . $this->data['stylename'] . '/resources/images/desktop/' . $sButtonUserImage . '" alt="' . $sUserDisplayName . '" />');
+			//$aOut[] = $wgUser->getSkin()->link($wgUser->getUserPage(), '    <img src="' . $this->data['stylepath'] . '/' . $this->data['stylename'] . '/resources/images/desktop/' . $sButtonUserImage . '" alt="' . $sUserDisplayName . '" />');
+			//$aOut[] = $wgUser->getSkin()->link($wgUser->getUserPage(), '<div id="bs-button-user-img" style="background-image: url('.BsCore::getInstance()->getUserMiniProfile($wgUser, array("width"=>"19", "height" => "16"))->execute().');"></div>');
+			$aOut[] = BsCore::getInstance()->getUserMiniProfile($wgUser, array("width"=>"19", "height" => "16"))->execute();
 			$aOut[] = '  <ul id="bs-personal-menu">';
 
 			$aPersonalUrlsFilter = array('userpage', 'logout', 'anonlogin', 'notifications');
-			$aOut[] = "<li class='bs-top-box'><div>".wfMessage('bs-top-bar-settings')->plain()."</div></li>";
+			$sUsername = $wgUser->getRealName() == "" ? $wgUser->getName() : $wgUser->getRealName();
+			$aOut[] = "<li class='bs-top-box'><div>".$sUsername."</div></li>";
+			$aOut[] = '<li id="pt-profile">';
+			$aOut[] = $wgUser->getSkin()->link($wgUser->getUserPage(), wfMessage("bs-topbar-profile")->plain());
+			$aOut[] = '</li>';
 			foreach ( $this->data['personal_urls'] as $sKey => $aItem ) {
 				if ( in_array( $sKey, $aPersonalUrlsFilter ) ) continue;
 				$sCssClass = $aItem['active'] ? ' class="active"' : '';

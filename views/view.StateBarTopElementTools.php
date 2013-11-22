@@ -35,6 +35,7 @@ class ViewStateBarTopElementTools extends ViewStateBarTopElement {
 	 * @return string HTML output
 	 */
 	public function execute( $params = false ) {
+		$aOut[] = "<div id='bs-buttons-container'>";
 		$aOut[] = "<div id='bs-tools'>";
 			$aOut[] = "<div id='bs-tools-btn'>";
 				$aOut[] = "<div id='bs-tools-img'></div>";
@@ -54,13 +55,16 @@ class ViewStateBarTopElementTools extends ViewStateBarTopElement {
 								$aOut[] = $oView->execute();
 							}
 						}
-					$aOut[]='</div>';
+					//$aOut[]='</div>';
 
 					$aOut[ ] = '<div id="bs-tools-more">';
-						$aOut[] = "<h3 id='bs-tools-more-headline' class='bs-tools-headline'>" . wfMessage( 'bs-tools-headline' )->escaped()."</h3>";
+						$aOut[ ] = "<div class='bs-widget-head'>";
+							$aOut[ ] = "<h5 class='bs-widget-title '>" . wfMessage( 'bs-tools-headline' )->escaped()."</h3>";
+						$aOut[ ] = "</div>";
 						$aOut[ ] = '<ul id="ca-more-menu">';
 						$aOut[ ] = implode( "\n", $this->mOptions['skinTemplate']->data['more_menu'] );
 						$aOut[ ] = '</ul>';
+					$aOut[ ] = '</div>';
 					$aOut[ ] = '</div>';
 					$aOut[] = "<div id='bs-tools-shadow-right'></div>";
 				$aOut[] = "</div>";

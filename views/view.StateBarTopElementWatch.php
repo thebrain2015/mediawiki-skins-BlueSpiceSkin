@@ -12,14 +12,17 @@ class ViewStateBarTopElementWatch extends ViewStateBarTopElement {
 	 * @return string HTML output
 	 */
 	public function execute( $params = false ) {
-		global $wgTitle;
+		global $wgTitle, $wgUser;
+		$sClass = "";
+		if ($wgUser->isWatched($wgTitle))
+			$sClass = "class='watched'";
 		$aOut[] = '<div id="ca-watch" class="icon">';
 		if ($wgTitle instanceof Title)
 		$sName = $wgTitle->userIsWatching () ? 'unwatch' : 'watch';
 		
-		$aOut[] = '  <a href="' . $wgTitle->getFullUrl(array('action' => $sName)) . '" title="' . wfMessage($sName)->plain() . '">'.wfMessage($sName)->plain().'</a>';
+		$aOut[] = '  <a href="' . $wgTitle->getFullUrl(array('action' => $sName)) . '" title="' . wfMessage($sName)->plain() . '" '.$sClass.'>'.wfMessage($sName)->plain().'</a>';
 		$aOut[] = '</div>';
-		
+		$aOut[] = "</div>";
 		return implode( "\n", $aOut );
 	}
 

@@ -90,7 +90,8 @@ $wgResourceModules['ext.bluespice.bluespiceskin.js'] = array(
 	),
 	'dependencies' => array(
 		'ext.bluespice',
-		'mediawiki.jqueryMsg'
+		'mediawiki.jqueryMsg',
+		'ext.echo.overlay'
 	),
 	'messages' => array(
 		'bs-top-bar-messages',
@@ -121,16 +122,23 @@ $wgResourceModules['ext.bluespice.bluespiceskin.main'] = array(
 		'BlueSpiceSkin/resources/bluespiceskin.fonts.css',
 		'BlueSpiceSkin/resources/bluespiceskin.links.css',
 		'BlueSpiceSkin/resources/bluespiceskin.form.css',
-		'BlueSpiceSkin/resources/bluespiceskin.skin.main.css',
-		'BlueSpiceSkin/resources/bluespiceskin.content.css'
+		'BlueSpiceSkin/resources/bluespiceskin.skin.main.css'
 	),
 	'position' => 'top',
 	'group' => 'site',
 	'localBasePath' => &$GLOBALS['wgStyleDirectory'],
 	'remoteBasePath' => &$GLOBALS['wgStylePath']
 );
+$wgResourceModules['ext.bluespice.bluespiceskin.content'] = array(
+	'styles' => array(
+		'BlueSpiceSkin/resources/bluespiceskin.content.css'
+	),
+	'position' => 'top',
+	'localBasePath' => &$GLOBALS['wgStyleDirectory'],
+	'remoteBasePath' => &$GLOBALS['wgStylePath']
+);
 	
-$wgResourceModules['ext.bluespice.notifications'] = array(
+$wgResourceModules['ext.bluespice.extensions'] = array(
 	'styles'  => array( 
 		'BlueSpiceSkin/resources/bluespiceskin.notifications.css',
 	),
