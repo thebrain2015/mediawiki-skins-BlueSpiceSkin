@@ -9,8 +9,8 @@
     border: none !important;
 }
 
-body{
-    background: none !important;
+body {
+    background-image: none !important;
     line-height: 1.6em !important;
     font: 9pt Arial, Verdana, Helvetica;
 }
@@ -59,4 +59,11 @@ p {
 span.editsection,
 .noprint {
 	display: none;
+}
+#footer, .readers-legend {
+	display: none !important;
+}
+
+#bs-afterarticlecontent legend.active{
+	width:100%;
 }

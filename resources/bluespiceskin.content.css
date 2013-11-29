@@ -103,7 +103,7 @@ table.greyscale-narrow tbody tr:hover{
 }
 
 #mw-content-text p{
-	color:#333333;
+	color:#000000;
 	font-family:"Open Sans", sans-serif;
 	font-size:12px;
 	font-style:normal;
@@ -124,11 +124,11 @@ table.greyscale-narrow tbody tr:hover{
 
 #mw-content-text h1, h1.firstHeading{
 	color:#000000;
-	font-family:Raleway, sans-serif;
+	font-family: 'Raleway', sans-serif;
 	font-size:26px;
 	font-style:normal;
 	font-variant:normal;
-	font-weight:bold;
+	font-weight:500;
 	line-height: 35px;
 	margin-bottom:5px;
 	margin-left:0px;
@@ -139,13 +139,15 @@ table.greyscale-narrow tbody tr:hover{
 	text-indent:0px;
 	border-bottom: none;
 }
-#mw-content-text h2, #mw-content-text h2{
+#mw-content-text h1 a {
+	font-size: inherit;
+}
+#mw-content-text h2 {
 	color:#000000;
 	font-family:"Open Sans Semibold", sans-serif;
 	font-size:20px;
 	font-style:normal;
 	font-variant:normal;
-	font-weight:bold;
 	line-height:1;
 	margin-bottom:5px;
 	margin-left:0px;
@@ -156,14 +158,16 @@ table.greyscale-narrow tbody tr:hover{
 	text-indent:0px;
 	border-bottom: none;
 }
-
-#mw-content-text h3, #mw-content-text h3{
+#mw-content-text h2 a {
+	font-size: inherit;
+}
+#mw-content-text h3 {
 	color:#000000;
-	font-family:"Open Sans", sans-serif;
+	font-family:"Open Sans 300", sans-serif;
 	font-size:16px;
 	font-style:normal;
 	font-variant:normal;
-	font-weight:bold;
+	font-weight:normal;
 	line-height:1;
 	margin-bottom:5px;
 	margin-left:0px;
@@ -174,13 +178,16 @@ table.greyscale-narrow tbody tr:hover{
 	text-indent:0px;
 	border-bottom: none;
 }
-#mw-content-text h4, #mw-content-text h4{
+#mw-content-text h3 a {
+	font-size: inherit;
+}
+#mw-content-text h4 {
 	color:#000000;
 	font-family:"Open Sans", sans-serif;
 	font-size:14px;
 	font-style:normal;
 	font-variant:normal;
-	font-weight:bold;
+	font-weight:normal;
 	line-height:1;
 	margin-bottom:5px;
 	margin-left:0px;
@@ -191,13 +198,16 @@ table.greyscale-narrow tbody tr:hover{
 	text-indent:0px;
 	border-bottom: none;
 }
-#mw-content-text h5, #mw-content-text h5{
+#mw-content-text h4 a {
+	font-size: inherit;
+}
+#mw-content-text h5 {
 	color:#000000;
 	font-family:"Open Sans", sans-serif;
 	font-size:14px;
 	font-style:normal;
 	font-variant:normal;
-	font-weight:bold;
+	font-weight:normal;
 	line-height:1;
 	margin-bottom:5px;
 	margin-left:0px;
@@ -208,13 +218,16 @@ table.greyscale-narrow tbody tr:hover{
 	text-indent:0px;
 	border-bottom: none;
 }
-#mw-content-text h6, #mw-content-text h6{
+#mw-content-text h5 a {
+	font-size: inherit;
+}
+#mw-content-text h6 {
 	color:#000000;
 	font-family:"Open Sans", sans-serif;
 	font-size:14px;
 	font-style:normal;
 	font-variant:normal;
-	font-weight:bold;
+	font-weight:normal;
 	line-height:1;
 	margin-bottom:5px;
 	margin-left:0px;
@@ -224,9 +237,13 @@ table.greyscale-narrow tbody tr:hover{
 	text-decoration:none;
 	text-indent:0px;
 	border-bottom: none;
+}
+#mw-content-text h6 a {
+	font-size: inherit;
 }
 table, tr, td, th, p, a, ul, ol, li{
 	font-size: 12px;
+	font-family:"Open Sans", sans-serif;
 }
 table.wikitable{
 	width: 100%;

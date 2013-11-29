@@ -48,11 +48,11 @@ jQuery.fn.fadeToggle = function(speed, easing, callback) {
 window.bnc_jquery_menu_drop= function() {
 	jQuery('#wptouch-menu').fadeToggle(400);
 	jQuery("#headerbar-menu a").toggleClass("open");
-}
+};
 
 window.bnc_jquery_login_toggle= function() {
 	jQuery('#wptouch-login').fadeToggle(400);
-}
+};
 
 window.bnc_jquery_search_toggle= function() {
 	jQuery('#wptouch-search').fadeToggle(400);
@@ -60,16 +60,16 @@ window.bnc_jquery_search_toggle= function() {
 
 window.bnc_jquery_gigpress_toggle= function() {
 	jQuery('#wptouch-gigpress').fadeToggle(400);
-}
+};
 
 
 window.bnc_jquery_prowl_open= function() {
 	jQuery('#prowl-message').fadeToggle(400);
-}
+};
 
 window.bnc_jquery_wordtwit_open= function() {
 	jQuery('#wptouch-wordtwit').fadeToggle(400);
-}
+};
 
 
 /////// -- Ajax comments -- ///////
@@ -77,7 +77,7 @@ window.bnc_showhide_coms_toggle= function() {
 	jQuery('#commentlist').fadeToggle(400);
 	jQuery("img#com-arrow").toggleClass("com-arrow-down");
 	jQuery("h3#com-head").toggleClass("comhead-open");
-}
+};
 
 window.commentAdded= function() {
     if (jQuery('#errors')) {
@@ -95,18 +95,18 @@ window.commentAdded= function() {
     jQuery("#commentform").hide();
     jQuery("#the-new-comment").fadeIn(400);
     jQuery("#refresher").fadeIn(400);
-}
+};
 
 
 /////// --Single Post Page -- ///////
 
 window.wptouch_toggle_twitter= function() {
 	jQuery('#twitter-box').fadeToggle(400);
-}
+};
 
 window.wptouch_toggle_bookmarks= function() {
 	jQuery('#bookmark-box').fadeToggle(400);
-}
+};
 
 /////// --jQuery Tabs-- ///////
 

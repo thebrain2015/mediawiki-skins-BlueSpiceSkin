@@ -134,8 +134,12 @@ $(document).ready(function(){
 	});
 	$("#bs-tools-more").css("min-height", biggest + "px");
 	$("#bs-tools-more").width($("#bs-tools-widgets").width() / 5 - 5);
-	$(".bs-widget-head").css('width', $(".bs-tools-widgets-column").width() - 20 + "px");
-	$("#bs-tools-more .bs-widget-head").css('width', $(".bs-tools-widgets-column").width() - 25 + "px");
+	var elemWidth = 200;
+	if ( $(".bs-tools-widgets-column").width() !== null ) {
+		elemWidth = $(".bs-tools-widgets-column").width();
+	}
+	$(".bs-widget-head").css('width', elemWidth - 20 + "px");
+	$("#bs-tools-more .bs-widget-head").css('width', elemWidth - 25 + "px");
 	$("#bs-tools-container").css('margin-left', (($("#bs-beforearticlecontent").outerWidth() - 46) * -1) + "px");
 	$("#bs-afterarticlecontent").append($('#footer-info'));
 	
@@ -203,7 +207,7 @@ $(document).ready(function(){
 		$("#p-cactions-list-more").css('display', 'none');
 	});
 	$(document).ajaxSuccess(function(event, XMLHttpRequest, ajaxOptions){
-		if (typeof(ajaxOptions.data) === "undefined" || ajaxOptions.data.indexOf("watch") === -1)
+		if (typeof(ajaxOptions.data) === "undefined" || ajaxOptions.data === null || ajaxOptions.data.indexOf("watch") === -1)
 			return;
 		var response = $.parseJSON(XMLHttpRequest.responseText);
 		if (typeof(response.watch.watched) !== "undefined")

@@ -59,7 +59,7 @@ class ViewStateBarTopElementTools extends ViewStateBarTopElement {
 
 					$aOut[ ] = '<div id="bs-tools-more">';
 						$aOut[ ] = "<div class='bs-widget-head'>";
-							$aOut[ ] = "<h5 class='bs-widget-title '>" . wfMessage( 'bs-tools-headline' )->escaped()."</h3>";
+							$aOut[ ] = "<h5 class='bs-widget-title '>" . wfMessage( 'bs-tools-headline' )->escaped()."</h5>";
 						$aOut[ ] = "</div>";
 						$aOut[ ] = '<ul id="ca-more-menu">';
 						$aOut[ ] = implode( "\n", $this->mOptions['skinTemplate']->data['more_menu'] );

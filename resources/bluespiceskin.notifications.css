@@ -11,14 +11,14 @@
 	float: right;
 	height: 15px;
 	margin-right: 8px;
-	width: 40px;
+	width: 45px;
 	background: url(images/desktop/userbar-icon-message.png) no-repeat 0 3px;
 	margin-top: 4px;
 }
 #pt-notifications-open{
 	background: none;
 	width: 90px;
-	margin-top: 8px;
+	margin: 8px 0 0 0;
 }
 
 #pt-notifications > a, #pt-notifications-open > a{
@@ -50,12 +50,15 @@ div.mw-echo-overlay {
 div.mw-echo-overlay{
 	left: auto;
 	position: relative;
-	margin-left: -286px;
+	margin-left: -250px;
 	top: 18px;
+	width: 420px;
 }
 #mw-echo-overlay-footer{
 	display: inline-block;
 	background-color: #fff;
+	width: 370px;
+	padding-left: 50px;
 }
 div.mw-echo-overlay-pokey{
 	left: -3px;
@@ -69,4 +72,10 @@ span.mw-badge-content{
 
 div.mw-badge-important span{
 	color: #FEB01B !important;
+}
+
+.mw-echo-date-section {
+	margin: 20px 0px 5px 0px;
+	list-style-type: none;
+	list-style-image: none;
 }
