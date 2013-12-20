@@ -262,7 +262,6 @@ h1.firstHeading{
 	overflow:hidden;
 	font-size:12px;
 	font-family:'Muli', sans-serif;
-	color:#333;
 	padding:8px 0!important;
 }
 #bs-nav-section-navigation > div > ul > li{
@@ -401,6 +400,13 @@ h1.firstHeading{
 	margin:0 auto;
 }
 
+#bs-left-resize-btn.narrowed{
+	background-image: url(images/desktop/navi-expand-btn.png);
+}
+
+#bs-left-resize-btn.extended{
+	background-image: url(images/desktop/navi-collapse-btn.png);
+}
 #bs-left-resize-container {
 	/*@embed*/
 	background-color: #98a7c4;
@@ -459,6 +465,15 @@ h1.firstHeading{
 	position:absolute;
 	left:365px;
 	top:9px;
+}
+input#bs-search-fulltext {
+	/*@embed*/
+	background: url('images/desktop/search--btn.png') 8px 35px no-repeat!important;
+	position:absolute;
+	width:33px;
+	height:28px;
+	margin-left: 334px;
+	border: 0px;
 }
 
 #bs-menu-top-right > div {
@@ -554,8 +569,8 @@ h1.firstHeading{
 }
 #bs-personal-menu-open{
 	display: block;
-	margin: 0 0 0 -125px;
-	margin-top: 0.75em;
+	margin: 8px 0 0 -125px;
+	margin-top: 10px \0/;
 }
 #bs-menu-top-right > #bs-user-container-open{
 	display: none;
@@ -566,11 +581,11 @@ h1.firstHeading{
 	color:#3E5389;
 	text-decoration:none;
 	vertical-align:middle;
-	padding:5px 20px;
+	padding:5px 19px 5px 20px;
 }
 #bs-personal-menu-open li a{
 	color: white;
-	margin-left: 12px;
+	margin-left: 13px;
 	width: 178px;
 }
 
@@ -751,7 +766,6 @@ h1.firstHeading{
 }
 
 #ca-more-menu {
-	padding:10px 0 15px 0;
 	margin: 0;
 }
 
@@ -791,7 +805,7 @@ li#ca-unwatch{
 
 #ca-watch.icon a.watched, #ca-watch.icon a:hover{
 	/*@embed*/
-	background:url(images/desktop/bs-statebar-btn-follow-on.png) no-repeat center 8px transparent;
+	background:url(images/desktop/bs-statebar-btn-follow-on.png) no-repeat center 7px transparent;
 }
 
 #catlinks {
@@ -1323,7 +1337,7 @@ tr.collapsable,tr.sv-space td,#p-cactions li.ca-divider,.invisible,
 	height:90px;
 	text-decoration:none;
 	vertical-align:middle;
-	width:100px;
+	width:160px;
 }
 
 .bs-admincontrolbtn a:hover {
@@ -1452,8 +1466,8 @@ tr.collapsable,tr.sv-space td,#p-cactions li.ca-divider,.invisible,
 	text-align: center;
 }
 .bs-top-box div{
-	width: 218px;
-	margin-left: 12px;
+	width: 217px;
+	margin-left: 13px;
 	background-color: #9D9D9D;
 }
 .bs-user-label {
@@ -1946,6 +1960,17 @@ abbr,acronym,.explain {
 	cursor:help;
 }
 
+/* MediaWiki default from vector/screen.css, altered to use 'Source Sans Pro' */
+html,
+body {
+	height: 100%;
+	margin: 0;
+	padding: 0;
+	font-family: 'Source Sans Pro', sans-serif;
+	font-size: 1em;
+}
+/* END MediaWiki default */
+
 body {
 	color:#444;
 	/*@embed*/
@@ -2135,10 +2160,6 @@ div.multipageimagenavbox div.thumb {
 
 div.multipageimagenavbox hr {
 	margin:6px;
-}
-
-div.mw-content-ltr {
-	padding-top:25px;
 }
 
 div.mw-lag-warn-high {
@@ -2761,4 +2782,8 @@ body.mce-content-body {
 }
 .selflink {
 	font-weight: normal;
+}
+
+.mw-content-ltr .editsection {
+	float: right;
 }

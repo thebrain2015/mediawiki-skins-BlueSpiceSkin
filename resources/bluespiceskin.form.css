@@ -55,29 +55,6 @@ form input[type=checkbox] {
 	background:none;
 }
 
-input#bs-search-fulltext {
-	/*@embed*/
-	background:url(images/desktop/search.png) no-repeat transparent!important;
-	background-position:0 0;
-	height:13px;
-	width:12px;
-	border:0 none;
-	cursor:pointer;
-	float:right;
-	margin:3px 3px 0;
-	
-}
-
-input#bs-search-fulltext,
-input#bs-search-fulltext:hover {
-	/*@embed*/
-	background: none no-repeat center center!important;
-	position:absolute;
-	width:33px;
-	height:23px;
-	margin-left: 334px;
-}
-
 input#wpSave,
 input#wpDiff,
 input#wpPreview {

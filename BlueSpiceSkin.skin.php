@@ -308,7 +308,7 @@ class BlueSpiceSkinTemplate extends BaseTemplate {
 		$aPortlets = array();
 
 		foreach ($this->data['sidebar'] as $bar => $cont) {
-			$sTitle = wfEmptyMsg($bar, wfMsg($bar)) ? $bar : wfMsg($bar);
+			$sTitle = wfEmptyMsg($bar, wfMessage($bar)->plain()) ? $bar : wfMessage($bar)->plain();
 			$aOut = array();
 
 			if ($bar == 'TOOLBOX') {
@@ -418,7 +418,7 @@ class BlueSpiceSkinTemplate extends BaseTemplate {
 
 			foreach ( $aRegisteredModules as $sModuleKey => $aModulParams ) {
 				$skeyLower = strtolower($sModuleKey);
-				$sModulLabel = wfMsg( 'bs-' . $skeyLower . '-label' );
+				$sModulLabel = wfMessage( 'bs-' . $skeyLower . '-label' )->plain();
 				$sUrl = $oWikiAdminSpecialPageTitle->getLocalURL('mode=' . $sModuleKey);
 				$aPointsAdmin [$sModulLabel] = $sUrl;
 			}
@@ -447,12 +447,12 @@ class BlueSpiceSkinTemplate extends BaseTemplate {
 
 		if ( $wgUser->isLoggedIn() ) {
 			$sButtonUserImage = 'account-icon.png';
-			$sLoginSwitchTooltip = wfMsg( 'bs-userbar_loginswitch_logout', 'Logout' );
+			$sLoginSwitchTooltip = wfMessage( 'bs-userbar_loginswitch_logout', 'Logout' )->plain();
 
 			$aOut[] = '<div id="bs-user-container">';
 			$aOut[] = '<div id="bs-button-logout">';
 			$aOut[] = '  <span>' . $sLoginSwitchTooltip . '</span>';
-			$aOut[] = '  <a href="' . SpecialPage::getTitleFor('UserLogout')->escapeLocalURL(array('returnto' => $wgRequest->getVal('title'))) . '" title="' . $sLoginSwitchTooltip . '">';
+			$aOut[] = '  <a href="' . SpecialPage::getTitleFor( 'Userlogout' )->getLocalURL( array( 'returnto' => $wgRequest->getVal( 'title' ) ) ) . '" title="' . $sLoginSwitchTooltip . '">';
 			$aOut[] = '    <img src="' . $this->data['stylepath'] . '/' . $this->data['stylename'] . '/resources/images/desktop/logout-icon.png" alt="' . $sLoginSwitchTooltip . '" />';
 			$aOut[] = '  </a>';
 			$aOut[] = '</div>';
@@ -460,17 +460,19 @@ class BlueSpiceSkinTemplate extends BaseTemplate {
 			$aUserBarBeforeLogoutViews = array();
 
 			$aOut[] = '<div id="bs-button-user">';
-			$aOut[] = '  <span>' . wfMsg('bs-my-account') . '</span>';
+			$aOut[] = '  <span>' . wfMessage('bs-my-account')->plain() . '</span>';
 			//$aOut[] = $wgUser->getSkin()->link($wgUser->getUserPage(), '    <img src="' . $this->data['stylepath'] . '/' . $this->data['stylename'] . '/resources/images/desktop/' . $sButtonUserImage . '" alt="' . $sUserDisplayName . '" />');
 			//$aOut[] = $wgUser->getSkin()->link($wgUser->getUserPage(), '<div id="bs-button-user-img" style="background-image: url('.BsCore::getInstance()->getUserMiniProfile($wgUser, array("width"=>"19", "height" => "16"))->execute().');"></div>');
 			$aOut[] = BsCore::getInstance()->getUserMiniProfile($wgUser, array("width"=>"19", "height" => "16"))->execute();
 			$aOut[] = '  <ul id="bs-personal-menu">';
 
+			$oTitle = Title::makeTitle( NS_USER, $wgUser->getName() );
+			$sLink = BsLinkProvider::makeLink( $oTitle, wfMessage("bs-topbar-profile")->plain() );
 			$aPersonalUrlsFilter = array('userpage', 'logout', 'anonlogin', 'notifications');
 			$sUsername = $wgUser->getRealName() == "" ? $wgUser->getName() : $wgUser->getRealName();
 			$aOut[] = "<li class='bs-top-box'><div>".$sUsername."</div></li>";
 			$aOut[] = '<li id="pt-profile">';
-			$aOut[] = $wgUser->getSkin()->link($wgUser->getUserPage(), wfMessage("bs-topbar-profile")->plain());
+			$aOut[] = $sLink;
 			$aOut[] = '</li>';
 			foreach ( $this->data['personal_urls'] as $sKey => $aItem ) {
 				if ( in_array( $sKey, $aPersonalUrlsFilter ) ) continue;
@@ -502,10 +504,10 @@ class BlueSpiceSkinTemplate extends BaseTemplate {
 			$aOut[] = '</div>';
 		} else {
 			$sButtonUserImage = 'bs-icon-user-transp-50.png';
-			$sLoginSwitchTooltip = wfMsg('bs-userbar_loginswitch_login', 'Login');
+			$sLoginSwitchTooltip = wfMessage('bs-userbar_loginswitch_login', 'Login')->plain();
 			$aOut[] = '<div id="bs-button-logout">';
 			$aOut[] = '  <span>' . $sLoginSwitchTooltip . '</span>';
-			$aOut[] = '  <a href="' . SpecialPage::getTitleFor('UserLogin')->escapeLocalURL(array('returnto' => $wgRequest->getVal('title'))) . '" title="' . $sLoginSwitchTooltip . '">';
+			$aOut[] = '  <a href="' . SpecialPage::getTitleFor( 'Userlogin' )->escapeLocalURL( array( 'returnto' => $wgRequest->getVal( 'title' ) ) ) . '" title="' . $sLoginSwitchTooltip . '">';
 			$aOut[] = '    <img src="' . $this->data['stylepath'] . '/' . $this->data['stylename'] . '/resources/images/desktop/login-icon.png" alt="' . $sLoginSwitchTooltip . '" />';
 			$aOut[] = '  </a>';
 			$aOut[] = '</div>';
@@ -665,15 +667,15 @@ class BlueSpiceSkinTemplate extends BaseTemplate {
 					<div id="bs-nav-sections"> <?php // TODO RBV (02.11.10 11:36): encapsulate creation of left navigation. Maybe views?    ?>
 						<ul id ="bs-nav-tabs">
 							<li>
-								<a href="#bs-nav-section-navigation"><?php echo wfMsg('bs-tab_navigation', 'Navigation'); ?></a>
+								<a href="#bs-nav-section-navigation"><?php echo wfMessage('bs-tab_navigation', 'Navigation')->plain(); ?></a>
 							</li>
 		<?php if ($wgUser->isLoggedIn()) { ?>
 								<li>
-									<a href="#bs-nav-section-focus"><?php echo wfMsg('bs-tab_focus', 'Focus'); ?></a>
+									<a href="#bs-nav-section-focus"><?php echo wfMessage('bs-tab_focus', 'Focus')->plain(); ?></a>
 								</li>
 								<?php if ($wgUser->isAllowed('wikiadmin')) { ?>
 									<li>
-										<a href="#bs-nav-section-admin"><?php echo wfMsg('bs-tab_admin', 'Admin'); ?></a>
+										<a href="#bs-nav-section-admin"><?php echo wfMessage('bs-tab_admin', 'Admin')->plain(); ?></a>
 									</li>
 								<?php }
 							}

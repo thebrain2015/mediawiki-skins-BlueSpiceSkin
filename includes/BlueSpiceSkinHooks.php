@@ -127,4 +127,13 @@ class BlueSpiceSkinHooks {
 		$sImg = "<img src='".$sLogoPath."' alt='' />";
 		return true;
 	}
+	
+	public static function onVisualEditorConfig(&$aStandardConf, &$aDefaultConf){
+		global $wgStylePath, $wgServer;
+		if (isset($aStandardConf['content_css']) && $aStandardConf['content_css'] != "")
+			$aStandardConf['content_css'] .= ",";
+		//add the content.css file to this array and it will be available in the VisualEditor (styling tables e.g.)
+		$aStandardConf['content_css'] = $wgServer . "/" . $wgStylePath .'/BlueSpiceSkin/resources/bluespiceskin.content.css';
+		return true;
+	}
 }

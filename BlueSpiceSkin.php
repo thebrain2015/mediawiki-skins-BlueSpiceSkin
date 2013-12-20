@@ -12,7 +12,7 @@ if (!defined('MEDIAWIKI'))
 	die("This is an extension to the MediaWiki package and cannot be run standalone.");
 
 $wgSkipSkins = array( 'chick', 'cologneblue', 'common', 'modern', 'monobook', 'myskin', 'nostalgia', 'simple', 'standard', 'vector' );
-$wgAutoloadClasses['Mobile_Detect'] = dirname(__FILE__) . '/includes/lib/Mobile_Detect.php';
+$wgAutoloadClasses['Mobile_Detect'] = __DIR__ . '/includes/lib/Mobile_Detect.php';
 global $oMobileDetect;
 $oMobileDetect = new Mobile_Detect();
 
@@ -27,8 +27,8 @@ if ($oMobileDetect->isMobile()) {
 
 	$wgValidSkinNames['bluespiceskinmobile'] = 'BlueSpiceSkinMobile';
 	
-	$wgAutoloadClasses['SkinBlueSpiceSkinMobile'] = dirname(__FILE__) . '/BlueSpiceSkinMobile.skin.php';
-	$wgAutoloadClasses['BlueSpiceSkinMobileTemplate'] = dirname(__FILE__) . '/BlueSpiceSkinMobile.skin.php';
+	$wgAutoloadClasses['SkinBlueSpiceSkinMobile'] = __DIR__ . '/BlueSpiceSkinMobile.skin.php';
+	$wgAutoloadClasses['BlueSpiceSkinMobileTemplate'] = __DIR__ . '/BlueSpiceSkinMobile.skin.php';
 
 	$wgHooks['OutputPageBodyAttributes'][] = "BlueSpiceSkinMobileTemplate::onBSAddBodyAttribute";
 
@@ -54,7 +54,7 @@ if ($oMobileDetect->isMobile()) {
 		'localBasePath' => &$GLOBALS['wgStyleDirectory'],
 		'remoteBasePath' => &$GLOBALS['wgStylePath']
 	);
-	$wgExtensionMessagesFiles['BlueSpiceSkin'] = dirname(__FILE__) . '/BlueSpiceSkin.i18n.php';
+	$wgExtensionMessagesFiles['BlueSpiceSkin'] = __DIR__ . '/BlueSpiceSkin.i18n.php';
 	$wgDefaultSkin = "bluespiceskinmobile";
 	return;
 }
@@ -69,19 +69,20 @@ $wgExtensionCredits['skin'][] = array(
 
 $wgValidSkinNames['bluespiceskin'] = 'BlueSpiceSkin';
 
-$wgAutoloadClasses['SkinBlueSpiceSkin'] = dirname(__FILE__) . '/BlueSpiceSkin.skin.php';
-$wgAutoloadClasses['BlueSpiceSkinTemplate'] = dirname(__FILE__) . '/BlueSpiceSkin.skin.php';
-$wgAutoloadClasses['BlueSpiceSkinHooks'] = dirname(__FILE__) . '/includes/BlueSpiceSkinHooks.php';
-$wgAutoloadClasses['ViewStateBarTopElementTools'] = dirname(__FILE__) . '/views/view.StateBarTopElementTools.php';
-$wgAutoloadClasses['ViewStateBarTopElementWatch'] = dirname(__FILE__) . '/views/view.StateBarTopElementWatch.php';
+$wgAutoloadClasses['SkinBlueSpiceSkin'] = __DIR__ . '/BlueSpiceSkin.skin.php';
+$wgAutoloadClasses['BlueSpiceSkinTemplate'] = __DIR__ . '/BlueSpiceSkin.skin.php';
+$wgAutoloadClasses['BlueSpiceSkinHooks'] = __DIR__ . '/includes/BlueSpiceSkinHooks.php';
+$wgAutoloadClasses['ViewStateBarTopElementTools'] = __DIR__ . '/views/view.StateBarTopElementTools.php';
+$wgAutoloadClasses['ViewStateBarTopElementWatch'] = __DIR__ . '/views/view.StateBarTopElementWatch.php';
 
-$wgExtensionMessagesFiles['BlueSpiceSkin'] = dirname(__FILE__) . '/BlueSpiceSkin.i18n.php';
+$wgExtensionMessagesFiles['BlueSpiceSkin'] = __DIR__ . '/BlueSpiceSkin.i18n.php';
 
 $wgHooks['SkinTemplateOutputPageBeforeExec'][] = "BlueSpiceSkinHooks::onSkinTemplateOutputPageBeforeExec";
 $wgHooks['BSStateBarBeforeTopViewAdd'][] = "BlueSpiceSkinHooks::onBSStateBarBeforeTopViewAdd";
 $wgHooks['DoEditSectionLink'][] = "BlueSpiceSkinHooks::onDoEditSectionLink";
 $wgHooks['SkinBuildSidebar'][] = 'BlueSpiceSkinHooks::onSkinBuildSidebar';
 $wgHooks['BSGetLogo'][] = "BlueSpiceSkinHooks::onBSGetLogo";
+$wgHooks['VisualEditorConfig'][] = "BlueSpiceSkinHooks::onVisualEditorConfig";
 
 $wgResourceModules['ext.bluespice.bluespiceskin.js'] = array(
 	'scripts' => array(
@@ -147,6 +148,15 @@ $wgResourceModules['ext.bluespice.extensions'] = array(
 		'ext.bluespice.bluespiceskin.main',
 	),
 	'position' => 'bottom',
+	'group' => 'site',
+	'localBasePath'  => &$GLOBALS['wgStyleDirectory'],
+	'remoteBasePath' => &$GLOBALS['wgStylePath']
+);
+$wgResourceModules['ext.bluespice.bluespiceskin.icons'] = array(
+	'styles'  => array( 
+		'BlueSpiceSkin/resources/bluespiceskin.icons.css',
+	),
+	'position' => 'top',
 	'group' => 'site',
 	'localBasePath'  => &$GLOBALS['wgStyleDirectory'],
 	'remoteBasePath' => &$GLOBALS['wgStylePath']

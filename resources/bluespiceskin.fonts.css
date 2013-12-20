@@ -1,3 +1,6 @@
+/*hint: http://carnage-melon.tom7.org/embed/*/
+/*transforms the ttf files to a ie-usable file*/
+
 @font-face{
 	font-family: Source Sans Pro;
 	src: url("fonts/source_sans_pro_600.ttf");

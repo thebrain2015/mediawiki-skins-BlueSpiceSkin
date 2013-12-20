@@ -49,19 +49,19 @@ BlueSpiceSkin = {
 	initSearchBox: function() {
 		$('#bs-search-input').attr( 'defaultValue', $('#bs-search-input').val() );
 
-		if( typeof bsExtendedSearchSetFocus == "boolean" ) {
+		if ( typeof bsExtendedSearchSetFocus === "boolean" ) {
 			if ( wgIsArticle === true && bsExtendedSearchSetFocus  === true ) {
-			if ( window.location.hash == '' ) {
-				$('#bs-search-input').val('').focus();
-			}
-
-				$('#bs-search-input').keypress(function() {
-					if ( $(this).val() == $(this).attr( 'defaultValue' ) ) { 
-						$(this).val('');
-					}
-				});
+				if ( window.location.hash === '' ) {
+					$('#bs-search-input').val('').focus();
+				}
 			}
 		}
+
+		$('#bs-search-input').keypress(function() {
+			if ( $(this).val() == $(this).attr( 'defaultValue' ) ) { 
+				$(this).val('');
+			}
+		});
 
 		$('#bs-search-input').focus(function(){
 			if ( $(this).val() == $(this).attr( 'defaultValue' ) ) $(this).val('');

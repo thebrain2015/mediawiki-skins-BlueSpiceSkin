@@ -102,6 +102,10 @@ table.greyscale-narrow tbody tr:hover{
 	background-color: #DEDCDC;
 }
 
+div#mw-content-text {
+	padding-top: 25px;
+}
+
 #mw-content-text p{
 	color:#000000;
 	font-family:"Open Sans", sans-serif;
