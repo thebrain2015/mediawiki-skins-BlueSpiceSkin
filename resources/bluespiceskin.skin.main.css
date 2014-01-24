@@ -90,8 +90,10 @@ h1.firstHeading{
 }
 
 #bs-dataaftercontent {
+	/* dont't know for what this is :)
 	width:105%;
 	margin-left:-16px;
+	*/
 }
 
 #bs-application {
@@ -800,12 +802,13 @@ li#ca-unwatch{
 	background-position: center 9px;
 	text-indent: 0;
 	text-decoration: none;
-	color: #333;
+	color: #000;
+	font-family: 'Source Sans Pro',sans-serif;
 }
 
 #ca-watch.icon a.watched, #ca-watch.icon a:hover{
 	/*@embed*/
-	background:url(images/desktop/bs-statebar-btn-follow-on.png) no-repeat center 7px transparent;
+	background:url(images/desktop/bs-statebar-btn-follow-on.png) no-repeat center 8px transparent;
 }
 
 #catlinks {
@@ -1742,14 +1745,6 @@ td.diff-ntitle {
 	margin-bottom:2em;
 	color:#000;
 	padding:.5em 1em;
-}
-
-.fb-like {
-	margin:0 15px;
-}
-
-.fb_edge_widget_with_comment {
-	position:absolute!important;
 }
 
 .hw-adminbtn {
@@ -2781,9 +2776,13 @@ body.mce-content-body {
 	width: inherit !important
 }
 .selflink {
-	font-weight: normal;
+	/*font-weight: normal;*/
 }
 
 .mw-content-ltr .editsection {
 	float: right;
+}
+
+#wpLoginAttempt {
+	height: inherit !important;
 }

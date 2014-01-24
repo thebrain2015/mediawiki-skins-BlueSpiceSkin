@@ -31,9 +31,10 @@ class BlueSpiceSkinHooks {
 	 * @param type $oTitle
 	 * @return boolean Always true to keep Hook running
 	 */
-	public static function onBSStateBarBeforeTopViewAdd($oStatebar, &$aTopViews, User $oUser, $oTitle, $oSkinTemplate) {
+	public static function onBSStateBarBeforeTopViewAdd( $oStatebar, &$aTopViews, User $oUser, $oTitle, $oSkinTemplate ) {
 		$aViews = array();
-		wfRunHooks('BlueSpiceSkin:Widgets', array(&$aViews, $oUser, $oUser->getSkin()));
+		$oSkin = RequestContext::getMain()->getSkin();
+		wfRunHooks( 'BlueSpiceSkin:Widgets', array( &$aViews, $oUser, $oSkin ) );
 		$oTopView = new ViewStateBarTopElementTools();
 		$oTopView->setOptions(
 				array(
@@ -62,16 +63,16 @@ class BlueSpiceSkinHooks {
 		return true;
 	}
 
-	public static function onSkinBuildSidebar(Skin $skin, &$bar) {
-		if (Title::makeTitle(NS_MEDIAWIKI, "Sidebar")->exists())
-			return true;	
+	public static function onSkinBuildSidebar( Skin $skin, &$bar ) {
+		if ( Title::makeTitle( NS_MEDIAWIKI, "Sidebar" )->exists() ) return true;
+
 		$newBar = array();
 		$aNavigation = array(
 			'navigation' => array(
 				Title::newMainPage(),
-				SpecialPage::getTitleFor("allpages"),
-				SpecialPage::getTitleFor("categories"),
-				SpecialPage::getTitleFor("recentchanges")
+				SpecialPage::getTitleFor( "Allpages" ),
+				SpecialPage::getTitleFor( "Categories" ),
+				SpecialPage::getTitleFor( "Recentchanges" )
 			),
 			'help' => array(
 				array(
@@ -90,23 +91,25 @@ class BlueSpiceSkinHooks {
 					'id' => 'contact'),
 			)
 		);
-		foreach ($aNavigation as $key => $aPages){
-			foreach ($aPages as $oPage){
-				if (is_object($oPage)){
-					if ($oPage->isMainPage())
+
+		foreach ( $aNavigation as $key => $aPages ) {
+			foreach ( $aPages as $oPage ){
+				if ( is_object( $oPage ) ) {
+					if ( $oPage->isMainPage() ) {
 						$sId = "n-mainpage";
-					else if ($oPage->isSpecialPage())
-						$sId = "n-special-" . strtolower(SpecialPage::getPageByAlias($oPage->getText())->getName());
-					else
-						$sId = "n-" . $oPage->getDBkey();
+					} elseif ( $oPage->isSpecialPage() ) {
+						$sId = 'n-special-' . strtolower( SpecialPageFactory::getPage( $oPage->getText())->getName() );
+					} else {
+						$sId = 'n-' . $oPage->getDBkey();
+					}
+
 					$newBar[$key][] = array(
 						"text" => $oPage->getBaseText(),
 						"href" => $oPage->getLocalURL(),
 						"id"=> $sId,
 						"active" => false
 					);
-				}
-				else{
+				} else{
 					$newBar[$key][] = array(
 						"text" => $oPage['text'],
 						"href" => $oPage['href'],

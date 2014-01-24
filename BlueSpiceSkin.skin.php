@@ -206,28 +206,6 @@ class BlueSpiceSkinTemplate extends BaseTemplate {
 		foreach ( $aViews as $key => $sView ) echo $sView;
 	}
 
-	protected function printLanguageBox() {
-		if ( $this->data['language_urls'] ) {
-			$aOut = array();
-			$aOut[] = '<div id="p-lang" class="portlet">';
-			$aOut[] = '  <h5>' . wfMessage( 'otherlanguages' )->plain() . '</h5>';
-			$aOut[] = '  <div class="pBody">';
-			$aOut[] = '     <ul>';
-
-			foreach ( $this->data['language_urls'] as $langlink ) {
-				$aOut[] = '<li class="' . htmlspecialchars( $langlink['class'] ) . '">';
-				$aOut[] = '  <a href="' . htmlspecialchars( $langlink['href'] ) . '">' . $langlink['text'] . '</a>';
-				$aOut[] = '</li>';
-			}
-
-			$aOut[] = '    </ul>';
-			$aOut[] = '  </div>';
-			$aOut[] = '</div>';
-
-			echo implode( "\n", $aOut );
-		}
-	}
-
 	protected function getToolboxMarkUp( $bRenderHeading = true ) {
 		// adding link to Allpages
 		$oAllPagesSpecialPage = SpecialPageFactory::getPage( 'Allpages' );
@@ -350,6 +328,7 @@ class BlueSpiceSkinTemplate extends BaseTemplate {
 		}
 
 		if ($this->data['language_urls']) {
+			wfRunHooks( 'otherlanguages', array( $this, true ) );
 			$aOut = array();
 			$aOut[] = '<div title="' . wfMessage('otherlanguages')->plain() . '" id="p-lang" class="bs-widget portal">';
 			$aOut[] = '  <div class="bs-widget-head">';
@@ -417,7 +396,7 @@ class BlueSpiceSkinTemplate extends BaseTemplate {
 			$aRegisteredModules = WikiAdmin::getRegisteredModules();
 
 			foreach ( $aRegisteredModules as $sModuleKey => $aModulParams ) {
-				$skeyLower = strtolower($sModuleKey);
+				$skeyLower = mb_strtolower($sModuleKey);
 				$sModulLabel = wfMessage( 'bs-' . $skeyLower . '-label' )->plain();
 				$sUrl = $oWikiAdminSpecialPageTitle->getLocalURL('mode=' . $sModuleKey);
 				$aPointsAdmin [$sModulLabel] = $sUrl;
@@ -488,12 +467,12 @@ class BlueSpiceSkinTemplate extends BaseTemplate {
 			$aOut[] = '  </ul>';
 			$aOut[] = '</div>';
 			wfRunHooks( 'BSBlueSpiceSkinUserBarBeforeLogout', array( &$aUserBarBeforeLogoutViews, $wgUser, $this ) );
-			foreach ($aUserBarBeforeLogoutViews as $oUserBarView) {
+			foreach ( $aUserBarBeforeLogoutViews as $oUserBarView ) {
 				$aOut[] = $oUserBarView->execute();
 			}
 			$sUsernameCSSClass = '';
 
-			if ($wgTitle->equals($wgUser->getUserPage())) {
+			if ( $wgTitle->equals( $wgUser->getUserPage() ) ) {
 				$sUsernameCSSClass = ' class="active"';
 			}
 
@@ -507,7 +486,7 @@ class BlueSpiceSkinTemplate extends BaseTemplate {
 			$sLoginSwitchTooltip = wfMessage('bs-userbar_loginswitch_login', 'Login')->plain();
 			$aOut[] = '<div id="bs-button-logout">';
 			$aOut[] = '  <span>' . $sLoginSwitchTooltip . '</span>';
-			$aOut[] = '  <a href="' . SpecialPage::getTitleFor( 'Userlogin' )->escapeLocalURL( array( 'returnto' => $wgRequest->getVal( 'title' ) ) ) . '" title="' . $sLoginSwitchTooltip . '">';
+			$aOut[] = '  <a href="' . htmlspecialchars( SpecialPage::getTitleFor( 'Userlogin' )->getLocalURL( array( 'returnto' => $wgRequest->getVal( 'title' ) ) ) ) . '" title="' . $sLoginSwitchTooltip . '">';
 			$aOut[] = '    <img src="' . $this->data['stylepath'] . '/' . $this->data['stylename'] . '/resources/images/desktop/login-icon.png" alt="' . $sLoginSwitchTooltip . '" />';
 			$aOut[] = '  </a>';
 			$aOut[] = '</div>';
@@ -770,8 +749,8 @@ class BlueSpiceSkinTemplate extends BaseTemplate {
 				</div>
 				<!-- #bs-footer END -->
 			</div>
+			<?php $this->printSkyScraper(); ?>
 		</div>
-		<?php $this->printSkyScraper(); ?>
 		<?php
 		$aAdditionalHTML = array();
 		wfRunHooks('BSBlueSpiceSkinAfterBsFloaterDiv', array($this, &$aAdditionalHTML));
