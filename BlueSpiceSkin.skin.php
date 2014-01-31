@@ -208,9 +208,8 @@ class BlueSpiceSkinTemplate extends BaseTemplate {
 
 	protected function getToolboxMarkUp( $bRenderHeading = true ) {
 		// adding link to Allpages
-		$oAllPagesSpecialPage = SpecialPageFactory::getPage( 'Allpages' );
-		$this->data['nav_urls']['specialpageallpages']['href'] = $oAllPagesSpecialPage->getTitle()->getLinkURL();
-		$this->data['nav_urls']['specialpageallpages']['text'] = $oAllPagesSpecialPage->getDescription();
+		$this->data['nav_urls']['specialpageallpages']['href'] = SpecialPage::getTitleFor( 'Allpages' )->getLinkURL();
+		$this->data['nav_urls']['specialpageallpages']['text'] = SpecialPageFactory::getPage( 'Allpages' )->getDescription();
 
 		$aToolboxExcludeList = array( 'mainpage' );
 		$aToolboxLinkList = array();
@@ -282,7 +281,6 @@ class BlueSpiceSkinTemplate extends BaseTemplate {
 	}
 
 	protected function printNavigationSidebar() {
-		global $wgScriptPath;
 		$aPortlets = array();
 
 		foreach ($this->data['sidebar'] as $bar => $cont) {
@@ -305,8 +303,13 @@ class BlueSpiceSkinTemplate extends BaseTemplate {
 					if (strpos($val['text'], "|") !== false) {
 						$aVal = explode('|', $val['text']);
 						$oFile = wfFindFile($aVal[1]);
-						if ($oFile->exists()) {
-							$aOut[] = '<div style="background-image:url(' . $oFile->getFullUrl() . '); width:24px; height:24px;" class="left_navigation_icon" ></div>';
+						if (is_object($oFile) && $oFile->exists()) {
+							if ( BsExtensionManager::isContextActive( 'MW::SecureFileStore::Active' ) ) {
+								$sUrl = SecureFileStore::secureStuff($oFile->getUrl(), true);
+							}
+							else
+								$sUrl = $oFile->getUrl();
+							$aOut[] = '<div style="background:url(' . $sUrl . ') center no-repeat; width:24px; height:24px;" class="left_navigation_icon" ></div>';
 							$aOutHidden[] = ' <li> <a href="' . htmlspecialchars($val['href']) . '" title="' . htmlspecialchars($aVal[0]) .'" ' . $sTarget . $sRel . '>' . '<div id="' . Sanitizer::escapeId($val['id']) . '-small" class="left_navigation_icon" style="background-image:url(' . $oFile->getFullUrl() . '); width:24px; height:24px;"></div>' . '</a> </li>';
 						} else {
 							//default

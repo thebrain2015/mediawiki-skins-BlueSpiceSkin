@@ -1194,8 +1194,12 @@ tr.collapsable,tr.sv-space td,#p-cactions li.ca-divider,.invisible,
 	width:12em!important;
 }
 
-#userloginForm input,#userlogin .loginText,#userlogin2 input {
+#userloginForm input,#userlogin .loginText,#userlogin2 input{
 	margin:0!important;
+}
+
+#content form input.loginPassword ,#content form input.loginText{
+	width: 100%;
 }
 
 #userloginForm td,#userlogin2 td {

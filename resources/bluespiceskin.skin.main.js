@@ -196,7 +196,8 @@ $(document).ready(function() {
 		$("#bs-user-container-open").fadeOut();
 		$("#pt-notifications").fadeIn();
 	});
-	var count = $("#review-userbar-element-open").text().replace(/(\r\n|\n|\r)/gm, "").replace(/\s+/g, '');
+        var count = $("#review-userbar-element-open").text().replace(/(\r\n|\n|\r)/gm, "").replace(/\s+/g, '').split('|');
+        count = count[0];
 	var oLink = $("#review-userbar-element-open a");
 	oLink.html(mw.message('bs-top-bar-review', +count).text());
 	$("#review-userbar-element-open").html(oLink);
