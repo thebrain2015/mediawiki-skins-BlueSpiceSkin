@@ -67,3 +67,7 @@ span.editsection,
 #bs-afterarticlecontent legend.active{
 	width:100%;
 }
+
+table, div.printfooter{
+	width: 90% !important;
+}

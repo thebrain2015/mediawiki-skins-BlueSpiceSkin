@@ -26,10 +26,18 @@ $(document).ready(function() {
 					$("#bs-content-column, #footer").animate({"margin-left": '90px'});
 				}
 
-				$("#bs-tools-container").css('width', $("#bs-tools-container").width() + 110 + "px");
-
-				var margin = $("#bs-tools-container").css('margin-left').replace('px', '');
-				$("#bs-tools-container").css('margin-left', margin - 110 + "px");
+				var margin = parseInt($("#bs-tools-container").css('margin-left').replace('px', ''));
+				$("#bs-tools-container").animate({
+					'width': ($("#bs-tools-container").width() + 110) + "px",
+					'margin-left': margin - 110 + "px"
+				});
+				var newWidth = parseInt($("#bs-tools-container").width() + 110 - $("#bs-tools-shadow-right").outerWidth() - $("#bs-tools-shadow-left").outerWidth());
+				$("#bs-tools-shadow-bottom-middle").animate({'width' : (newWidth + 1) + 'px'});
+				$("#bs-tools-widgets").animate({'width': (newWidth + 1) + "px"});
+				$("#bs-tools-widgets > div").each(function(i, v){
+					$(v).animate({'width' : (newWidth / 5)-1 + "px"});
+					
+				});
 			} else {
 				$("#bs-nav-small").fadeOut(400, function() {
 					$("#bs-nav-sections > ul").fadeIn();
@@ -59,33 +67,43 @@ $(document).ready(function() {
 					$("#bs-content-column, #footer").animate({"margin-left": '200px'});
 				}
 
-				$("#bs-tools-container").css('width', $("#bs-tools-container").width() - 110 + "px");
-
-				var margin = $("#bs-tools-container").css('margin-left').replace('px', '');
-				$("#bs-tools-container").css('margin-left', margin + 110 + "px");
+				var margin = parseInt($("#bs-tools-container").css('margin-left').replace('px', ''));
+				$("#bs-tools-container").animate({
+					'width' : $("#bs-tools-container").width() - 110 + "px",
+					'margin-left': margin + 110 + "px"
+				});
+				var newWidth = $("#bs-tools-container").width() - 110 - $("#bs-tools-shadow-right").outerWidth() - $("#bs-tools-shadow-left").outerWidth();
+				$("#bs-tools-shadow-bottom-middle").animate({'width' : newWidth + 1});
+				$("#bs-tools-widgets").animate({'width': newWidth + 1 + "px"});
+				$("#bs-tools-widgets > div").each(function(i, v){
+					$(v).animate({'width' : (newWidth / 5)-1 + 'px'});
+					
+				});
 			}
 		});
 	}
 	$("#bs-statebar-viewtoggler-image").attr('src', wgScriptPath + '/skins/BlueSpiceSkin/resources/images/desktop/statusbar-btn_more.png');
 	$("#bs-statebar-viewtoggler-image").css('display', 'block');
+	$("#bs-statebar-viewtoggler-image").css('margin', '0 auto');
 	$("#bs-beforearticlecontent").append($("#bs-statebar-viewtoggler"));
 	if (typeof BsStateBar != 'undefined') {
 		BsStateBar.imagePathActive = wgScriptPath + '/skins/BlueSpiceSkin/resources/images/desktop/statusbar-btn_less.png';
 		BsStateBar.imagePathInactive = wgScriptPath + '/skins/BlueSpiceSkin/resources/images/desktop/statusbar-btn_more.png';
 	}
-	$("#bs-statebar-viewtoggler-image").toggle(function() {
-		$(this).css('margin-top', "0  !important");
-		$(this).css('margin-right', "auto !important");
-		$(this).css('margin-bottom', "0  !important");
-		$(this).css('margin-right', "auto  !important");
-		return true;
-	}, function() {
-		$(this).css('margin-top', "0  !important");
-		$(this).css('margin-right', "0  !important");
-		$(this).css('margin-bottom', "0  !important");
-		$(this).css('margin-right', "0  !important");
-		return true;
-	});
+	$("#bs-statebar-viewtoggler-image").toggle(
+		function() {
+			$(this).css('margin-top', "0 !important");
+			$(this).css('margin-right', "auto !important");
+			$(this).css('margin-bottom', "0 !important");
+			return true;
+		}, 
+		function() {
+			$(this).css('margin-top', "0 !important");
+			$(this).css('margin-right', "0 !important");
+			$(this).css('margin-bottom', "0 !important");
+			return true;
+		}
+	);
 	/*BlueSpice.Skin.initWidgets = function(){};
 	 BlueSpice.Skin.initMoreMenu = function(){};
 	 BlueSpice.Skin.initPersonalMenu = function(){};*/
@@ -167,8 +185,6 @@ $(document).ready(function() {
 	if ($(".bs-tools-widgets-column").width() !== null) {
 		elemWidth = $(".bs-tools-widgets-column").width();
 	}
-	$(".bs-widget-head").css('width', elemWidth - 20 + "px");
-	$("#bs-tools-more .bs-widget-head").css('width', elemWidth - 25 + "px");
 	$("#bs-tools-container").css('margin-left', (($("#bs-beforearticlecontent").outerWidth() - 36) * -1) + "px");
 	$("#bs-afterarticlecontent").append($('#footer-info'));
 

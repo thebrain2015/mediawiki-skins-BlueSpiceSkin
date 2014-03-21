@@ -952,7 +952,7 @@ li#ca-unwatch{
 	padding-top:2em;
 }
 
-#mw-read-only-warning {
+#mw-read-only-warning, #mw-missingsummary {
 	border:2px solid #8B0000;
 	background:#FFAE00;
 	margin:0 0 5px;
@@ -2659,8 +2659,8 @@ div.bs-authors{
 #bs-tools-shadow-right{
 	/*@embed*/
 	background: url(images/desktop/toolbar-bg-right.png) transparent repeat-y;
-	width: 14px;
-	height: 91.5%;
+	width: 16px;
+	height: 90.5%;
 	bottom: 0;
 	position: absolute;
 	right: 0;
@@ -2670,7 +2670,7 @@ div.bs-authors{
 	width: 100%;
 	height: 14px;
 	position: absolute;
-	bottom: -14px;
+	bottom: -13px;
 }
 #bs-tools-shadow-bottom-left{
 	/*@embed*/
@@ -2697,7 +2697,7 @@ div.bs-authors{
 
 div.left_navigation_icon{
 	/*@embed*/
-	background: url(images/desktop/left_bavigation_sprite.png) 0 48px;
+	background: url(images/desktop/left_navigation_sprite.png) 0 48px;
 	width:24px;
 	height:24px;
 	float: left !important;
@@ -2789,4 +2789,8 @@ body.mce-content-body {
 
 #wpLoginAttempt {
 	height: inherit !important;
+}
+
+#bs-user-container-open, #bs-user-container{
+	margin-right: -13px !important;
 }

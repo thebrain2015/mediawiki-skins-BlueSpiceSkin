@@ -76,19 +76,20 @@ class BlueSpiceSkinHooks {
 			),
 			'help' => array(
 				array(
-					'text' => 'Anleitungen',
+					'text' => wfMessage( 'bs-navigation-instructions' )->plain(),
 					'href' => 'http://help.blue-spice.org/index.php/Wiki/de',
 					'id' => 'manuals'
 				),
 				array(
-					'text' => 'Support',
+					'text' => wfMessage( 'bs-navigation-support' )->plain(),
 					'href' => 'http://www.blue-spice.org/de/service/support/business-support/',
 					'id' => 'support'
 				),
 				array(
-					'text' => 'Kontakt',
+					'text' => wfMessage( 'bs-navigation-contact' )->plain(),
 					'href' => 'http://www.blue-spice.org/de/ueber-uns/kontakt-anfahrt/',
-					'id' => 'contact'),
+					'id' => 'contact'
+					),
 			)
 		);
 
@@ -98,13 +99,14 @@ class BlueSpiceSkinHooks {
 					if ( $oPage->isMainPage() ) {
 						$sId = "n-mainpage";
 					} elseif ( $oPage->isSpecialPage() ) {
-						$sId = 'n-special-' . strtolower( SpecialPageFactory::getPage( $oPage->getText())->getName() );
+						$oSpecialPage = SpecialPageFactory::getPage( $oPage->getText() );
+						$sId = 'n-special-' . strtolower( $oSpecialPage->getName() );
 					} else {
 						$sId = 'n-' . $oPage->getDBkey();
 					}
 
 					$newBar[$key][] = array(
-						"text" => $oPage->getBaseText(),
+						"text" => ( isset( $oSpecialPage ) ) ? $oSpecialPage->getDescription() : $oPage->getText(),
 						"href" => $oPage->getLocalURL(),
 						"id"=> $sId,
 						"active" => false

@@ -292,39 +292,48 @@ class BlueSpiceSkinTemplate extends BaseTemplate {
 				continue;
 			}
 			if ($cont) {
-				$aOut[] = '<div id="p-' . Sanitizer::escapeId($bar) . '" class="bs-nav-links">';
+				$aOut[] = '<div id="p-' . Sanitizer::escapeId( $bar ) . '" class="bs-nav-links">';
 				$aOut[] = '  <h5>' . $sTitle . '</h5>';
 				$aOut[] = '  <ul>';
 				foreach ($cont as $key => $val) {
+					if ( strpos( $val['text'], "|" ) !== false ) {
+						$aVal = explode( '|', $val['text'] );
+						$val['id'] = 'n-' . $aVal[0];
+					}
+
 					$sCssClass = (!isset($val['active']) ) ? ' class="active"' : '';
 					$sTarget = ( isset($val['target']) ) ? ' target="' . $val['target'] . '"' : '';
 					$sRel = ( isset($val['rel']) ) ? ' rel="' . $val['rel'] . '"' : '';
 					$aOut[] = '<li id="' . Sanitizer::escapeId($val['id']) . '"' . $sCssClass . ' class="clearfix">';
-					if (strpos($val['text'], "|") !== false) {
-						$aVal = explode('|', $val['text']);
-						$oFile = wfFindFile($aVal[1]);
+					if ( !empty( $aVal ) ) {
+						$oFile = wfFindFile( $aVal[1] );
+						if ( strpos( $lang = $this->translator->translate( $aVal[0] ), "&lt;" ) === false ) {
+							$aVal[0] = $lang;
+						}
+
 						if (is_object($oFile) && $oFile->exists()) {
 							if ( BsExtensionManager::isContextActive( 'MW::SecureFileStore::Active' ) ) {
-								$sUrl = SecureFileStore::secureStuff($oFile->getUrl(), true);
-							}
-							else
+								$sUrl = SecureFileStore::secureStuff( $oFile->getUrl(), true );
+							} else {
 								$sUrl = $oFile->getUrl();
+							}
 							$aOut[] = '<div style="background:url(' . $sUrl . ') center no-repeat; width:24px; height:24px;" class="left_navigation_icon" ></div>';
-							$aOutHidden[] = ' <li> <a href="' . htmlspecialchars($val['href']) . '" title="' . htmlspecialchars($aVal[0]) .'" ' . $sTarget . $sRel . '>' . '<div id="' . Sanitizer::escapeId($val['id']) . '-small" class="left_navigation_icon" style="background-image:url(' . $oFile->getFullUrl() . '); width:24px; height:24px;"></div>' . '</a> </li>';
+							$aOutHidden[] = '<li><a href="' . htmlspecialchars($val['href']) . '" title="' . htmlspecialchars($aVal[0]) .'" ' . $sTarget . $sRel . '>' . '<div id="' . Sanitizer::escapeId($val['id']) . '-small" class="left_navigation_icon" style="background:url(' . $sUrl . ') center no-repeat; width:24px; height:24px;"></div>' . '</a> </li>';
 						} else {
 							//default
 							$aOut[] = '<div class="left_navigation_icon"></div>';
-							$aOutHidden[] = ' <li> <a href="' . htmlspecialchars($val['href']) . '" title="' . htmlspecialchars($aVal[0]) .'" ' . $sTarget . $sRel . '>' . '<div id="' . Sanitizer::escapeId($val['id']) . '-small" class="left_navigation_icon" ></div>' . '</a> </li>';
+							$aOutHidden[] = '<li><a href="' . htmlspecialchars($val['href']) . '" title="' . htmlspecialchars($aVal[0]) .'" ' . $sTarget . $sRel . '>' . '<div id="' . Sanitizer::escapeId($val['id']) . '-small" class="left_navigation_icon" ></div>' . '</a> </li>';
 						}
-						$aOut[] = '  <a href="' . htmlspecialchars($val['href']) . '" title="' . htmlspecialchars($aVal[0]) .'" ' . $sTarget . $sRel . '>' . htmlspecialchars($aVal[0]) . '</a>';
+						$aOut[] = '<a href="' . htmlspecialchars($val['href']) . '" title="' . htmlspecialchars($aVal[0]) .'" ' . $sTarget . $sRel . '>' . htmlspecialchars($aVal[0]) . '</a>';
 					} else {
 						$aOut[] = '<div class="left_navigation_icon"></div>';
-						$aOutHidden[] = ' <li> <a href="' . htmlspecialchars($val['href']) . '" title="' . htmlspecialchars($val['text']) .'" ' . $sTarget . $sRel . '>' . '<div id="' . Sanitizer::escapeId($val['id']) . '-small" class="left_navigation_icon" ></div>' . '</a> </li>';
-						$aOut[] = '  <a href="' . htmlspecialchars($val['href']) . '" title="' . htmlspecialchars($val['text']) .'" ' . $sTarget . $sRel . '>' . htmlspecialchars($val['text']) . '</a>';
+						$aOutHidden[] = '<li><a href="' . htmlspecialchars($val['href']) . '" title="' . htmlspecialchars($val['text']) .'" ' . $sTarget . $sRel . '>' . '<div id="' . Sanitizer::escapeId($val['id']) . '-small" class="left_navigation_icon" ></div>' . '</a> </li>';
+						$aOut[] = '<a href="' . htmlspecialchars($val['href']) . '" title="' . htmlspecialchars($val['text']) .'" ' . $sTarget . $sRel . '>' . htmlspecialchars($val['text']) . '</a>';
 					}
 					$aOut[] = '</li>';
+					unset( $aVal );
 				}
-				$aOut[] = '  </ul>';
+				$aOut[] = '</ul>';
 				$aOut[] = '</div>';
 				$aPortlets[$bar] = implode("\n", $aOut);
 			}
@@ -401,13 +410,13 @@ class BlueSpiceSkinTemplate extends BaseTemplate {
 			foreach ( $aRegisteredModules as $sModuleKey => $aModulParams ) {
 				$skeyLower = mb_strtolower($sModuleKey);
 				$sModulLabel = wfMessage( 'bs-' . $skeyLower . '-label' )->plain();
-				$sUrl = $oWikiAdminSpecialPageTitle->getLocalURL('mode=' . $sModuleKey);
-				$aPointsAdmin [$sModulLabel] = $sUrl;
+				$sUrl = $oWikiAdminSpecialPageTitle->getLocalURL( 'mode=' . $sModuleKey );
+				$aPointsAdmin[$sModulLabel] = array( 'url' => $sUrl, 'module' => $skeyLower );
 			}
 			ksort( $aPointsAdmin );
-			foreach ( $aPointsAdmin as $sModuleLabel => $sUrl ) {
-				$sUrl = str_replace('&', '&amp;', $sUrl);
-				$aOut[] = '    <li><a href="' . $sUrl . '" title="' . $sModuleLabel . '">' . $sModuleLabel . '</a></li>';
+			foreach ( $aPointsAdmin as $sModuleLabel => $aParams ) {
+				$sUrl = str_replace( '&', '&amp;', $aParams['url'] );
+				$aOut[] = '    <li><a id="bs-admin-'.$aParams['module'].'" href="' . $sUrl . '" title="' . $sModuleLabel . '">' . $sModuleLabel . '</a></li>';
 			}
 		}
 
@@ -649,15 +658,15 @@ class BlueSpiceSkinTemplate extends BaseTemplate {
 					<div id="bs-nav-sections"> <?php // TODO RBV (02.11.10 11:36): encapsulate creation of left navigation. Maybe views?    ?>
 						<ul id ="bs-nav-tabs">
 							<li>
-								<a href="#bs-nav-section-navigation"><?php echo wfMessage('bs-tab_navigation', 'Navigation')->plain(); ?></a>
+								<a id="bs-tab-navigation" href="#bs-nav-section-navigation"><?php echo wfMessage('bs-tab_navigation', 'Navigation')->plain(); ?></a>
 							</li>
 		<?php if ($wgUser->isLoggedIn()) { ?>
 								<li>
-									<a href="#bs-nav-section-focus"><?php echo wfMessage('bs-tab_focus', 'Focus')->plain(); ?></a>
+									<a id="bs-tab-focus" href="#bs-nav-section-focus"><?php echo wfMessage('bs-tab_focus', 'Focus')->plain(); ?></a>
 								</li>
 								<?php if ($wgUser->isAllowed('wikiadmin')) { ?>
 									<li>
-										<a href="#bs-nav-section-admin"><?php echo wfMessage('bs-tab_admin', 'Admin')->plain(); ?></a>
+										<a id="bs-tab-admin" href="#bs-nav-section-admin"><?php echo wfMessage('bs-tab_admin', 'Admin')->plain(); ?></a>
 									</li>
 								<?php }
 							}

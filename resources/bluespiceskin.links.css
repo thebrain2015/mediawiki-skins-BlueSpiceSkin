@@ -1,4 +1,4 @@
-#bodyContent a.external,#bodyContent a[href ^="gopher://"],#bodyContent a[href ^="https://"],.link-https {
+#bodyContent a.external,#bodyContent a[href ^="gopher://"],#bodyContent a.external[href ^="https://"],.link-https {
 	/*@embed*/
 	background:url(images/desktop/bs-external.png) center right no-repeat;
 	padding-right:13px;
@@ -34,32 +34,32 @@
 	padding:0;
 }
 
-#bodyContent a[href^="ftp://"],.link-ftp {
+#bodyContent a.external[href^="ftp://"],.link-ftp {
 	/*@embed*/
 	background:url(images/desktop/bs-icon-file.gif) center right no-repeat;
 	padding-right:18px;
 }
 
-#bodyContent a[href^="irc://"],.link-irc {
+#bodyContent a.external[href^="irc://"],.link-irc {
 	/*@embed*/
 	background:url(images/desktop/bs-icon-discussionitem.gif) center right no-repeat;
 	padding-right:18px;
 }
 
-#bodyContent a[href^="mailto:"],.link-mailto {
+#bodyContent a.external[href^="mailto:"],.link-mailto {
 	/*@embed*/
 	background:url(images/desktop/bs-icon-mail.gif) center right no-repeat;
 	padding-right:18px;
 }
 
-#bodyContent a[href^="news://"] {
+#bodyContent a.external[href^="news://"] {
 	/*@embed*/
 	background:url(images/desktop/bs-icon-news.png) center right no-repeat;
 	padding-right:18px;
 }
 
-#bodyContent a[href^="http://"],
-#bodyContent a[href^="https://"],
+#bodyContent a.external[href^="http://"],
+#bodyContent a.external[href^="https://"],
 .link-https{
 	/*@embed*/
 	background:url(images/desktop/bs-external.png) no-repeat scroll right center transparent;
