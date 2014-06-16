@@ -33,12 +33,12 @@ class SkinBlueSpiceSkin extends SkinTemplate {
 	/**
 	 * @param $out OutputPage object
 	 */
-	function initPage( \OutputPage $out) {
+	function initPage( \OutputPage $out ) {
 		parent::initPage($out);
 		$out->addModules('ext.bluespice.bluespiceskin.js');
 	}
 
-	function setupSkinUserCss(OutputPage $out) {
+	function setupSkinUserCss( OutputPage $out ) {
 		parent::setupSkinUserCss($out);
 		$out->addModuleStyles('ext.bluespice.bluespiceskin');
 		$out->addModuleStyles('ext.bluespice.bluespiceskin.main');
@@ -268,14 +268,14 @@ class BlueSpiceSkinTemplate extends BaseTemplate {
 		return $oWidgetView;
 	}
 
-	public function onBSWidgetBarGetDefaultWidgets(&$aViews, $oUser, $oTitle) {
-		if (!isset($this->data['sidebar']['TOOLBOX'])) {
+	public function onBSWidgetBarGetDefaultWidgets( &$aViews, $oUser, $oTitle ) {
+		if ( !isset( $this->data['sidebar']['TOOLBOX'] ) ) {
 			$aViews[] = $this->getToolBoxWidget();
 		}
 		return true;
 	}
 
-	public function onBSWidgetListHelperInitKeyWords(&$aKeywords, $oTitle) {
+	public function onBSWidgetListHelperInitKeyWords( &$aKeywords, $oTitle ) {
 		$aKeywords['TOOLBOX'] = array($this, 'getToolBoxWidget');
 		return true;
 	}
@@ -284,14 +284,15 @@ class BlueSpiceSkinTemplate extends BaseTemplate {
 		$aPortlets = array();
 
 		foreach ($this->data['sidebar'] as $bar => $cont) {
-			$sTitle = wfEmptyMsg($bar, wfMessage($bar)->plain()) ? $bar : wfMessage($bar)->plain();
+			$sTitle = ( wfMessage( $bar )->isBlank() ) ? $bar : wfMessage( $bar )->plain();
+
 			$aOut = array();
 
-			if ($bar == 'TOOLBOX') {
+			if ( $bar == 'TOOLBOX' ) {
 				$aPortlets[$bar] = $this->getToolboxMarkUp();
 				continue;
 			}
-			if ($cont) {
+			if ( $cont ) {
 				$aOut[] = '<div id="p-' . Sanitizer::escapeId( $bar ) . '" class="bs-nav-links">';
 				$aOut[] = '  <h5>' . $sTitle . '</h5>';
 				$aOut[] = '  <ul>';
@@ -311,7 +312,7 @@ class BlueSpiceSkinTemplate extends BaseTemplate {
 							$aVal[0] = $lang;
 						}
 
-						if (is_object($oFile) && $oFile->exists()) {
+						if ( is_object( $oFile ) && $oFile->exists() ) {
 							if ( BsExtensionManager::isContextActive( 'MW::SecureFileStore::Active' ) ) {
 								$sUrl = SecureFileStore::secureStuff( $oFile->getUrl(), true );
 							} else {
@@ -432,18 +433,20 @@ class BlueSpiceSkinTemplate extends BaseTemplate {
 	 * @global WebRequest $wgRequest
 	 */
 	protected function printUserBar() {
-		global $wgTitle, $wgUser, $wgRequest;
+		$oUser = RequestContext::getMain()->getUser();
+		$oTitle = RequestContext::getMain()->getTitle();
+		$oRequest = RequestContext::getMain()->getRequest();
 
 		$aOut = array();
 
-		if ( $wgUser->isLoggedIn() ) {
+		if ( $oUser->isLoggedIn() ) {
 			$sButtonUserImage = 'account-icon.png';
 			$sLoginSwitchTooltip = wfMessage( 'bs-userbar_loginswitch_logout', 'Logout' )->plain();
 
 			$aOut[] = '<div id="bs-user-container">';
 			$aOut[] = '<div id="bs-button-logout">';
 			$aOut[] = '  <span>' . $sLoginSwitchTooltip . '</span>';
-			$aOut[] = '  <a href="' . SpecialPage::getTitleFor( 'Userlogout' )->getLocalURL( array( 'returnto' => $wgRequest->getVal( 'title' ) ) ) . '" title="' . $sLoginSwitchTooltip . '">';
+			$aOut[] = '  <a href="' . SpecialPage::getTitleFor( 'Userlogout' )->getLocalURL( array( 'returnto' => $oRequest->getVal( 'title' ) ) ) . '" title="' . $sLoginSwitchTooltip . '">';
 			$aOut[] = '    <img src="' . $this->data['stylepath'] . '/' . $this->data['stylename'] . '/resources/images/desktop/logout-icon.png" alt="' . $sLoginSwitchTooltip . '" />';
 			$aOut[] = '  </a>';
 			$aOut[] = '</div>';
@@ -451,16 +454,16 @@ class BlueSpiceSkinTemplate extends BaseTemplate {
 			$aUserBarBeforeLogoutViews = array();
 
 			$aOut[] = '<div id="bs-button-user">';
-			$aOut[] = '  <span>' . wfMessage('bs-my-account')->plain() . '</span>';
-			//$aOut[] = $wgUser->getSkin()->link($wgUser->getUserPage(), '    <img src="' . $this->data['stylepath'] . '/' . $this->data['stylename'] . '/resources/images/desktop/' . $sButtonUserImage . '" alt="' . $sUserDisplayName . '" />');
-			//$aOut[] = $wgUser->getSkin()->link($wgUser->getUserPage(), '<div id="bs-button-user-img" style="background-image: url('.BsCore::getInstance()->getUserMiniProfile($wgUser, array("width"=>"19", "height" => "16"))->execute().');"></div>');
-			$aOut[] = BsCore::getInstance()->getUserMiniProfile($wgUser, array("width"=>"19", "height" => "16"))->execute();
+			$aOut[] = '  <span>' . wfMessage( 'bs-my-account' )->plain() . '</span>';
+
+			$aOut[] = BsCore::getInstance()->getUserMiniProfile( $oUser, array( "width" => "19", "height" => "16" ) )->execute();
 			$aOut[] = '  <ul id="bs-personal-menu">';
 
-			$oTitle = Title::makeTitle( NS_USER, $wgUser->getName() );
-			$sLink = BsLinkProvider::makeLink( $oTitle, wfMessage("bs-topbar-profile")->plain() );
+			$oTitleUser = Title::makeTitle( NS_USER, $oUser->getName() );
+			$sLink = BsLinkProvider::makeLink( $oTitleUser, wfMessage("bs-topbar-profile")->plain() );
 			$aPersonalUrlsFilter = array('userpage', 'logout', 'anonlogin', 'notifications');
-			$sUsername = $wgUser->getRealName() == "" ? $wgUser->getName() : $wgUser->getRealName();
+			$sUsername = $oUser->getRealName() == "" ? $oUser->getName() : $oUser->getRealName();
+
 			$aOut[] = "<li class='bs-top-box'><div>".$sUsername."</div></li>";
 			$aOut[] = '<li id="pt-profile">';
 			$aOut[] = $sLink;
@@ -478,32 +481,30 @@ class BlueSpiceSkinTemplate extends BaseTemplate {
 			$aOut[] = "<li class='bs-bottom-box'></li>";
 			$aOut[] = '  </ul>';
 			$aOut[] = '</div>';
-			wfRunHooks( 'BSBlueSpiceSkinUserBarBeforeLogout', array( &$aUserBarBeforeLogoutViews, $wgUser, $this ) );
+
+			wfRunHooks( 'BSBlueSpiceSkinUserBarBeforeLogout', array( &$aUserBarBeforeLogoutViews, $oUser, $this ) );
+
 			foreach ( $aUserBarBeforeLogoutViews as $oUserBarView ) {
 				$aOut[] = $oUserBarView->execute();
 			}
 			$sUsernameCSSClass = '';
 
-			if ( $wgTitle->equals( $wgUser->getUserPage() ) ) {
+			if ( $oTitle->equals( $oUser->getUserPage() ) ) {
 				$sUsernameCSSClass = ' class="active"';
 			}
 
-			/* $aOut[ ] = '<div id="bs-skin-username"' . $sUsernameCSSClass . '>';
-			  $sUserDisplayName = BsAdapterMW::getUserDisplayName( $wgUser );
-			  $aOut[ ] = $wgUser->getSkin()->link( $wgUser->getUserPage(), $sUserDisplayName );
-			  $aOut[ ] = '</div>'; */
 			$aOut[] = '</div>';
 		} else {
 			$sButtonUserImage = 'bs-icon-user-transp-50.png';
 			$sLoginSwitchTooltip = wfMessage('bs-userbar_loginswitch_login', 'Login')->plain();
 			$aOut[] = '<div id="bs-button-logout">';
 			$aOut[] = '  <span>' . $sLoginSwitchTooltip . '</span>';
-			$aOut[] = '  <a href="' . htmlspecialchars( SpecialPage::getTitleFor( 'Userlogin' )->getLocalURL( array( 'returnto' => $wgRequest->getVal( 'title' ) ) ) ) . '" title="' . $sLoginSwitchTooltip . '">';
+			$aOut[] = '  <a href="' . htmlspecialchars( SpecialPage::getTitleFor( 'Userlogin' )->getLocalURL( array( 'returnto' => $oRequest->getVal( 'title' ) ) ) ) . '" title="' . $sLoginSwitchTooltip . '">';
 			$aOut[] = '    <img src="' . $this->data['stylepath'] . '/' . $this->data['stylename'] . '/resources/images/desktop/login-icon.png" alt="' . $sLoginSwitchTooltip . '" />';
 			$aOut[] = '  </a>';
 			$aOut[] = '</div>';
 			$aUserBarBeforeLogoutViews = array();
-			wfRunHooks('BSBlueSpiceSkinUserBarBeforeLogout', array(&$aUserBarBeforeLogoutViews, $wgUser, $this));
+			wfRunHooks('BSBlueSpiceSkinUserBarBeforeLogout', array(&$aUserBarBeforeLogoutViews, $oUser, $this));
 			foreach ($aUserBarBeforeLogoutViews as $oUserBarView) {
 				$aOut[] = $oUserBarView->execute();
 			}
@@ -521,13 +522,6 @@ class BlueSpiceSkinTemplate extends BaseTemplate {
 			$this->printViews($aViews);
 			echo '</div>';
 		}
-	}
-
-	protected function printWidgets() {
-		global $wgUser;
-		$aViews = array();
-		wfRunHooks('BlueSpiceSkin:Widgets', array(&$aViews, $wgUser, $this));
-		$this->printViews($aViews);
 	}
 
 	protected function printApplicationList() {
@@ -555,42 +549,26 @@ class BlueSpiceSkinTemplate extends BaseTemplate {
 
 	protected function printSearchBox() {
 		$aSearchBoxKeyValues = array();
-		wfRunHooks('FormDefaults', array($this, &$aSearchBoxKeyValues));
+		wfRunHooks( 'FormDefaults', array( $this, &$aSearchBoxKeyValues ) );
 
 		$aOut = array();
 		$aOut[] = '<div id="bs-searchbar">';
-		/* $aOut[] = '  <form class="bs-search-form" action="' . $aSearchBoxKeyValues[ 'SearchDestination' ] . '" onsubmit="if (document.getElementById(\'bs-search-input\').value == \'' . $aSearchBoxKeyValues[ 'SearchTextFieldDefaultText' ] . '\') return false;" method="' . $aSearchBoxKeyValues[ 'method' ] . '">';
-		  if ( isset( $aSearchBoxKeyValues[ 'HiddenFields' ] ) && is_array( $aSearchBoxKeyValues[ 'HiddenFields' ] ) ) {
-		  foreach ( $aSearchBoxKeyValues[ 'HiddenFields' ] as $key => $value )
-		  $aOut[] = "    <input type=\"hidden\" name=\"$key\" value=\"$value\" />";
-		  }
-		  $aOut[] = '    <input type="hidden" name="search_scope" value="' . $aSearchBoxKeyValues['DefaultKeyValuePair'][ 1 ] . '" id="bs-search-button-hidden" />';
-		  //$aOut[] = '    <button type="button" id="bs-search-button" title="' . $aSearchBoxKeyValues[ 'SubmitButtonTitle' ] . '" ></button>';
-		  $aOut[] = '    <div id="bs-search-right"></div>';
-		  $aOut[] = '    <input name="' . $aSearchBoxKeyValues[ 'SearchTextFieldName' ] . '" type="text" title="' . $aSearchBoxKeyValues[ 'SearchTextFieldTitle' ] . '" id="bs-search-input" value="' . $aSearchBoxKeyValues[ 'SearchTextFieldDefaultText' ] . '" class="bs-unfocused-textfield bs-autocomplete-field" accesskey="f" />';
-		  $aOut[] = '    <button type="button" id="bs-search-fulltext" title="' . $aSearchBoxKeyValues[ 'SubmitButtonFulltext' ] . '" ></button>';
-		  //$aOut[] = ( isset( $aSearchBoxKeyValues[ 'IdBsSearchLeft' ] ) ) ? $aSearchBoxKeyValues[ 'IdBsSearchLeft' ] : '<div id="bs-search-left"></div>';
-		  $aOut[] = '  </form>';
-		  $aOut[] = '</div>';
+		$aOut[] = '<form class="bs-search-form" action="'.$aSearchBoxKeyValues['SearchDestination'].'" method="'.$aSearchBoxKeyValues['method'].'">';
 
-		  $out = implode( "\n", $aOut );
-		  echo $out; */
-
-
-		$aOut[] = '    <form class="bs-search-form" action="' . $aSearchBoxKeyValues['SearchDestination'] . '" onsubmit="if (document.getElementById(\'bs-search-input\').value == \'' . $aSearchBoxKeyValues['SearchTextFieldDefaultText'] . '\') return false;" method="' . $aSearchBoxKeyValues['method'] . '">';
-
-		if (isset($aSearchBoxKeyValues['HiddenFields']) && is_array($aSearchBoxKeyValues['HiddenFields'])) {
-			foreach ($aSearchBoxKeyValues['HiddenFields'] as $key => $value) {
-				$aOut[] = "        <input type=\"hidden\" name=\"$key\" value=\"$value\" />";
+		if ( isset( $aSearchBoxKeyValues['HiddenFields'] ) && is_array( $aSearchBoxKeyValues['HiddenFields'] ) ) {
+			foreach ( $aSearchBoxKeyValues['HiddenFields'] as $key => $value ) {
+				$aOut[] = '<input type="hidden" name="'.$key.'" value="'.$value.'" />';
 			}
 		}
 
-		$aOut[] = '        <input type="submit" id="bs-search-fulltext" title="' . $aSearchBoxKeyValues['SubmitButtonFulltext'] . '" name="search_scope" value="">';
-		$aOut[] = '        <input name="' . $aSearchBoxKeyValues['SearchTextFieldName'] . '" type="text" title="' . $aSearchBoxKeyValues['SearchTextFieldTitle'] . '" id="bs-search-input" value="' . $aSearchBoxKeyValues['SearchTextFieldDefaultText'] . '" class="bs-unfocused-textfield bs-autocomplete-field" accesskey="f" />';
+		$aOut[] = '<input type="submit" id="bs-search-fulltext" title="'.$aSearchBoxKeyValues['SubmitButtonFulltext'].'" name="search_scope" value="">';
+		$aOut[] = '<input name="'.$aSearchBoxKeyValues['SearchTextFieldName'].'" type="text" title="'.$aSearchBoxKeyValues['SearchTextFieldTitle'].
+						'" id="bs-search-input" value="'.$aSearchBoxKeyValues['SearchTextFieldDefaultText'].
+						'" class="bs-unfocused-textfield bs-autocomplete-field" accesskey="f" />';
 
-		wfRunHooks('BSExtendedSearchFormInputs', array(&$aOut));
+		wfRunHooks( 'BSExtendedSearchFormInputs', array( &$aOut ) );
 
-		$aOut[] = '    </form>';
+		$aOut[] = '</form>';
 		$aOut[] = '</div>';
 
 		echo implode("\n", $aOut);
@@ -607,12 +585,12 @@ class BlueSpiceSkinTemplate extends BaseTemplate {
 	}
 
 	public function printTitleActions() {
-		global $wgRequest, $wgTitle;
+		$oContext = RequestContext::getMain();
 		$aOut = array();
-		if ($wgRequest->getVal('action', 'view') != 'view')
+		if ( $oContext->getRequest()->getVal('action', 'view') != 'view')
 			return true;
 		$aContentActions = $this->data['bs_title_actions'];
-		if (count($aContentActions) < 1 || $wgRequest->getVal('action', 'view') != 'view' || $wgTitle->isSpecialPage())
+		if ( count( $aContentActions ) < 1 || $oContext->getRequest()->getVal( 'action', 'view' ) != 'view' || $oContext->getTitle()->isSpecialPage())
 			return;
 		foreach ($aContentActions as $aContentAction) {
 			$aOut[] = "<li class='bs-actions-" . $aContentAction['id'] . "'>";
@@ -623,7 +601,8 @@ class BlueSpiceSkinTemplate extends BaseTemplate {
 	}
 
 	public function execute() {
-		global $wgUser, $wgHooks;
+		global $wgHooks;
+		$oUser = RequestContext::getMain()->getUser();
 		$this->skin = $this->data['skin'];
 		$wgHooks['BSWidgetBarGetDefaultWidgets'][] = array(&$this, 'onBSWidgetBarGetDefaultWidgets');
 		$wgHooks['BSWidgetListHelperInitKeyWords'][] = array(&$this, 'onBSWidgetListHelperInitKeyWords');
@@ -660,11 +639,11 @@ class BlueSpiceSkinTemplate extends BaseTemplate {
 							<li>
 								<a id="bs-tab-navigation" href="#bs-nav-section-navigation"><?php echo wfMessage('bs-tab_navigation', 'Navigation')->plain(); ?></a>
 							</li>
-		<?php if ($wgUser->isLoggedIn()) { ?>
+		<?php if ($oUser->isLoggedIn()) { ?>
 								<li>
 									<a id="bs-tab-focus" href="#bs-nav-section-focus"><?php echo wfMessage('bs-tab_focus', 'Focus')->plain(); ?></a>
 								</li>
-								<?php if ($wgUser->isAllowed('wikiadmin')) { ?>
+								<?php if ($oUser->isAllowed('wikiadmin')) { ?>
 									<li>
 										<a id="bs-tab-admin" href="#bs-nav-section-admin"><?php echo wfMessage('bs-tab_admin', 'Admin')->plain(); ?></a>
 									</li>
@@ -676,12 +655,12 @@ class BlueSpiceSkinTemplate extends BaseTemplate {
 							<!-- Navigation-Code -->
 		<?php $this->printNavigationSidebar(); ?>
 						</div>
-							<?php if ($wgUser->isLoggedIn()) { ?>
+							<?php if ($oUser->isLoggedIn()) { ?>
 							<div id="bs-nav-section-focus">
 								<!-- Focus-Code -->
 							<?php $this->printFocusSidebar(); ?>
 							</div>
-								<?php if ($wgUser->isAllowed('wikiadmin') || $wgUser->isAllowed('useradmin') || $wgUser->isAllowed('editadmin')) { ?>
+								<?php if ($oUser->isAllowed('wikiadmin')) { ?>
 								<div id="bs-nav-section-admin">
 									<!-- Admin-Code -->
 								<?php $this->printAdminSidebar(); ?>
@@ -749,9 +728,9 @@ class BlueSpiceSkinTemplate extends BaseTemplate {
 					if (count($aFooterIcons) > 0):
 						?>
 						<ul id="footer-icons" class="noprint">
-								<?php foreach ($aFooterIcons as $blockName => $aFooterIconBlock): ?>
+								<?php foreach ( $aFooterIcons as $blockName => $aFooterIconBlock ): ?>
 								<li id="footer-<?php echo htmlspecialchars($blockName); ?>ico">
-									<?php foreach ($aFooterIconBlock as $icon): ?>
+									<?php foreach ( $aFooterIconBlock as $icon ): ?>
 										<?php echo $this->getSkin()->makeFooterIcon($icon); ?>
 								<?php endforeach; ?>
 								</li>
@@ -766,8 +745,8 @@ class BlueSpiceSkinTemplate extends BaseTemplate {
 		<?php
 		$aAdditionalHTML = array();
 		wfRunHooks('BSBlueSpiceSkinAfterBsFloaterDiv', array($this, &$aAdditionalHTML));
-		if (!empty($aAdditionalHTML)) {
-			echo implode("\n", $aAdditionalHTML);
+		if ( !empty( $aAdditionalHTML ) ) {
+			echo implode( "\n", $aAdditionalHTML );
 		}
 
 		$this->printTrail();
@@ -775,9 +754,5 @@ class BlueSpiceSkinTemplate extends BaseTemplate {
 		</body>
 		</html><?php
 		wfRestoreWarnings();
-	}
-
-// end of execute() method
-}
-
-// end of class
+	} // end of execute() method
+} // end of class

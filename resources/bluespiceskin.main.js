@@ -24,7 +24,6 @@ BlueSpiceSkin = {
 		this.initSearchBox();
 		this.initTables();
 		this.initExceptionViews();
-		this.initPreferenceBoxes();
 		this.initTooltips();
 	},
 
@@ -47,26 +46,37 @@ BlueSpiceSkin = {
 	},
 
 	initSearchBox: function() {
-		$('#bs-search-input').attr( 'defaultValue', $('#bs-search-input').val() );
+		var searchInput = $('#bs-search-input');
+
+		searchInput.attr( 'defaultValue', searchInput.val() );
+
+		$('.bs-search-form').on( 'submit', function( e ) {
+			if ( $( this ).attr( 'defaultValue' ) == $( this ).val() ) {
+				e.preventDefault();
+			}
+		} );
 
 		if ( typeof bsExtendedSearchSetFocus === "boolean" ) {
-			if ( wgIsArticle === true && bsExtendedSearchSetFocus  === true ) {
+			//$(document).scrollTop(): prevent loosing last scroll position on history back
+			if ( wgIsArticle === true && bsExtendedSearchSetFocus  === true && $(document).scrollTop() < 1) {
 				if ( window.location.hash === '' ) {
-					$('#bs-search-input').val('').focus();
+					searchInput.val('').focus();
 				}
 			}
 		}
 
-		$('#bs-search-input').keypress(function() {
-			if ( $(this).val() == $(this).attr( 'defaultValue' ) ) { 
+		searchInput.keypress( function( e ) {
+			if ( e.keyCode !== 13 ) {
+				if ( $(this).val() == $(this).attr( 'defaultValue' ) ) {
+					$(this).val('');
+				}
+			}
+		}).focus( function() {
+			if ( $(this).val() == $(this).attr( 'defaultValue' ) ) {
 				$(this).val('');
 			}
-		});
 
-		$('#bs-search-input').focus(function(){
-			if ( $(this).val() == $(this).attr( 'defaultValue' ) ) $(this).val('');
-
-		}).blur(function() {
+		}).blur( function() {
 			if($(this).val() == '' || $(this).val() == $(this).attr( 'defaultValue' ) ) {
 				$(this).val( $(this).attr( 'defaultValue' ) );
 			}
@@ -103,54 +113,6 @@ BlueSpiceSkin = {
 
 	disableEffects: function() {
 		$.fx.off = false;
-	},
-
-	initPreferenceBoxes: function() {
-		$('.bs-prefs .bs-prefs-head').click( function() {
-			var oPrefsBody = $(this).parent().find('.bs-prefs-body');
-			var sCookieKey  = $(this).parent().attr('id')+'-viewstate';
-			if( oPrefsBody.is(":visible") == true ) {
-				$(oPrefsBody[0]).slideUp(500);
-				$(oPrefsBody[0]).parent().addClass('bs-prefs-viewstate-collapsed');
-				$.cookie(sCookieKey, null, {
-					path: '/'
-				});
-			}
-			else {
-				$(oPrefsBody[0]).slideDown(500);
-				$(oPrefsBody[0]).parent().removeClass('bs-prefs-viewstate-collapsed');
-				$.cookie(sCookieKey, 'opened', {
-					path: '/',
-					expires: 10
-				});
-			}
-		}).each( function() {
-			var oPrefsBody = $(this).parent().find('.bs-prefs-body');
-			var sCookieKey = $(this).parent().attr('id')+'-viewstate';
-			if( sCookieKey != 'bluespice-viewstate' && ($.cookie( sCookieKey ) == null || $.cookie( sCookieKey ) != 'opened')) {
-				oPrefsBody.hide();
-				$(oPrefsBody[0]).parent().addClass('bs-prefs-viewstate-collapsed');
-			}
-		});
-		$('form').each(function() {
-			$(this).submit(function() {
-				$(this).find('.multiselectplusadd').each(function(index, item) {
-					var i;
-					for (i = item.length - 1; i>=0; i--) {
-						item.options[i].selected = true;
-					}
-				}) ;
-				return true;
-			});
-		});
-		$('form').each(function() {
-			$(this).find('.multiselectplusadd').each(function(index, item) {
-				var i;
-				for (i = item.length - 1; i>=0; i--) {
-					item.options[i].selected = false;
-				}
-			});
-		});
 	},
 
 	initTooltips: function() {

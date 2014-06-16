@@ -3,9 +3,12 @@
     visibility: hidden !important;
 }
 
+#bs-wrapper, #bs-content-column {
+	width: 21cm !important;
+}
+
 #bs-content-column {
     margin: 0.1cm !important;
-    /* width: 21cm !important; */
     border: none !important;
 }
 
