@@ -1,0 +1,111 @@
+#bs-apps {
+	height:32px;
+}
+
+#bs-apps li {
+	zoom:1;
+	height:32px;
+	margin:0;
+	padding:0;
+	float: left;
+}
+
+#bs-apps li a {
+	zoom:1;
+	display:block;
+	height:32px;
+	text-align:center;
+	vertical-align:bottom;
+	font-weight:bold;
+	color:#b4b3b3;
+	text-decoration:none;
+	line-height:32px;
+	padding:0 10px;
+}
+
+#bs-apps li.active a,
+#bs-apps li a:hover {
+	color:#717171;
+	/*@embed*/
+	background:url(images/desktop/appsbar-active.png) no-repeat center top;
+}
+
+#bs-apps ul {
+	margin:0;
+	list-style: none;
+}
+
+#bs-apps ul.bs-apps-child li{
+	background: none #BABABA repeat-y;
+}
+
+#bs-apps ul.bs-apps-child li a:hover{
+	background-color:#B1B1B1;
+	background-image: none;
+}
+#bs-apps ul.bs-apps-child{
+	background: none transparent;
+	border: none;
+}
+
+#bs-logo {
+	float: left;
+}
+
+#bs-menu-top-right > div,
+#bs-user-container > div {
+	float:right;
+}
+
+ul#bs-personal-menu {
+	display:none;
+	position: absolute;
+	z-index: 1000;
+	background-color: @bs-color-neutral3;
+	list-style: none;
+	margin: 0;
+	
+	li {
+		padding: 0.5em;
+		a {
+			text-decoration: none;
+		}
+	}
+	
+	li:hover{
+		background-color: @bs-color-neutral;
+	}
+}
+
+ul#bs-personal-info {
+	list-style: none;
+}
+
+ul#bs-personal-info > li{
+	float: left;
+}
+
+ul#bs-personal-info > li.active {
+	color: @bs-color-secondary;
+}
+
+ul#bs-personal-info > li > a {
+	padding: 1em;
+}
+
+#bs-menu-top-right > #bs-user-container-open{
+	display: none;
+}
+
+#bs-button-user {
+	cursor: pointer;
+}
+
+#bs-button-user div.bs-userminiprofile,
+#bs-button-user div.bs-userminiprofile > a.bs-block {
+	display: inline-block;
+}
+
+#p-personal-label {
+	display: none;
+}

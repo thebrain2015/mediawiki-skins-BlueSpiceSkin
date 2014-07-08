@@ -2,45 +2,43 @@
 
 class BlueSpiceSkinHooks {
 
-	/**
-	 * 
-	 * @param SkinTemplate $sktemplate
-	 * @param BaseTemplate $tpl
-	 * @return boolean Always true to keep Hook running
-	 */
-	public static function onSkinTemplateOutputPageBeforeExec(&$sktemplate, &$tpl) {
-		$aViews = array();
-		wfRunHooks('BSBlueSpiceSkinAfterArticleContent', array(&$aViews, $sktemplate->getUser(), $sktemplate->getTitle()));
-		self::mergeTemplateDataArray($tpl, 'bs_after_article_content', $aViews);
+	public static function setup() {
+		global $wgStylePath, $wgScriptPath;
+		$sStylePath = ( $wgStylePath ? $wgStylePath : $wgScriptPath ) . "/BlueSpiceSkin/resources/images/";
 
-		return true;
-	}
-
-	protected static function mergeTemplateDataArray(&$tpl, $key, $array) {
-		if (!isset($tpl->data[$key])) {
-			$tpl->data[$key] = array();
+		if( BsConfig::get('MW::LogoPath') === '' ) {
+			BsConfig::set( 'MW::LogoPath', $sStylePath . '/desktop/bs-logo.png' );
 		}
-		$tpl->data[$key] += $array;
+		if( BsConfig::get('MW::FaviconPath') === '' ) {
+			BsConfig::set( 'MW::FaviconPath', $sStylePath . '/desktop/favicon.ico' );
+		}
+		if( BsConfig::get('MW::DefaultUserImage') === '' ) {
+			BsConfig::set( 'MW::DefaultUserImage', $sStylePath . '/desktop/bs-user-default-image.png' );
+		}
+		if( BsConfig::get('MW::AnonUserImage') === '' ) {
+			BsConfig::set( 'MW::AnonUserImage', $sStylePath . '/desktop/bs-user-anon-image.png' );
+		}
+		if( BsConfig::get('MW::DeletedUserImage') === '' ) {
+			BsConfig::set( 'MW::DeletedUserImage', $sStylePath . '/desktop/bs-user-deleted-image.png' );
+		}
 	}
 
 	/**
-	 * 
-	 * @param type $oStatebar
-	 * @param type $aTopViews
-	 * @param type $oUser
-	 * @param type $oTitle
+	 *
+	 * @param StateBar $oStatebar
+	 * @param array $aTopViews
+	 * @param User $oUser
+	 * @param Title $oTitle
 	 * @return boolean Always true to keep Hook running
 	 */
 	public static function onBSStateBarBeforeTopViewAdd( $oStatebar, &$aTopViews, User $oUser, $oTitle, $oSkinTemplate ) {
 		$aViews = array();
-		$oSkin = RequestContext::getMain()->getSkin();
-		wfRunHooks( 'BlueSpiceSkin:Widgets', array( &$aViews, $oUser, $oSkin ) );
 		$oTopView = new ViewStateBarTopElementTools();
 		$oTopView->setOptions(
-				array(
-					'skinTemplate' => $oSkinTemplate,
-					'views' => $aViews
-				)
+			array(
+				'skinTemplate' => $oSkinTemplate,
+				'views' => $aViews
+			)
 		);
 		$aTopViews['statebartoptools'] = $oTopView;
 		$oTopViewWatch = new ViewStateBarTopElementWatch();
@@ -49,7 +47,7 @@ class BlueSpiceSkinHooks {
 	}
 
 	/**
-	 * 
+	 * Removes brackets and other markup from edit section links
 	 * @param SkinTemplate $skin
 	 * @param Title $title
 	 * @param int $section
@@ -59,12 +57,29 @@ class BlueSpiceSkinHooks {
 	 * @return boolean Always true to keep Hook running
 	 */
 	public static function onDoEditSectionLink($skin, $title, $section, $tooltip, &$result, $lang = false) {
-		$result = "<span class='editsection'><a href='" . $title->getLocalURL(array('action' => 'edit', 'section' => $section)) . "' title='" . $tooltip . "'></a></span>";
+		$result = Linker::link(
+			$title,
+			Html::element(
+				'span',
+				array(),
+				wfMessage( 'editsection' )->inLanguage( $lang )->text()
+			),
+			array(
+				'class' => 'mw-editsection icon-pencil',
+				'title' => $tooltip
+			),
+			array(
+				'action' => 'edit',
+				'section' => $section
+			)
+		);
 		return true;
 	}
 
 	public static function onSkinBuildSidebar( Skin $skin, &$bar ) {
-		if ( Title::makeTitle( NS_MEDIAWIKI, "Sidebar" )->exists() ) return true;
+		if ( Title::makeTitle( NS_MEDIAWIKI, "Sidebar" )->exists() ) {
+			return true;
+		}
 
 		$newBar = array();
 		$aNavigation = array(
@@ -95,7 +110,7 @@ class BlueSpiceSkinHooks {
 
 		foreach ( $aNavigation as $key => $aPages ) {
 			foreach ( $aPages as $oPage ){
-				if ( is_object( $oPage ) ) {
+				if ( $oPage instanceof Title) {
 					if ( $oPage->isMainPage() ) {
 						$sId = "n-mainpage";
 					} elseif ( $oPage->isSpecialPage() ) {
@@ -125,20 +140,21 @@ class BlueSpiceSkinHooks {
 		$bar['TOOLBOX'] = array();
 		return true;
 	}
-	public static function onBSGetLogo(&$sImg){
-		$sLogoPath = BsConfig::get('MW::LogoPath');
-		if (substr($sLogoPath,0,1) != '/' && substr($sLogoPath,0,4) != 'http')
-				$sLogoPath = "/" . $sLogoPath;
-		$sImg = "<img src='".$sLogoPath."' alt='' />";
-		return true;
-	}
-	
-	public static function onVisualEditorConfig(&$aStandardConf, &$aDefaultConf){
-		global $wgStylePath, $wgServer;
-		if (isset($aStandardConf['content_css']) && $aStandardConf['content_css'] != "")
-			$aStandardConf['content_css'] .= ",";
-		//add the content.css file to this array and it will be available in the VisualEditor (styling tables e.g.)
-		$aStandardConf['content_css'] = $wgServer . "/" . $wgStylePath .'/BlueSpiceSkin/resources/bluespiceskin.content.css';
-		return true;
+
+	public static function ajaxGetDiscussionCount() {
+		$oResponse = BsCAResponse::newFromPermission('read');
+		if( $oResponse->isSuccess() == false ) {
+			return $oResponse;
+		}
+
+		$oContext = BsCAContext::newFromRequest();
+		$iCount = BsArticleHelper::getInstance(
+			$oContext->getTitle()
+		)->getDiscussionAmount();
+
+		$oResponse->setPayload( $iCount );
+		$oResponse->setSuccess( true );
+
+		return $oResponse;
 	}
 }

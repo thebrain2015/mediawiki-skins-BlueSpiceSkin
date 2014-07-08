@@ -2,9 +2,9 @@
 
 /**
  * BlueSpice for MediaWiki
- * Authors: Radovan Kubani, Sebastian Ulbricht
+ * Authors: Radovan Kubani, Sebastian Ulbricht, Tobias Weichart, Robert Vogel
  *
- * Copyright (C) 2013 Hallo Welt! – Medienwerkstatt GmbH, All rights reserved.
+ * Copyright (C) 2014 Hallo Welt! – Medienwerkstatt GmbH, All rights reserved.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -34,681 +34,99 @@ class SkinBlueSpiceSkin extends SkinTemplate {
 	 * @param $out OutputPage object
 	 */
 	function initPage( \OutputPage $out ) {
+		global $wgLocalStylePath;
 		parent::initPage($out);
-		$out->addModules('ext.bluespice.bluespiceskin.js');
+
+		// Append CSS  for icon font support
+		$out->addHeadItem(
+			'icomoon-style',
+			"\n<link rel=\"stylesheet\" href=\"" .
+				htmlspecialchars( $wgLocalStylePath ) .
+				"/{$this->stylename}/resources/icomoon/icomoon.icons.css\">\n"
+			."<!--[if lt IE 8]>\n<link rel=\"stylesheet\" href=\"" .
+				htmlspecialchars( $wgLocalStylePath ) .
+				"/{$this->stylename}/resources/icomoon/icomoon.icons.ie7.css\">\n<![endif]-->\n"
+			. "<!--[if lt IE 8]>\n<script src=\"" .
+				htmlspecialchars( $wgLocalStylePath ) .
+				"/{$this->stylename}/resources/icomoon/icomoon.icons.ie7.js\"></script>\n<![endif]-->\n"
+		);
+
+		$out->addModules('skins.bluespiceskin.scripts');
 	}
 
+	/**
+	 * Loads the styles
+	 * @param OutputPage $out
+	 */
 	function setupSkinUserCss( OutputPage $out ) {
 		parent::setupSkinUserCss($out);
-		$out->addModuleStyles('ext.bluespice.bluespiceskin');
-		$out->addModuleStyles('ext.bluespice.bluespiceskin.main');
-		$out->addModuleStyles('ext.bluespice.bluespiceskin.content');
-		$out->addModuleStyles('ext.bluespice.extensions');
-		//$out->addHeadItem("font", "<link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro|Muli:300,400' rel='stylesheet' type='text/css' />");
+		$out->addModuleStyles('skins.bluespiceskin');
 	}
 
 }
 
-class BlueSpiceSkinTemplate extends BaseTemplate {
-
-	function __construct() {
-		parent::__construct();
-		global $wgTitle;
-		$this->data['bs_title_actions'] = array(
-			array(
-				'id' => 'print',
-				'href' => $wgTitle->getLocalURL( array( 'printable' => 'yes' ) ),
-				'title'
-			)
-		);
-	}
-
-	protected function printViews( $aViews ) {
-		foreach ( $aViews as $oView ) {
-			if ( $oView !== null && $oView instanceof ViewBaseElement ) {
-				echo $oView->execute();
-			} else {
-				wfDebugLog('BS::Skin', 'BlueSpiceSkinTemplate::printViews: Invalid view.');
-			}
-		}
-	}
-
-	protected function printBeforeArticleHeadline() {
-		global $wgUser, $wgTitle;
-		$aViews = array();
-		wfRunHooks( 'BlueSpiceSkin:BeforeArticleHeadline', array( &$aViews, $wgUser, $wgTitle ) );
-		if ( !empty( $aViews ) ) {
-			echo '<div id="bs-beforearticleheadline">';
-			$this->printViews( $aViews );
-			echo '</div>';
-		}
-	}
-
-	protected function printBeforeArticleContent() {
-		global $wgUser, $wgTitle;
-		$aViews = array();
-		wfRunHooks( 'BSBlueSpiceSkinBeforeArticleHeadline', array( &$aViews, $wgUser, $wgTitle ) );
-		//todo: reimplement skin
-		wfRunHooks( 'BSBlueSpiceSkinBeforeArticleContent', array( &$aViews, $wgUser, $wgTitle, $this ) );
-		if ( !empty( $aViews ) ) {
-			echo '<div id="bs-beforearticlecontent">';
-			$this->printViews( $aViews );
-			echo '</div>';
-		}
-		if ( isset( $this->data['dataBeforeContent'] ) ) {
-			echo '<div id="bs-dataaftercontent">';
-			echo $this->html( 'dataBeforeContent' );
-			echo '</div>';
-		}
-		echo "<div id='bs-statebar-extend'></div>";
-	}
-
-	protected function printAfterArticleContent() {
-		if ( $this->data['bs_after_article_content'] ) {
-			echo '<div id="bs-afterarticlecontent">';
-			$this->printViews( $this->data['bs_after_article_content'] );
-			echo '</div>';
-		}
-
-		if ( $this->data['dataAfterContent'] ) {
-			echo '<div id="bs-dataaftercontent">';
-			echo $this->html( 'dataAfterContent' );
-			echo '</div>';
-		}
-	}
-
-	protected function printContentActionsList(){
-		wfRunHooks( 'SkinTemplateContentActions', array( &$this->data[ 'content_actions' ] ) );
-		wfRunHooks( 'SkinTemplateTabs', array( $this->skin, &$this->data[ 'content_actions' ] ) ); // TODO RBV (12.12.11 12:46): Check for Cross-Version compat. Is there still a $this->skin in MW 1.18 ($this->getSkin()?)?
-		$aActionsNotInMoreMenu = array( 'nstab-user', 'talk', 'edit', 'viewsource', 'history', 'addsection', 'watch', 'unwatch' );
-		// Hook to add "not in more menu" and reorder content_actions
-		wfRunHooks( 'BlueSpiceSkin:ReorderActionTabs', array( &$this->data[ 'content_actions' ], &$aActionsNotInMoreMenu ) );
-		$aOut = array();
-		$aMoreMenuOut = array();
-		$aOut[] = "<ul id='p-cactions-list-left'>";
-		foreach ($this->data['content_navigation']['namespaces'] as $sKey=>$aActionTab){
-			$sCssClass = isset( $aActionTab[ 'class' ] ) ? ' class="' . htmlspecialchars( $aActionTab[ 'class' ] ) . '"' : '';
-			$aOut[] = '<li id="ca-' . Sanitizer::escapeId( $sKey ) . '"' . $sCssClass . '>';
-			$aOut[] = ' <span>';
-			$aOut[] = '  <a href="' . htmlspecialchars( $aActionTab[ 'href' ] ) . '" ' . $aActionTab[ 'attributes' ] . ' title="' . $aActionTab[ 'text' ] . '">';
-			$aOut[] = htmlspecialchars( $aActionTab[ 'text' ] );
-			// Should be secure enough
-			$aOut[] = $aActionTab[ 'textasrawhtml' ];
-			if ( $sKey == 'talk' ) {
-				$aOut[] = $this->getDiscussionAmount();
-			}
-			$aOut[] = '  </a>';
-			$aOut[] = ' </span>';
-			$aOut[] = '</li>';
-		}
-		$aOut[] = "</ul>";
-		$aOut[] = "<ul id='p-cactions-list-right'>";
-		foreach ($this->data['content_actions'] as $sKey=>$aActionTab){
-			$bIsNamespaceActionTab = strstr( $sKey, 'nstab' ) ? true : false;
-			if ( in_array( $sKey, $aActionsNotInMoreMenu ) || $bIsNamespaceActionTab ) {
-				if ( ($sKey == "watch" || $sKey == "unwatch") && BsConfig::get( 'MW::StateBar::Show' ) === true ) continue;
-				if ( $sKey == "talk" || $aActionTab['context'] == "subject") continue;
-				$aOut[] = '<li id="ca-' . Sanitizer::escapeId( $sKey ) . '"' . $sCssClass . '>';
-				$aOut[] = ' <span>';
-				$aOut[] = '  <a href="' . htmlspecialchars( $aActionTab[ 'href' ] ) . '" ' . $aActionTab[ 'attributes' ] . ' title="' . $aActionTab[ 'text' ] . '">';
-				$aOut[] = htmlspecialchars( $aActionTab[ 'text' ] );
-				// Should be secure enough
-				$aOut[] = $aActionTab[ 'textasrawhtml' ];
-				if ( $sKey == 'talk' ) {
-					$aOut[] = $this->getDiscussionAmount();
-				}
-				$aOut[] = '  </a>';
-				$aOut[] = ' </span>';
-				$aOut[] = '</li>';
-			} else {
-				$aMoreMenuOut[] = '<li id="ca-' . Sanitizer::escapeId( $sKey ) . '"' . $sCssClass . '>';
-				$aMoreMenuOut[] = '  <a href="' . htmlspecialchars( $aActionTab[ 'href' ] ) . '" ' . $aActionTab[ 'attributes' ] . ' title="' . $aActionTab[ 'text' ] . '">';
-				$aMoreMenuOut[] = htmlspecialchars( $aActionTab[ 'text' ] );
-				$aMoreMenuOut[] = '  </a>';
-				$aMoreMenuOut[] = '</li>';
-			}
-		}
-		if (BsConfig::get( 'MW::StateBar::Show' ) === false){
-			$aOut[] = "<li id='ca-more-top'>";
-			$aOut[] = "<span>".wfMessage('bs-tools-button')->plain()."</span>";
-			$aOut[] = "<ul id='p-cactions-list-more'>".implode("\n", $aMoreMenuOut)."</ul>";
-			$aOut[] = "</li>";
-		}
-		$aOut[] = "</ul>";
-
-		$this->data['more_menu'] = $aMoreMenuOut;
-
-		echo implode( "\n", $aOut );
-	}
-
-	protected function printSiteNotice() {
-		if ( $this->data['sitenotice'] ) {
-			echo '<div id="siteNotice">';
-			echo $this->html( 'sitenotice' );
-			echo '</div>';
-		}
-	}
-
-	protected function printArticleHeadline() {
-		global $wgTitle;
-
-		$aViews = array();
-		if ( $wgTitle->equals( Title::newMainPage() ) === false ) {
-			$aViews = array(
-				'articletitleprefix' => '<h1 class="firstHeading">',
-				'articletitle' => $this->data['title'],
-				'articletitlesuffix' => '</h1>',
-			);
-		}
-
-		wfRunHooks( 'BSBlueSpiceSkinBeforePrintArticleHeadline', array( $wgTitle, $this, &$aViews ) );
-
-		foreach ( $aViews as $key => $sView ) echo $sView;
-	}
-
-	protected function getToolboxMarkUp( $bRenderHeading = true ) {
-		// adding link to Allpages
-		$this->data['nav_urls']['specialpageallpages']['href'] = SpecialPage::getTitleFor( 'Allpages' )->getLinkURL();
-		$this->data['nav_urls']['specialpageallpages']['text'] = SpecialPageFactory::getPage( 'Allpages' )->getDescription();
-
-		$aToolboxExcludeList = array( 'mainpage' );
-		$aToolboxLinkList = array();
-		foreach ( $this->data['nav_urls'] as $sKey => $aLink ) {
-			if ( empty( $aLink['href'] ) || in_array( $sKey, $aToolboxExcludeList ) ) continue;
-
-			$aLink['href'] = str_replace( '&', '&amp;', $aLink['href'] );
-			$vTooltip = $this->tooltipAndAccesskeyAttribs( 't-' . $sKey );
-			$sAttr = '';
-			if ( is_array( $vTooltip ) ) {
-				$sAttr = ' title="' . $vTooltip['title'] . '" accesskey="' . $vTooltip['accesskey'] . '"';
-			} else {
-				$sAttr = $vTooltip;
-			}
-			$aToolboxLinkList[] = '<li id="t-' . htmlspecialchars( $sKey ) . '">';
-			$aToolboxLinkList[] = '  <a href="' . $aLink['href'] . '"' . $sAttr . '>';
-			$aToolboxLinkList[] = empty( $aLink['text'] ) ? htmlspecialchars( $this->translator->translate( $sKey ) ) : $aLink['text'];
-			$aToolboxLinkList[] = '  </a>';
-			$aToolboxLinkList[] = '</li>';
-		}
-
-		$sToolboxLinkList = implode("\n", $aToolboxLinkList);
-
-		ob_start();
-		wfRunHooks('SkinTemplateToolboxEnd', array(&$this));
-		$sToolboxEndLinkList = ob_get_contents();
-		ob_end_clean();
-
-		$aOut = array();
-		$aOut[] = '<div class="portlet bs-nav-links" id="p-tb">';
-		if ( $bRenderHeading === true ) {
-			$aOut[] = '  <h5>' . $this->translator->translate( 'toolbox' ) . '</h5>';
-		}
-		$aOut[] = '  <div class="pBody">';
-		$aOut[] = '    <ul>';
-		$aOut[] = $sToolboxLinkList;
-		$aOut[] = $sToolboxEndLinkList;
-		$aOut[] = '    </ul>';
-		$aOut[] = '  </div>';
-		$aOut[] = '</div>';
-
-		return implode( "\n", $aOut );
-	}
-
-	protected function printToolBox() {
-		echo $this->getToolboxMarkUp();
-	}
-
-	public function getToolBoxWidget() {
-		$oWidgetView = new ViewWidget();
-		$oWidgetView->setId('bs-toolbox')
-				->setTitle($this->translator->translate('toolbox')) // BsI18N::getInstance( )->msg('label');
-				->setBody($this->getToolboxMarkUp(false))
-				->setTooltip($this->translator->translate('toolbox'));
-
-		return $oWidgetView;
-	}
-
-	public function onBSWidgetBarGetDefaultWidgets( &$aViews, $oUser, $oTitle ) {
-		if ( !isset( $this->data['sidebar']['TOOLBOX'] ) ) {
-			$aViews[] = $this->getToolBoxWidget();
-		}
-		return true;
-	}
-
-	public function onBSWidgetListHelperInitKeyWords( &$aKeywords, $oTitle ) {
-		$aKeywords['TOOLBOX'] = array($this, 'getToolBoxWidget');
-		return true;
-	}
-
-	protected function printNavigationSidebar() {
-		$aPortlets = array();
-
-		foreach ($this->data['sidebar'] as $bar => $cont) {
-			$sTitle = ( wfMessage( $bar )->isBlank() ) ? $bar : wfMessage( $bar )->plain();
-
-			$aOut = array();
-
-			if ( $bar == 'TOOLBOX' ) {
-				$aPortlets[$bar] = $this->getToolboxMarkUp();
-				continue;
-			}
-			if ( $cont ) {
-				$aOut[] = '<div id="p-' . Sanitizer::escapeId( $bar ) . '" class="bs-nav-links">';
-				$aOut[] = '  <h5>' . $sTitle . '</h5>';
-				$aOut[] = '  <ul>';
-				foreach ($cont as $key => $val) {
-					if ( strpos( $val['text'], "|" ) !== false ) {
-						$aVal = explode( '|', $val['text'] );
-						$val['id'] = 'n-' . $aVal[0];
-					}
-
-					$sCssClass = (!isset($val['active']) ) ? ' class="active"' : '';
-					$sTarget = ( isset($val['target']) ) ? ' target="' . $val['target'] . '"' : '';
-					$sRel = ( isset($val['rel']) ) ? ' rel="' . $val['rel'] . '"' : '';
-					$aOut[] = '<li id="' . Sanitizer::escapeId($val['id']) . '"' . $sCssClass . ' class="clearfix">';
-					if ( !empty( $aVal ) ) {
-						$oFile = wfFindFile( $aVal[1] );
-						if ( strpos( $lang = $this->translator->translate( $aVal[0] ), "&lt;" ) === false ) {
-							$aVal[0] = $lang;
-						}
-
-						if ( is_object( $oFile ) && $oFile->exists() ) {
-							if ( BsExtensionManager::isContextActive( 'MW::SecureFileStore::Active' ) ) {
-								$sUrl = SecureFileStore::secureStuff( $oFile->getUrl(), true );
-							} else {
-								$sUrl = $oFile->getUrl();
-							}
-							$aOut[] = '<div style="background:url(' . $sUrl . ') center no-repeat; width:24px; height:24px;" class="left_navigation_icon" ></div>';
-							$aOutHidden[] = '<li><a href="' . htmlspecialchars($val['href']) . '" title="' . htmlspecialchars($aVal[0]) .'" ' . $sTarget . $sRel . '>' . '<div id="' . Sanitizer::escapeId($val['id']) . '-small" class="left_navigation_icon" style="background:url(' . $sUrl . ') center no-repeat; width:24px; height:24px;"></div>' . '</a> </li>';
-						} else {
-							//default
-							$aOut[] = '<div class="left_navigation_icon"></div>';
-							$aOutHidden[] = '<li><a href="' . htmlspecialchars($val['href']) . '" title="' . htmlspecialchars($aVal[0]) .'" ' . $sTarget . $sRel . '>' . '<div id="' . Sanitizer::escapeId($val['id']) . '-small" class="left_navigation_icon" ></div>' . '</a> </li>';
-						}
-						$aOut[] = '<a href="' . htmlspecialchars($val['href']) . '" title="' . htmlspecialchars($aVal[0]) .'" ' . $sTarget . $sRel . '>' . htmlspecialchars($aVal[0]) . '</a>';
-					} else {
-						$aOut[] = '<div class="left_navigation_icon"></div>';
-						$aOutHidden[] = '<li><a href="' . htmlspecialchars($val['href']) . '" title="' . htmlspecialchars($val['text']) .'" ' . $sTarget . $sRel . '>' . '<div id="' . Sanitizer::escapeId($val['id']) . '-small" class="left_navigation_icon" ></div>' . '</a> </li>';
-						$aOut[] = '<a href="' . htmlspecialchars($val['href']) . '" title="' . htmlspecialchars($val['text']) .'" ' . $sTarget . $sRel . '>' . htmlspecialchars($val['text']) . '</a>';
-					}
-					$aOut[] = '</li>';
-					unset( $aVal );
-				}
-				$aOut[] = '</ul>';
-				$aOut[] = '</div>';
-				$aPortlets[$bar] = implode("\n", $aOut);
-			}
-		}
-
-		if ($this->data['language_urls']) {
-			wfRunHooks( 'otherlanguages', array( $this, true ) );
-			$aOut = array();
-			$aOut[] = '<div title="' . wfMessage('otherlanguages')->plain() . '" id="p-lang" class="bs-widget portal">';
-			$aOut[] = '  <div class="bs-widget-head">';
-			$aOut[] = '    <h5 class="bs-widget-title" ' . $this->data['userlangattributes'] . '>' . wfMessage('otherlanguages')->plain() . '</h5>';
-			$aOut[] = '  </div>';
-			$aOut[] = '  <div class="bs-widget-body bs-nav-links">';
-			$aOut[] = '    <ul>';
-			foreach ($this->data['language_urls'] as $langlink) {
-				$aOut[] = '      <li class="' . htmlspecialchars($langlink['class']) . '">';
-				$aOut[] = '        <a href="' . htmlspecialchars($langlink['href']) . '">' . $langlink['text'] . '</a>';
-				$aOut[] = '      </li>';
-			}
-			$aOut[] = '    </ul>';
-			$aOut[] = '  </div>';
-			$aOut[] = '</div>';
-			$aPortlets['language_urls'] = implode("\n", $aOut);
-		}
-
-		wfRunHooks('BSBlueSpiceSkinNavigationSidebar', array($this, &$aPortlets));
-		$aOut = array();
-		foreach ($aPortlets as $sKey => $vPortlet) {
-			if ($vPortlet instanceof ViewBaseElement) {
-				$aOut[] = $vPortlet->execute();
-			} else {
-				$aOut[] = $vPortlet; //Check for string?
-			}
-		}
-		$aOut[] = '<div id="bs-nav-small"><ul>';
-		$aOut[] = implode("", $aOutHidden);
-		$aOut[] = '</ul></div>';
-		echo implode("\n", $aOut);
-	}
-
-	protected function getDiscussionAmount() {
-		global $wgTitle;
-		if ($wgTitle->getNamespace() < 0)
-			return '';
-		return ' (' . BsArticleHelper::getDiscussionAmountForTitle($wgTitle) . ')';
-	}
-
-	protected function printFocusSidebar() {
-		global $wgUser;
-		$aViews = array();
-
-		//wfRunHooks( 'BSFocusSidebar', array( &$aViews, $wgUser, $this ) );
-		wfRunHooks('BSBlueSpiceSkinFocusSidebar', array(&$aViews, $wgUser, $this));
-		//wfRunHooks( 'BlueSpiceSkin:FocusSidebar', array( &$aViews, $wgUser, $this ) );
-		$this->printViews($aViews);
-	}
-
-	protected function printAdminSidebar() {
-		global $wgUser;
-		$aViews = array();
-
-		wfRunHooks( 'BSBlueSpiceSkinAdminSidebar', array( &$aViews, $wgUser, $this) ); // TODO RBV (29.10.10 08:49): For future use
-
-		$oWikiAdminSpecialPageTitle = SpecialPage::getTitleFor( 'SpecialWikiAdmin' );
-
-		$aOut = array();
-		$aOut[] = '<div id="p-adminbar" class="bs-nav-links">';
-		$aOut[] = '  <ul>';
-
-		// CR RBV (27.06.11 14:46): Use hook or event
-		if ( class_exists( 'WikiAdmin' ) ) {
-			$aRegisteredModules = WikiAdmin::getRegisteredModules();
-
-			foreach ( $aRegisteredModules as $sModuleKey => $aModulParams ) {
-				$skeyLower = mb_strtolower($sModuleKey);
-				$sModulLabel = wfMessage( 'bs-' . $skeyLower . '-label' )->plain();
-				$sUrl = $oWikiAdminSpecialPageTitle->getLocalURL( 'mode=' . $sModuleKey );
-				$aPointsAdmin[$sModulLabel] = array( 'url' => $sUrl, 'module' => $skeyLower );
-			}
-			ksort( $aPointsAdmin );
-			foreach ( $aPointsAdmin as $sModuleLabel => $aParams ) {
-				$sUrl = str_replace( '&', '&amp;', $aParams['url'] );
-				$aOut[] = '    <li><a id="bs-admin-'.$aParams['module'].'" href="' . $sUrl . '" title="' . $sModuleLabel . '">' . $sModuleLabel . '</a></li>';
-			}
-		}
-
-		$aOut[] = '  </ul>';
-		$aOut[] = '</div>';
-
-		echo implode("\n", $aOut);
-	}
-
-	/**
-	 * @global Title $wgTitle
-	 * @global User $wgUser
-	 * @global WebRequest $wgRequest
-	 */
-	protected function printUserBar() {
-		$oUser = RequestContext::getMain()->getUser();
-		$oTitle = RequestContext::getMain()->getTitle();
-		$oRequest = RequestContext::getMain()->getRequest();
-
-		$aOut = array();
-
-		if ( $oUser->isLoggedIn() ) {
-			$sButtonUserImage = 'account-icon.png';
-			$sLoginSwitchTooltip = wfMessage( 'bs-userbar_loginswitch_logout', 'Logout' )->plain();
-
-			$aOut[] = '<div id="bs-user-container">';
-			$aOut[] = '<div id="bs-button-logout">';
-			$aOut[] = '  <span>' . $sLoginSwitchTooltip . '</span>';
-			$aOut[] = '  <a href="' . SpecialPage::getTitleFor( 'Userlogout' )->getLocalURL( array( 'returnto' => $oRequest->getVal( 'title' ) ) ) . '" title="' . $sLoginSwitchTooltip . '">';
-			$aOut[] = '    <img src="' . $this->data['stylepath'] . '/' . $this->data['stylename'] . '/resources/images/desktop/logout-icon.png" alt="' . $sLoginSwitchTooltip . '" />';
-			$aOut[] = '  </a>';
-			$aOut[] = '</div>';
-
-			$aUserBarBeforeLogoutViews = array();
-
-			$aOut[] = '<div id="bs-button-user">';
-			$aOut[] = '  <span>' . wfMessage( 'bs-my-account' )->plain() . '</span>';
-
-			$aOut[] = BsCore::getInstance()->getUserMiniProfile( $oUser, array( "width" => "19", "height" => "16" ) )->execute();
-			$aOut[] = '  <ul id="bs-personal-menu">';
-
-			$oTitleUser = Title::makeTitle( NS_USER, $oUser->getName() );
-			$sLink = BsLinkProvider::makeLink( $oTitleUser, wfMessage("bs-topbar-profile")->plain() );
-			$aPersonalUrlsFilter = array('userpage', 'logout', 'anonlogin', 'notifications');
-			$sUsername = $oUser->getRealName() == "" ? $oUser->getName() : $oUser->getRealName();
-
-			$aOut[] = "<li class='bs-top-box'><div>".$sUsername."</div></li>";
-			$aOut[] = '<li id="pt-profile">';
-			$aOut[] = $sLink;
-			$aOut[] = '</li>';
-			foreach ( $this->data['personal_urls'] as $sKey => $aItem ) {
-				if ( in_array( $sKey, $aPersonalUrlsFilter ) ) continue;
-				$sCssClass = $aItem['active'] ? ' class="active"' : '';
-				$aOut[] = '<li id="pt-' . Sanitizer::escapeId($sKey) . '"' . $sCssClass . '>';
-				$sCssClass = !empty($aItem['class']) ? ' class="' . htmlspecialchars( $aItem['class'] ) . '"' : '';
-				$aOut[] = '  <a href="' . htmlspecialchars( $aItem['href'] ) . '"' . $sCssClass . '>';
-				$aOut[] = htmlspecialchars( $aItem['text'] );
-				$aOut[] = '  </a>';
-				$aOut[] = '</li>';
-			}
-			$aOut[] = "<li class='bs-bottom-box'></li>";
-			$aOut[] = '  </ul>';
-			$aOut[] = '</div>';
-
-			wfRunHooks( 'BSBlueSpiceSkinUserBarBeforeLogout', array( &$aUserBarBeforeLogoutViews, $oUser, $this ) );
-
-			foreach ( $aUserBarBeforeLogoutViews as $oUserBarView ) {
-				$aOut[] = $oUserBarView->execute();
-			}
-			$sUsernameCSSClass = '';
-
-			if ( $oTitle->equals( $oUser->getUserPage() ) ) {
-				$sUsernameCSSClass = ' class="active"';
-			}
-
-			$aOut[] = '</div>';
-		} else {
-			$sButtonUserImage = 'bs-icon-user-transp-50.png';
-			$sLoginSwitchTooltip = wfMessage('bs-userbar_loginswitch_login', 'Login')->plain();
-			$aOut[] = '<div id="bs-button-logout">';
-			$aOut[] = '  <span>' . $sLoginSwitchTooltip . '</span>';
-			$aOut[] = '  <a href="' . htmlspecialchars( SpecialPage::getTitleFor( 'Userlogin' )->getLocalURL( array( 'returnto' => $oRequest->getVal( 'title' ) ) ) ) . '" title="' . $sLoginSwitchTooltip . '">';
-			$aOut[] = '    <img src="' . $this->data['stylepath'] . '/' . $this->data['stylename'] . '/resources/images/desktop/login-icon.png" alt="' . $sLoginSwitchTooltip . '" />';
-			$aOut[] = '  </a>';
-			$aOut[] = '</div>';
-			$aUserBarBeforeLogoutViews = array();
-			wfRunHooks('BSBlueSpiceSkinUserBarBeforeLogout', array(&$aUserBarBeforeLogoutViews, $oUser, $this));
-			foreach ($aUserBarBeforeLogoutViews as $oUserBarView) {
-				$aOut[] = $oUserBarView->execute();
-			}
-		}
-
-		echo implode("\n", $aOut);
-	}
-
-	protected function printSkyScraper() {
-		global $wgTitle;
-		$aViews = array();
-		wfRunHooks('BSBlueSpiceSkinSkyScraper', array(&$aViews, $wgTitle));
-		if (!empty($aViews)) {
-			echo '<div id="bs-skyscraper">';
-			$this->printViews($aViews);
-			echo '</div>';
-		}
-	}
-
-	protected function printApplicationList() {
-		global $wgUser;
-		$aApplications = BsConfig::get('MW::Applications');
-		$sCurrentApplicationContext = BsConfig::get('MW::ApplicationContext');
-		$aOut = array();
-		if (wfRunHooks('BSBlueSpiceSkin:ApplicationList', array(&$aApplications, &$sCurrentApplicationContext, $wgUser, &$aOut, $this))) {
-			// TODO RBV (02.11.10 11:00): Encapsulate in view
-			$aOut[] = '<div id="bs-apps">';
-			$aOut[] = '  <ul>';
-			foreach ($aApplications as $aApp) {
-				$sClass = ( $aApp['name'] == $sCurrentApplicationContext ) ? ' class="active" ' : '';
-				$aListItem = array();
-				$aListItem[] = '  <li>';
-				$aListItem[] = '    <a href="' . $aApp['url'] . '" title="' . $aApp['displaytitle'] . '"' . $sClass . '>' . $aApp['displaytitle'] . '</a>';
-				$aListItem[] = '  </li>';
-				$aOut[] = implode("\n", $aListItem);
-			}
-			$aOut[] = '  </ul>';
-			$aOut[] = '</div>';
-		}
-		echo implode("\n", $aOut);
-	}
-
-	protected function printSearchBox() {
-		$aSearchBoxKeyValues = array();
-		wfRunHooks( 'FormDefaults', array( $this, &$aSearchBoxKeyValues ) );
-
-		$aOut = array();
-		$aOut[] = '<div id="bs-searchbar">';
-		$aOut[] = '<form class="bs-search-form" action="'.$aSearchBoxKeyValues['SearchDestination'].'" method="'.$aSearchBoxKeyValues['method'].'">';
-
-		if ( isset( $aSearchBoxKeyValues['HiddenFields'] ) && is_array( $aSearchBoxKeyValues['HiddenFields'] ) ) {
-			foreach ( $aSearchBoxKeyValues['HiddenFields'] as $key => $value ) {
-				$aOut[] = '<input type="hidden" name="'.$key.'" value="'.$value.'" />';
-			}
-		}
-
-		$aOut[] = '<input type="submit" id="bs-search-fulltext" title="'.$aSearchBoxKeyValues['SubmitButtonFulltext'].'" name="search_scope" value="">';
-		$aOut[] = '<input name="'.$aSearchBoxKeyValues['SearchTextFieldName'].'" type="text" title="'.$aSearchBoxKeyValues['SearchTextFieldTitle'].
-						'" id="bs-search-input" value="'.$aSearchBoxKeyValues['SearchTextFieldDefaultText'].
-						'" class="bs-unfocused-textfield bs-autocomplete-field" accesskey="f" />';
-
-		wfRunHooks( 'BSExtendedSearchFormInputs', array( &$aOut ) );
-
-		$aOut[] = '</form>';
-		$aOut[] = '</div>';
-
-		echo implode("\n", $aOut);
-	}
-
-	protected function printNavigationTop() {
-		$aViews = array();
-		wfRunHooks( 'BlueSpiceSkin:NavigationTop', array( &$aViews, $this ) );
-		$this->printViews($aViews);
-	}
-
-	protected function tooltipAndAccesskeyAttribs($sName) {
-		return Xml::expandAttributes( Linker::tooltipAndAccesskeyAttribs( $sName ) );
-	}
-
-	public function printTitleActions() {
-		$oContext = RequestContext::getMain();
-		$aOut = array();
-		if ( $oContext->getRequest()->getVal('action', 'view') != 'view')
-			return true;
-		$aContentActions = $this->data['bs_title_actions'];
-		if ( count( $aContentActions ) < 1 || $oContext->getRequest()->getVal( 'action', 'view' ) != 'view' || $oContext->getTitle()->isSpecialPage())
-			return;
-		foreach ($aContentActions as $aContentAction) {
-			$aOut[] = "<li class='bs-actions-" . $aContentAction['id'] . "'>";
-			$aOut[] = "  <a href='" . $aContentAction['href'] . "' title='" . $aContentAction['title'] . "'>" . $aContentAction['text'] . "</a>";
-			$aOut[] = "</li>";
-		}
-		echo implode("\n", $aOut);
-	}
+class BlueSpiceSkinTemplate extends BsBaseTemplate {
 
 	public function execute() {
-		global $wgHooks;
-		$oUser = RequestContext::getMain()->getUser();
-		$this->skin = $this->data['skin'];
-		$wgHooks['BSWidgetBarGetDefaultWidgets'][] = array(&$this, 'onBSWidgetBarGetDefaultWidgets');
-		$wgHooks['BSWidgetListHelperInitKeyWords'][] = array(&$this, 'onBSWidgetListHelperInitKeyWords');
+		parent::execute();
 
-		// Suppress warnings to prevent notices about missing indexes in $this->data
 		wfSuppressWarnings();
-		$this->html('headelement');
 		?>
 		<div id="bs-wrapper">
 			<div id="bs-menu-top" class="clearfix">
-				<!--<div id="bs-menu-top-left">
-		<?php $this->printApplicationList(); // TODO RBV (27.10.10 15:22): Make hookpoint  ?>
-					</div>-->
-				<div id="bs-logo">
-					<a href="<?php echo htmlspecialchars($this->data['nav_urls']['mainpage']['href']) ?>" <?php echo $this->tooltipAndAccesskeyAttribs('p-logo') ?>><?php $sImg = ""; wfRunHooks("BSGetLogo", array(&$sImg)); echo $sImg; ?></a>
-				</div>
+				<?php $this->printLogo(); ?>
 				<div id="bs-menu-top-left">
-					<!-- Applications -->
-					<?php $this->printApplicationList(); // TODO RBV (27.10.10 15:22): Make hookpoint ?>
+					<?php $this->printNavigationSites(); ?>
 				</div>
 				<div id="bs-menu-top-right">
-		<?php $this->printUserBar() // TODO RBV (27.10.10 15:22): Make hookpoint   ?>
-		<?php $this->printSearchBox() ?>
+					<?php $this->printPersonalTools(); ?>
 				</div>
+				<?php $this->printSearchBox(); ?>
 			</div>
 			<div id="bs-application">
-				<!-- #bs-left-column START -->
-				<div id="bs-left-column" class="clearfix">
-					<div id="bs-left-resize-container">
-						<div id='bs-left-resize-btn'></div>
-					</div>
-					<div id="bs-nav-sections"> <?php // TODO RBV (02.11.10 11:36): encapsulate creation of left navigation. Maybe views?    ?>
-						<ul id ="bs-nav-tabs">
-							<li>
-								<a id="bs-tab-navigation" href="#bs-nav-section-navigation"><?php echo wfMessage('bs-tab_navigation', 'Navigation')->plain(); ?></a>
-							</li>
-		<?php if ($oUser->isLoggedIn()) { ?>
-								<li>
-									<a id="bs-tab-focus" href="#bs-nav-section-focus"><?php echo wfMessage('bs-tab_focus', 'Focus')->plain(); ?></a>
-								</li>
-								<?php if ($oUser->isAllowed('wikiadmin')) { ?>
-									<li>
-										<a id="bs-tab-admin" href="#bs-nav-section-admin"><?php echo wfMessage('bs-tab_admin', 'Admin')->plain(); ?></a>
-									</li>
-								<?php }
-							}
-							?>
-						</ul>
-						<div id="bs-nav-section-navigation">
-							<!-- Navigation-Code -->
-		<?php $this->printNavigationSidebar(); ?>
-						</div>
-							<?php if ($oUser->isLoggedIn()) { ?>
-							<div id="bs-nav-section-focus">
-								<!-- Focus-Code -->
-							<?php $this->printFocusSidebar(); ?>
-							</div>
-								<?php if ($oUser->isAllowed('wikiadmin')) { ?>
-								<div id="bs-nav-section-admin">
-									<!-- Admin-Code -->
-								<?php $this->printAdminSidebar(); ?>
-								</div>
-								<?php }
-							}
-							?>
-					</div>
-				</div>
-				<!-- #bs-left-column END -->
-
 				<!-- #bs-content-column START -->
 				<div id="bs-content-column">
-					<div id="p-cactions">
-						<ul id="p-cactions-list">
-		<?php $this->printContentActionsList(); ?>
-						</ul>
-					</div>
-		<?php $this->printBeforeArticleContent(); ?>
-					<div id="content">
+					<?php $this->printContentActions(); ?>
+					<?php $this->printDataBeforeContent(); ?>
+					<div id="content" class="mw-body" role="main">
+						<a id="top"></a>
 						<div id="mw-js-message" style="display:none;"<?php $this->html('userlangattributes') ?>></div>
-		<?php $this->printBeforeArticleHeadline(); ?>
-						<a name="top" id="top"></a>
 						<?php $this->printSiteNotice(); ?>
-						<?php $this->printArticleHeadline(); ?>
+						<?php $this->printFirstHeading(); ?>
+						<?php $this->html( 'prebodyhtml' ) ?>
 						<div id="bodyContent" class="clearfix">
-							<h3 id="siteSub">    <?php $this->msg('tagline') ?>  </h3>
+							<h3 id="siteSub"> <?php $this->msg('tagline') ?> </h3>
 							<div id="contentSub"><?php $this->html('subtitle') ?></div>
-
-		<?php if ($this->data['undelete']) { ?><div id="contentSub2"><?php $this->html('undelete') ?></div><?php } ?>
-							<?php if ($this->data['newtalk']) { ?><div class="usermessage"><?php $this->html('newtalk') ?></div><?php } ?>
+							<?php if ($this->data['undelete']) { ?>
+								<div id="contentSub2"><?php $this->html('undelete') ?></div>
+							<?php } ?>
+							<?php if ($this->data['newtalk']) { ?>
+								<div class="usermessage"><?php $this->html('newtalk') ?></div>
+							<?php } ?>
 							<?php if ($this->data['showjumplinks']) { ?>
 								<div id="jump-to-nav"><?php $this->msg('jumpto') ?>
 									<a href="#column-one"><?php $this->msg('jumptonavigation') ?></a>,
 									<a href="#searchInput"><?php $this->msg('jumptosearch') ?></a>
 								</div>
-		<?php } ?>
-							<ul id="bs-title-actions">
+							<?php } ?>
 							<?php $this->printTitleActions(); ?>
-							</ul>
 							<!-- start content -->
-		<?php $this->html('bodytext') ?>
+							<div id="bs-bodytext">
+								<?php $this->html('bodytext') ?>
+							</div>
 							<!-- end content -->
+							<?php $this->printDataAfterContent(); ?>
+							<div class="visualClear"></div>
+							<?php $this->html( 'debughtml' ); ?>
 						</div>
-		<?php $this->printAfterArticleContent(); ?>
 					</div>
 				</div>
 				<!-- #bs-content-column END -->
+				<!-- #bs-left-column START -->
+				<div id="bs-left-column" class="clearfix">
+					<?php $this->printNavigationMain(); ?>
+				</div>
+				<!-- #bs-left-column END -->
 				<!-- #bs-footer START -->
 				<div id="footer" <?php $this->html('userlangattributes') ?>>
 		<?php
@@ -742,17 +160,9 @@ class BlueSpiceSkinTemplate extends BaseTemplate {
 			</div>
 			<?php $this->printSkyScraper(); ?>
 		</div>
-		<?php
-		$aAdditionalHTML = array();
-		wfRunHooks('BSBlueSpiceSkinAfterBsFloaterDiv', array($this, &$aAdditionalHTML));
-		if ( !empty( $aAdditionalHTML ) ) {
-			echo implode( "\n", $aAdditionalHTML );
-		}
-
-		$this->printTrail();
-		?>
-		</body>
-		</html><?php
+		<?php $this->printTrail(); ?>
+	</body>
+</html><?php
 		wfRestoreWarnings();
 	} // end of execute() method
-} // end of class
+}
