@@ -1,0 +1,9 @@
+.icon-silk-add {
+	/*@embed*/
+	background-image: url('images/desktop/bs-add.png');
+}
+
+.icon-silk-delete {
+	/*@embed*/
+	background-image: url('images/desktop/bs-delete.png');
+}
