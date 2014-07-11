@@ -56,7 +56,6 @@ $wgResourceModules['skins.bluespiceskin.scripts'] = array(
 		'ext.bluespice',
 		'mediawiki.jqueryMsg',
 		'jquery.ui.tabs',
-		'ext.echo.overlay'
 	),
 	'messages' => array(
 		'bs-top-bar-messages',
