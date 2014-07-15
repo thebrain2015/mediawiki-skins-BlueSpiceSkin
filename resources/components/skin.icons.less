@@ -17,3 +17,47 @@ a[class*=" icon-"]:hover {
 	text-decoration: none;
 	color: @bs-color-primary;
 }
+
+#bs-nav-sections {
+	#p-help, #p-navigation {
+		li > a {
+			display: table-cell;
+			vertical-align: middle;
+			height: 24px;
+			padding-left: 32px;
+			box-sizing: border-box;
+			/*@embed*/
+			background-image: url('images/desktop/bs-nav-icon-sprite.png');
+			background-repeat: no-repeat;
+			background-position-y: -144px;
+		}
+	}
+
+	li#n-mainpage > a {
+		background-position-y: -72px;
+	}
+
+	li#n-special-allpages > a {
+		background-position-y: -24px;
+	}
+
+	li#n-special-categories > a {
+		background-position-y: 0;
+	}
+
+	li#n-special-recentchanges > a {
+		background-position-y: -120px;
+	}
+
+	li#n-external-manuals > a {
+		background-position-y: -48px;
+	}
+
+	li#n-external-support > a {
+		background-position-y: -168px;
+	}
+
+	li#n-external-contact > a {
+		background-position-y: -96px;
+	}
+}

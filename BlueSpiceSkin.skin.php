@@ -63,6 +63,13 @@ class SkinBlueSpiceSkin extends SkinTemplate {
 		$out->addModuleStyles('skins.bluespiceskin');
 	}
 
+	public function addToSidebarPlain(&$bar, $text) {
+		$item = parent::addToSidebarPlain($bar, $text);
+		//TODO: read-in potential icon configs; Maybe do this in hook or
+		//base class
+		return $item;
+	}
+
 }
 
 class BlueSpiceSkinTemplate extends BsBaseTemplate {
