@@ -72,6 +72,7 @@ $wgResourceModules['skins.bluespiceskin'] = array(
 
 		'BlueSpiceSkin/resources/screen.less',
 		'BlueSpiceSkin/resources/print.less' => array('media' => 'print'),
+		'BlueSpiceSkin/resources/bs.icons.css'
 
 	)
 )+$aResourceModuleTemplate;
