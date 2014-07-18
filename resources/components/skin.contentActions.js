@@ -8,7 +8,7 @@ $(document).on( 'mouseout', '#bs-cactions-button', function() {
 
 (function(mw, $){
 	$(function(){
-		if ( wgIsArticle === true ) {
+		if ( wgIsArticle === true && wgArticleId !== 0 ) {
 			$.getJSON(
 				bs.util.getAjaxDispatcherUrl('BlueSpiceSkinHooks::ajaxGetDiscussionCount', [], true),
 				function( data ) {
