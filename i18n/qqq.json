@@ -1,0 +1,12 @@
+{
+	"@metadata": {
+		"authors": [
+			"Stephan Muggli <muggli@hallowelt.biz>"
+		]
+	},
+	"bluespiceskin-desc": "Used in [[Special:Version]], description of bluespice skin",
+	"bs-tools-widgets-headline": "Headline of widget container\n*completely uppercase\n*{{Identical|WIDGETS}}",
+	"bs-tools-button": "Anchor alternativ text for more\n*completely uppercase\n*{{Identical|MORE}}",
+	"bs-title-actions-print-text": "Anchor alternativ text for print",
+	"bs-title-actions-print-title": "Anchor title for displays printable version of the page"
+}

@@ -28,6 +28,8 @@ $wgAutoloadClasses['BlueSpiceSkinHooks'] = __DIR__ . '/includes/BlueSpiceSkinHoo
 $wgAutoloadClasses['ViewStateBarTopElementTools'] = __DIR__ . '/views/view.StateBarTopElementTools.php';
 $wgAutoloadClasses['ViewStateBarTopElementWatch'] = __DIR__ . '/views/view.StateBarTopElementWatch.php';
 
+$wgMessagesDirs['BlueSpiceSkin'] = __DIR__ . '/i18n';
+
 $wgExtensionMessagesFiles['BlueSpiceSkin'] = __DIR__ . '/BlueSpiceSkin.i18n.php';
 
 //$wgHooks['BSStateBarBeforeTopViewAdd'][] = "BlueSpiceSkinHooks::onBSStateBarBeforeTopViewAdd";
@@ -56,10 +58,6 @@ $wgResourceModules['skins.bluespiceskin.scripts'] = array(
 		'ext.bluespice',
 		'mediawiki.jqueryMsg',
 		'jquery.ui.tabs',
-	),
-	'messages' => array(
-		'bs-top-bar-messages',
-		'bs-top-bar-review'
 	),
 ) + $aResourceModuleTemplate;
 
