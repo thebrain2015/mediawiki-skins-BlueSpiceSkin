@@ -10,7 +10,7 @@ body.mediawiki {
 
 #bs-wrapper {
 	min-width:980px;
-	width:1200px;
+	width: @bs-width-page;
 	margin:0 auto;
 }
 
@@ -18,7 +18,7 @@ body.mediawiki {
 	margin-top: 20px;
 }
 
-#bs-logo, 
+#bs-logo,
 #bs-logo a {
 	height: 60px;
 	background-repeat: no-repeat;
@@ -30,12 +30,12 @@ body.mediawiki {
 }
 
 #bs-menu-top {
-	width:1200px;
+	width: @bs-width-page;
 	height: 100px;
 }
 
 #bs-application {
-	width:1200px;
+	width: @bs-width-page;
 	float:left;
 	clear:none;
 	padding:0;
@@ -50,7 +50,7 @@ body.mediawiki {
 	overflow:hidden;
 	border-top:1px solid #989898;
 	background-color:#BABABA;
-	margin:20px 0 5px @bs-margin-left-content;
+	margin:0px 0 5px @bs-margin-left-content;
 	padding:5px 0 0;
 }
 
@@ -105,7 +105,7 @@ ul#footer-places {
 	list-style: none;
 }
 
-#bs-left-column, 
+#bs-left-column,
 #bs-logo,
 #bs-logo a {
 	width: @bs-width-navcol;
@@ -118,7 +118,7 @@ ul#footer-places {
 
 #bs-nav-sections {
 	position: absolute;
-	top: 175px;
+	top: 158px;
 	width: @bs-width-navcol;
 }
 

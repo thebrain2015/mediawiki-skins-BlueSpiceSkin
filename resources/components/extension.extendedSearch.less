@@ -10,3 +10,26 @@
 #searchform input:focus {
 	border-radius: 8px 8px 0 0;
 }
+
+#bs-extendedsearch-autocomplete{
+	> .ui-menu{
+		border: 1px solid @bs-color-middle-blue;
+		width: 335px !important;
+		box-shadow: @bs-box-shadow;
+		color: @bs-color-dark-blue;
+		border-radius: 0;
+		margin-left: -2px !important;
+		width: 337px !important;
+		li.bs-extendedsearch-suggest.ui-menu-item,
+		li.bs-extendedsearch-ac-noresults.ui-menu-item{
+			background-color: @bs-color-middle-blue;
+			color: @bs-color-dark-blue;
+			b{
+				color: white;
+			}
+		}
+		li.bs-extendedsearch-ac-noresults.ui-menu-item{
+			border-top: none;
+		}
+	}
+}

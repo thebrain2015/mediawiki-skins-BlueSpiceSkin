@@ -87,8 +87,8 @@ class BlueSpiceSkinTemplate extends BsBaseTemplate {
 				</div>
 				<div id="bs-menu-top-right">
 					<?php $this->printPersonalTools(); ?>
+					<?php $this->printSearchBox(); ?>
 				</div>
-				<?php $this->printSearchBox(); ?>
 			</div>
 			<div id="bs-application">
 				<!-- #bs-content-column START -->
@@ -122,11 +122,11 @@ class BlueSpiceSkinTemplate extends BsBaseTemplate {
 								<?php $this->html('bodytext') ?>
 							</div>
 							<!-- end content -->
-							<?php $this->printDataAfterContent(); ?>
 							<div class="visualClear"></div>
 							<?php $this->html( 'debughtml' ); ?>
 						</div>
 					</div>
+					<?php $this->printDataAfterContent(); ?>
 				</div>
 				<!-- #bs-content-column END -->
 				<!-- #bs-left-column START -->

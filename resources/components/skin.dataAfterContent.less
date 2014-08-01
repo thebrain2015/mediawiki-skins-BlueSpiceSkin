@@ -62,3 +62,25 @@
 #bs-data-after-content li.ui-tabs-selected {
 	font-weight: bold;
 }
+
+#bs-data-after-content{
+	border-top: 1px solid rgb(154, 154, 154)!important;
+	margin-top: 0;
+	background-color: rgb(238, 238, 238) !important;
+	#bs-data-after-content-tabs{
+		li{
+			margin-top: -2px;
+			padding-top: 5px;
+		}
+		li.ui-tabs-selected, li.ui-state-hover{
+			background: url(images/desktop/footer-marker.png) no-repeat center top;
+			font-weight: normal;
+			a{
+				color: @bs-color-dark-blue;
+			}
+		}
+	}
+	.bs-authors-originator{
+		background-image: none;
+	}
+}

@@ -13,6 +13,23 @@
 	ul {
 		margin: 0px;
 	}
+	#bs-cactions-button > a{
+		padding-top: 8px;
+		padding-bottom: 0px;
+	}
+	#bs-cactions-button a.icon-arrow-down9-after span{
+		display: inline-block;
+		margin-right: 10px;
+		font-family: @bs-font-default;
+	}
+	#bs-cactions-button{
+		a.icon-arrow-down9-after{
+			color: #b4b3b3;
+		}
+		a.icon-arrow-down9-after.open{
+			color: @bs-color-dark-blue;
+		}
+	}
 	.menu {
 		display:none;
 		position:absolute;
@@ -23,6 +40,20 @@
 			float: none;
 			> a {
 				text-transform: none;
+			}
+		}
+	}
+	#p-views{
+		#ca-watch, #ca-unwatch{
+			margin-top: 7px;
+			cursor: pointer;
+			a{
+				width: 13px;
+				height: 13px;
+				overflow: hidden;
+				margin-top: -13px;
+				padding: 0;
+				text-indent: 20px;
 			}
 		}
 	}

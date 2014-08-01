@@ -1,5 +1,5 @@
 body.mediawiki {
-	font-family: "Neue Helvetica", Helvetica, Arial, sans-serif;
+	font-family: @bs-font-default;
 	font-size: 0.8em;
 }
 
@@ -9,5 +9,39 @@ body.mediawiki {
 	.ui-widget {
 		font-size: 100%;
 	}
-	font-family: "Neue Helvetica", Helvetica, Arial, sans-serif;
+	font-family: @bs-font-default;
+}
+#bs-personal-name{
+	font-size: 85%;
+}
+#bs-content-column{
+	#left-navigation{
+		font-family: "Source Sans Pro";
+		li a{
+			color: @bs-color-dark-blue;
+		}
+		li.selected a{
+			color: rgb(73, 73, 73);
+			font-weight: bold;
+		}
+	}
+	#right-navigation{
+		font-family: "Source Sans Pro";
+		#p-views{
+			li a{
+				color: @bs-color-dark-blue;
+			}
+			li.selected a{
+				color: rgb(73, 73, 73);
+				font-weight: bold;
+			}
+		}
+		#bs-cactions-button a.icon-plus-after:after{
+			color: @bs-color-dark-blue;
+		}
+		#bs-cactions-button a.icon-plus-after span{
+			font-family: "Source Sans Pro";
+			color: @bs-color-dark-blue;
+		}
+	}
 }

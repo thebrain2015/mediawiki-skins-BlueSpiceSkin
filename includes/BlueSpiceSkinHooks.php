@@ -157,4 +157,22 @@ class BlueSpiceSkinHooks {
 
 		return $oResponse;
 	}
+
+	public static function onSkinTemplateNavigationUniversal( &$sktemplate, &$links ) {
+		if (isset($links['views']['view']))
+			unset($links['views']['view']);
+		if (isset($links['actions']['watch'])){
+			$links['actions']['watch']['class'] = 'icon-star';
+			$aTmp = $links['actions']['watch'];
+			$links['views'] = array("watch" => $aTmp) + $links['views'];
+			unset($links['actions']['watch']);
+		}
+		if (isset($links['actions']['unwatch'])){
+			$links['actions']['unwatch']['class'] = 'icon-star3';
+			$aTmp = $links['actions']['unwatch'];
+			$links['views'] = array("unwatch" => $aTmp) + $links['views'];
+			unset($links['actions']['unwatch']);
+		}
+		return true;
+	}
 }

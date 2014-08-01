@@ -1,11 +1,3 @@
-$(document).on( 'mouseover', '#bs-cactions-button', function() {
-	$(this).find('.menu').stop().fadeIn();
-});
-
-$(document).on( 'mouseout', '#bs-cactions-button', function() {
-	$(this).find('.menu').stop().fadeOut();
-});
-
 (function(mw, $){
 	$(function(){
 		if ( wgIsArticle === true && wgArticleId !== 0 ) {
@@ -21,5 +13,12 @@ $(document).on( 'mouseout', '#bs-cactions-button', function() {
 				}
 			);
 		}
+		$("#ca-watch, #ca-unwatch").click(function(e){
+			$(this).children().first().trigger('click');
+			if ($(this).hasClass("icon-star"))
+				$(this).removeClass("icon-star").addClass("icon-star3");
+			else
+				$(this).removeClass("icon-star3").addClass("icon-star");
+		});
 	});
 })( mediaWiki, jQuery );

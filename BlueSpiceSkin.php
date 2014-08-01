@@ -35,6 +35,7 @@ $wgExtensionMessagesFiles['BlueSpiceSkin'] = __DIR__ . '/BlueSpiceSkin.i18n.php'
 //$wgHooks['BSStateBarBeforeTopViewAdd'][] = "BlueSpiceSkinHooks::onBSStateBarBeforeTopViewAdd";
 $wgHooks['DoEditSectionLink'][] = "BlueSpiceSkinHooks::onDoEditSectionLink";
 $wgHooks['SkinBuildSidebar'][] = 'BlueSpiceSkinHooks::onSkinBuildSidebar';
+$wgHooks['SkinTemplateNavigation::Universal'][] = 'BlueSpiceSkinHooks::onSkinTemplateNavigationUniversal';
 
 $wgExtensionFunctions[] = 'BlueSpiceSkinHooks::setup';
 
@@ -53,6 +54,9 @@ $wgResourceModules['skins.bluespiceskin.scripts'] = array(
 		'BlueSpiceSkin/resources/components/skin.dataAfterContent.js',
 		'BlueSpiceSkin/resources/components/extension.widgetbar.js',
 	),
+	'messages' => array(
+		'bs-tools-button'
+	),
 	'styles' => array(),
 	'dependencies' => array(
 		'ext.bluespice',
@@ -70,7 +74,8 @@ $wgResourceModules['skins.bluespiceskin'] = array(
 
 		'BlueSpiceSkin/resources/screen.less',
 		'BlueSpiceSkin/resources/print.less' => array('media' => 'print'),
-		'BlueSpiceSkin/resources/bs.icons.css'
+		'BlueSpiceSkin/resources/bs.icons.css',
+		'BlueSpiceSkin/resources/fonts.css'
 
 	)
 )+$aResourceModuleTemplate;
