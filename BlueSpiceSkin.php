@@ -53,6 +53,7 @@ $wgResourceModules['skins.bluespiceskin.scripts'] = array(
 		'BlueSpiceSkin/resources/components/skin.menuTop.js',
 		'BlueSpiceSkin/resources/components/skin.dataAfterContent.js',
 		'BlueSpiceSkin/resources/components/extension.widgetbar.js',
+		'BlueSpiceSkin/resources/components/special.preferences.js'
 	),
 	'messages' => array(
 		'bs-tools-button'
