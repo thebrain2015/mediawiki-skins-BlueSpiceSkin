@@ -14,9 +14,12 @@ body.mediawiki {
 #bs-personal-name{
 	font-size: 85%;
 }
+#bs-statebar-viewtoggler{
+	font-size: 95%;
+}
 #bs-content-column{
 	#left-navigation{
-		font-family: "Source Sans Pro";
+		font-family: @bs-font-actions;
 		li a{
 			color: @bs-color-dark-blue;
 		}
@@ -26,7 +29,7 @@ body.mediawiki {
 		}
 	}
 	#right-navigation{
-		font-family: "Source Sans Pro";
+		font-family: @bs-font-actions;
 		#p-views{
 			li a{
 				color: @bs-color-dark-blue;
@@ -36,12 +39,27 @@ body.mediawiki {
 				font-weight: bold;
 			}
 		}
-		#bs-cactions-button a.icon-plus-after:after{
-			color: @bs-color-dark-blue;
+		#bs-cactions-button a span{
+			font-family: @bs-font-actions;
 		}
-		#bs-cactions-button a.icon-plus-after span{
-			font-family: "Source Sans Pro";
-			color: @bs-color-dark-blue;
+	}
+}
+
+#bs-menu-top-right{
+	#bs-user-container{
+		#bs-personal-menu{
+			li a{
+				font-size: 90%;
+				color: black !important;
+				font-family: @bs-font-actions;
+			}
 		}
+	}
+}
+
+#bs-extendedsearch-autocomplete{
+	> .ui-menu li.ui-menu-item{
+		font-family: @bs-font-actions;
+		color: @bs-color-dark-blue;
 	}
 }
