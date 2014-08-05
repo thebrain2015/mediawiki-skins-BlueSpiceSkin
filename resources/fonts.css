@@ -5,6 +5,10 @@
 	font-family: Source Sans Pro;
 	src: url("fonts/SourceSansPro-Regular.ttf");
 }
+@font-face{
+	font-family: RobotoSlab;
+	src: url("fonts/RobotoSlab-Regular.ttf");
+}
 
 @font-face{
 	font-family: Muli;
