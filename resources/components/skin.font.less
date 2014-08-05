@@ -14,29 +14,44 @@ body.mediawiki {
 #bs-personal-name{
 	font-size: 85%;
 }
-#bs-statebar-viewtoggler{
-	font-size: 95%;
+#bs-statebar{
+	font-family: @bs-font-actions;
+	#bs-statebar-viewtoggler{
+		font-size: 95%;
+	}
+	#bs-statebar-view{
+		#footer-info{
+			color: @bs-color-dark-grey;
+			font-size: 85%;
+		}
+	}
 }
 #bs-content-column{
 	#left-navigation{
 		font-family: @bs-font-actions;
 		li a{
-			color: @bs-color-dark-blue;
+			color: @bs-color-dark-grey;
 		}
 		li.selected a{
-			color: rgb(73, 73, 73);
+			color: @bs-color-dark-blue;
 			font-weight: bold;
+		}
+		li a:hover{
+			color: @bs-color-dark-blue;
 		}
 	}
 	#right-navigation{
 		font-family: @bs-font-actions;
 		#p-views{
 			li a{
-				color: @bs-color-dark-blue;
+				color: @bs-color-dark-grey;
 			}
 			li.selected a{
-				color: rgb(73, 73, 73);
+				color: @bs-color-dark-blue;
 				font-weight: bold;
+			}
+			li a:hover{
+				color: @bs-color-dark-blue;
 			}
 		}
 		#bs-cactions-button a span{
@@ -44,7 +59,18 @@ body.mediawiki {
 		}
 	}
 }
-
+#bs-left-column{
+	#bs-nav-sections,
+	#bs-nav-sections h5,
+	#bs-nav-sections a,
+	#bs-nav-sections .ui-widget-content a{
+		color: @bs-color-darker-grey;
+		font-family: @bs-font-actions;
+	}
+	#bs-nav-sections #bs-nav-tabs a{
+		font-family: icomoon;
+	}
+}
 #bs-menu-top-right{
 	#bs-user-container{
 		#bs-personal-menu{
@@ -54,6 +80,14 @@ body.mediawiki {
 				font-family: @bs-font-actions;
 			}
 		}
+		span.bs-personal-not-loggedin a,
+		span.bs-personal-not-loggedin a:hover,
+		span.bs-personal-not-loggedin a:active,
+		span.bs-personal-not-loggedin a:visited{
+			font-size: 85%;
+			color: black;
+			text-decoration: none;
+		}
 	}
 }
 
@@ -61,5 +95,25 @@ body.mediawiki {
 	> .ui-menu li.ui-menu-item{
 		font-family: @bs-font-actions;
 		color: @bs-color-dark-blue;
+	}
+}
+#bs-nav-sections.ui-tabs.ui-widget.ui-widget-content.ui-corner-all {
+	h5 {
+		font-size: 170%;
+	}
+}
+#bs-left-column #bs-nav-sections .ui-widget-content a,
+#bs-left-column #bs-nav-sections .ui-widget-content em,
+#bs-left-column #bs-nav-sections .ui-widget-content strong,
+#bs-left-column #bs-nav-sections .ui-widget-content li{
+	font-size: 110%;
+}
+#bs-left-column #bs-nav-sections .ui-widget-content a:after{
+	font-size: 100%;
+}
+#bs-data-after-content{
+	font-family: @bs-font-actions;
+	#bs-data-after-content-tabs{
+		font-size: 85%;
 	}
 }
