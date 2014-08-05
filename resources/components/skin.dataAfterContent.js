@@ -7,4 +7,7 @@ $(document).ready(function(){
 			selected: 0
 		});
 	});
+	$(document).on("onBsShoutboxAfterUpdated", function(e, BsShoutbox){
+		$(".bs-sb-archive").addClass("icon-cancel-circle");
+	});
 });
