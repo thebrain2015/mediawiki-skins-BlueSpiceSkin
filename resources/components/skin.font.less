@@ -35,6 +35,12 @@ body.mediawiki{
 				font-size: 15px;
 			}
 		}
+		a{
+			color: @bs-color-dark-blue;
+		}
+		a:hover{
+			text-decoration: underline;
+		}
 		*{
 			color: @bs-color-content-default;
 		}
@@ -43,8 +49,10 @@ body.mediawiki{
 			color: @bs-color-light-grey;
 		}
 		a[class*='icon-']:hover:after,
-		a[class*='icon-']:hover:before{
+		a[class*='icon-']:hover:before,
+		a[class*='icon-']:hover{
 			color: @bs-color-dark-blue;
+			text-decoration: none;
 		}
 	}
 }
