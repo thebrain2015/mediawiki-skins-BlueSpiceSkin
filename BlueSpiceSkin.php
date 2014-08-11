@@ -85,4 +85,4 @@ unset($aResourceModuleTemplate);
 
 $wgDefaultSkin = 'bluespiceskin';
 $wgSkipSkins = array( 'chick', 'cologneblue', 'common', 'modern', 'monobook',
-	'myskin', 'nostalgia', 'simple', 'standard', 'vector' );
+	'myskin', 'nostalgia', 'simple', 'standard' );
