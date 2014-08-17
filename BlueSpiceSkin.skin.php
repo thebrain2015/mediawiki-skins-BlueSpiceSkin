@@ -25,10 +25,10 @@
  */
 class SkinBlueSpiceSkin extends SkinTemplate {
 
-	var $skinname = 'bluespiceskin';
-	var $stylename = 'BlueSpiceSkin';
-	var $template = 'BlueSpiceSkinTemplate';
-	var $useHeadElement = true;
+	public $skinname = 'bluespiceskin';
+	public $stylename = 'BlueSpiceSkin';
+	public $template = 'BlueSpiceSkinTemplate';
+	public $useHeadElement = true;
 
 	/**
 	 * @param $out OutputPage object
