@@ -52,12 +52,32 @@
 		}
 	}
 }
+#bs-extendedsearch-form-specialpage{
+	#bs-extendedsearch-inputfieldtext-specialpage{
+		height: 16px;
+	}
+	.bs-extendedsearch-domaindiv{
+		.bs-extendedsearch-multivaluefield{
+			margin: 9px;
+		}
+	}
+}
 #bs-extendedsearch-specialpage-body{
 	#bs-extendedsearch-filters-results-paging{
+		.bs-extendedsearch-paging-no:hover{
+			color: #666;
+		}
+		.bs-extendedsearch-paging-no-active{
+			padding-top: 0px;
+		}
+		.bs-extendedsearch-sorting-bar bs-extendedsearch-default-textspacing{
+			font-size: 0.75em;
+		}
 		#bs-extendedsearch-results-paging{
 			#bs-extendedsearch-results{
 				.bs-search-result-info{
-					margin-top: 0;
+					margin-top: -5px;
+					margin-bottom: 5px;
 					line-height: 1.4em;
 				}
 				.bs-search-hit-text{
@@ -68,9 +88,9 @@
 		#bs-extendedsearch-filters{
 			#bs-extendedsearch-all-filter-boxes{
 				.bs-facet-title, .bs-extendedsearch-facetbox{
-					font-size: 1em !important;
 					.facetBarEntry{
-						font-size: 0.8em !important;
+						font-size: 90% !important;
+						line-height: normal;
 					}
 				}
 			}
