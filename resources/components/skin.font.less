@@ -28,7 +28,7 @@ body.mediawiki{
 	}
 	#content{
 		h1, h2, h3, h4, h5, h6{
-			font-family: @bs-font-roboto;
+			font-family: @bs-font-default;
 			border-bottom: none;
 			font-weight: normal;
 			a.mw-editsection.icon-pencil:before{
@@ -67,6 +67,17 @@ body.mediawiki{
 		a[class*='icon-']:hover{
 			color: @bs-color-dark-blue;
 			text-decoration: none;
+		}
+		.bs-blog-item-info{
+			color: #999;
+			margin: 5px 0 12px 0;
+		}
+		.bs-blog-header{
+			border-bottom: none;
+		}
+		.bs-blog-item-headline{
+			margin-bottom: 0;
+			border-bottom-color: @bs-color-dark-grey;
 		}
 	}
 	#bs-data-after-content{
@@ -180,6 +191,14 @@ body.mediawiki{
 				font-size: 90%;
 				color: black !important;
 				font-family: @bs-font-default;
+			}
+		}
+		#bs-personal-info{
+			li a:before{
+				color: @bs-color-dark-grey;
+			}
+			li a:hover:before{
+				color: @bs-color-dark-blue;
 			}
 		}
 		span.bs-personal-not-loggedin a,
