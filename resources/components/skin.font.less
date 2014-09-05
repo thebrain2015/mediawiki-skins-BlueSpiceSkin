@@ -35,7 +35,14 @@ body.mediawiki{
 				font-size: 15px;
 			}
 		}
-		a{
+		h1{
+			margin-bottom: 5px;
+		}
+		h2{
+			border-bottom: 1px solid;
+			margin-top: 10px;
+		}
+		a, #toc a span{
 			color: @bs-color-dark-blue;
 		}
 		a.new{
@@ -62,6 +69,27 @@ body.mediawiki{
 			text-decoration: none;
 		}
 	}
+	#bs-data-after-content{
+		#bs-shoutbox{
+			form#bs-sb-form{
+				#bs-sb-send{
+					font-size: 0.85em;
+				}
+				.bs-sb-textarea-additionalinfo{
+					#bs-sb-charactercounter{
+						font-size: 75%;
+					}
+				}
+			}
+			#bs-sb-content{
+				.bs-sb-message{
+					.bs-sb-message-text, .bs-sb-message-head{
+						font-size: 90%;
+					}
+				}
+			}
+		}
+	}
 }
 #bs-left-column,
 #bs-left-column .ui-widget {
@@ -79,7 +107,17 @@ body.mediawiki{
 	#bs-statebar-viewtoggler{
 		font-size: 95%;
 	}
+	#bs-statebar-viewtoggler:after{
+		display: table-cell;
+		vertical-align: middle;
+	}
 	#bs-statebar-view{
+		h4{
+			font-size: 100%;
+		}
+		.bs-statebar-body-itembody{
+			font-size: 80%;
+		}
 		#footer-info{
 			color: @bs-color-dark-grey;
 			font-size: 85%;
@@ -91,6 +129,7 @@ body.mediawiki{
 		font-family: @bs-font-default;
 		li a{
 			color: @bs-color-dark-grey;
+			font-size: 75%;
 		}
 		li.selected a{
 			color: @bs-color-dark-blue;
@@ -105,6 +144,7 @@ body.mediawiki{
 		#p-views{
 			li a{
 				color: @bs-color-dark-grey;
+				font-size: 75%;
 			}
 			li.selected a{
 				color: @bs-color-dark-blue;
@@ -116,6 +156,7 @@ body.mediawiki{
 		}
 		#bs-cactions-button a span{
 			font-family: @bs-font-default;
+			font-size: 75%;
 		}
 	}
 }
@@ -129,7 +170,7 @@ body.mediawiki{
 	}
 	#bs-nav-sections #bs-nav-tabs a{
 		font-family: icomoon;
-		font-size: 160%;
+		font-size: 140%;
 	}
 }
 #bs-menu-top-right{

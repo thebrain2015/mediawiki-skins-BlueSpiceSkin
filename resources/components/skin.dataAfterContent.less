@@ -89,19 +89,43 @@
 	.bs-authors-originator{
 		background-image: none;
 	}
+	.bs-readers, .bs-readers{
+		.bs-userminiprofile img{
+			padding: 0 0.35em;
+		}
+	}
 	#bs-shoutbox{
 		#bs-sb-form, #bs-sb-content{
 			width: 75%;
 		}
 		#bs-sb-message{
 			width: 100%;
+			height: 75px;
+		}
+		#bs-sb-form{
+			.bs-sb-textarea-additionalinfo{
+				margin-top: 0.25em;
+			}
 		}
 		#bs-sb-content{
+			ul, li{
+				list-style-type: none;
+			}
 			li.bs-sb-more{
 				list-style-type: none;
 			}
 			.bs-sb-message{
 				width: 90%;
+				color: @bs-color-neutral;
+			}
+			.bs-sb-archive{
+				background-image: none;
+			}
+			.bs-sb-archive:before{
+				color: @bs-color-light-grey;
+			}
+			.bs-sb-archive:hover:before{
+				color: @bs-color-primary;
 			}
 			.bs-sb-listitem{
 				width: 100%;
