@@ -32,6 +32,12 @@
 }
 
 @font-face{
+	font-family: Open Sans;
+	src: url("fonts/open_sans_600.ttf");
+	font-weight: bold;
+}
+
+@font-face{
 	font-family: Open Sans 300;
 	src: url("fonts/open_sans_300.ttf");
 }
