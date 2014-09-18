@@ -90,7 +90,6 @@ if ($oMobileDetect->isMobile()) {
 		'dependencies' => array(
 			'ext.bluespice',
 			'mediawiki.jqueryMsg',
-			'ext.echo.overlay'
 		),
 		'messages' => array(
 			'bs-top-bar-messages',
