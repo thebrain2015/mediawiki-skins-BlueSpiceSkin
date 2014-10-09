@@ -37,8 +37,6 @@ $wgHooks['DoEditSectionLink'][] = "BlueSpiceSkinHooks::onDoEditSectionLink";
 $wgHooks['SkinBuildSidebar'][] = 'BlueSpiceSkinHooks::onSkinBuildSidebar';
 $wgHooks['SkinTemplateNavigation::Universal'][] = 'BlueSpiceSkinHooks::onSkinTemplateNavigationUniversal';
 
-$wgExtensionFunctions[] = 'BlueSpiceSkinHooks::setup';
-
 $wgAjaxExportList[] = 'BlueSpiceSkinHooks::ajaxGetDiscussionCount';
 
 $aResourceModuleTemplate = array(

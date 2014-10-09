@@ -2,27 +2,6 @@
 
 class BlueSpiceSkinHooks {
 
-	public static function setup() {
-		global $wgStylePath, $wgScriptPath;
-		$sStylePath = ( $wgStylePath ? $wgStylePath : $wgScriptPath ) . "/BlueSpiceSkin/resources/images/";
-
-		if( BsConfig::get('MW::LogoPath') === '' ) {
-			BsConfig::set( 'MW::LogoPath', $sStylePath . '/desktop/bs-logo.png' );
-		}
-		if( BsConfig::get('MW::FaviconPath') === '' ) {
-			BsConfig::set( 'MW::FaviconPath', $sStylePath . '/desktop/favicon.ico' );
-		}
-		if( BsConfig::get('MW::DefaultUserImage') === '' ) {
-			BsConfig::set( 'MW::DefaultUserImage', $sStylePath . '/desktop/bs-user-default-image.png' );
-		}
-		if( BsConfig::get('MW::AnonUserImage') === '' ) {
-			BsConfig::set( 'MW::AnonUserImage', $sStylePath . '/desktop/bs-user-anon-image.png' );
-		}
-		if( BsConfig::get('MW::DeletedUserImage') === '' ) {
-			BsConfig::set( 'MW::DeletedUserImage', $sStylePath . '/desktop/bs-user-deleted-image.png' );
-		}
-	}
-
 	/**
 	 *
 	 * @param StateBar $oStatebar
