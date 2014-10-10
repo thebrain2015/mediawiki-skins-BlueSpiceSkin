@@ -27,6 +27,8 @@ body.mediawiki{
 		font-family: icomoon;
 	}
 	#content{
+		color: @bs-color-content-default;
+
 		h1, h2, h3, h4, h5, h6{
 			font-family: @bs-font-default;
 			border-bottom: none;
@@ -55,9 +57,7 @@ body.mediawiki{
 		a:hover{
 			text-decoration: underline;
 		}
-		*{
-			color: @bs-color-content-default;
-		}
+
 		*[class*='icon-']:after,
 		*[class*='icon-']:before{
 			color: @bs-color-light-grey;
