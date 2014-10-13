@@ -60,7 +60,11 @@ class SkinBlueSpiceSkin extends SkinTemplate {
 	 */
 	function setupSkinUserCss( OutputPage $out ) {
 		parent::setupSkinUserCss($out);
-		$out->addModuleStyles('skins.bluespiceskin');
+		$out->addModuleStyles( 'skins.bluespiceskin' );
+
+		if ( version_compare( $GLOBALS['wgVersion'], '1.23', '>=' ) ) {
+			$out->addModuleStyles( 'mediawiki.skinning.interface' );
+		}
 	}
 
 	public function addToSidebarPlain(&$bar, $text) {
