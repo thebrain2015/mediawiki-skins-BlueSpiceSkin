@@ -66,20 +66,23 @@ $wgResourceModules['skins.bluespiceskin.scripts'] = array(
 
 $wgResourceModules['skins.bluespiceskin'] = array(
 	'styles' => array(
-		'common/commonElements.css' => array('media' => 'screen'),
-		'common/commonContent.css' => array('media' => 'screen'),
-		'common/commonInterface.css' => array('media' => 'screen'),
-		'common/commonPrint.css' => array( 'media' => 'print' ),
-
 		'BlueSpiceSkin/resources/screen.less',
-		'BlueSpiceSkin/resources/print.less' => array('media' => 'print'),
+		'BlueSpiceSkin/resources/print.less' => array( 'media' => 'print' ),
 		'BlueSpiceSkin/resources/bs.icons.css',
 		'BlueSpiceSkin/resources/fonts.css'
-
 	)
-)+$aResourceModuleTemplate;
+) + $aResourceModuleTemplate;
 
-unset($aResourceModuleTemplate);
+if ( version_compare( $GLOBALS['wgVersion'], '1.23', '<' ) ) {
+	$wgResourceModules['skins.bluespiceskin']['styles'] += array(
+		'common/commonElements.css' => array( 'media' => 'screen' ),
+		'common/commonContent.css' => array( 'media' => 'screen' ),
+		'common/commonInterface.css' => array( 'media' => 'screen' ),
+		'common/commonPrint.css' => array( 'media' => 'print' )
+	);
+}
+
+unset( $aResourceModuleTemplate );
 
 $wgDefaultSkin = 'bluespiceskin';
 $wgSkipSkins = array( 'chick', 'cologneblue', 'common', 'modern', 'monobook',
