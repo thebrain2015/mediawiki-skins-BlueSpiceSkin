@@ -218,17 +218,19 @@ body.mediawiki{
 		color: @bs-color-dark-blue;
 	}
 }
-#bs-nav-sections.ui-tabs.ui-widget.ui-widget-content.ui-corner-all {
+#bs-nav-sections.ui-tabs.ui-widget.ui-widget-content.ui-corner-all,
+#bs-nav-sections .bs-nav-tab {
 	h5 {
 		font-size: 150%;
 	}
 }
-#bs-left-column #bs-nav-sections .ui-widget-content a,
-#bs-left-column #bs-nav-sections .ui-widget-content em,
-#bs-left-column #bs-nav-sections .ui-widget-content strong,
-#bs-left-column #bs-nav-sections .ui-widget-content li{
-	font-size: 105%;
+#bs-left-column #bs-nav-sections .ui-widget-content,
+#bs-left-column #bs-nav-sections .bs-nav-tab {
+	a, em, strong, li {
+		font-size: 105%;
+	}
 }
+
 #bs-left-column #bs-nav-sections .ui-widget-content a:hover{
 	text-decoration: underline;
 }
