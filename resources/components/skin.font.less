@@ -3,10 +3,6 @@ body.mediawiki, body.x-body{
 	font-size: 0.938em; //15px
 }
 body.mediawiki{
-	p, a, em, ul, ol, li, table, h5, h6, #toc{
-		font-size: 100%;
-		font-family: @bs-font-default;
-	}
 	h1.firstHeading{
 		font-size: 200%;
 	}
@@ -220,23 +216,15 @@ body.mediawiki{
 }
 #bs-nav-sections.ui-tabs.ui-widget.ui-widget-content.ui-corner-all,
 #bs-nav-sections .bs-nav-tab {
-	h5 {
+	.bs-nav-links > h5 {
 		font-size: 150%;
-	}
-}
-#bs-left-column #bs-nav-sections .ui-widget-content,
-#bs-left-column #bs-nav-sections .bs-nav-tab {
-	a, em, strong, li {
-		font-size: 105%;
 	}
 }
 
 #bs-left-column #bs-nav-sections .ui-widget-content a:hover{
 	text-decoration: underline;
 }
-#bs-left-column #bs-nav-sections .ui-widget-content a:after{
-	font-size: 100%;
-}
+
 #bs-data-after-content{
 	font-family: @bs-font-default;
 	#bs-data-after-content-tabs{
