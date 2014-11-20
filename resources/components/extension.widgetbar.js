@@ -20,9 +20,8 @@ $(document).ready(function() {
 	moreContent.attr("id", "bs-widget-more-menu");
 	moreContent.attr("title", title);
 	moreContent.find("h5").first().text(title);
-	var moreOld = $("li#bs-cactions-button div.menu").clone(true);
 	moreContent.find("div.bs-widget-body").first().html("");
-	moreContent.find("div.bs-widget-body").first().append(moreOld);
+	moreContent.find("div.bs-widget-body").first().append($("li#bs-cactions-button div.menu"));
 
 	var moreContainer = $("<div>");
 	var moreContainerHeadline = $("<h4>");
