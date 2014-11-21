@@ -1,9 +1,11 @@
 {
 	"@metadata": {
 		"authors": [
-			"Nikosguard"
+			"Nikosguard",
+			"Glavkos"
 		]
 	},
+	"bluespiceskin-desc": "Θέμα εμφάνισης της επέκτασης BlueSpice",
 	"bs-tools-widgets-headline": "WIDGETS",
 	"bs-tools-button": "ΠΕΡΙΣΣΌΤΕΡΑ",
 	"bs-title-actions-print-text": "Εκτύπωση",
