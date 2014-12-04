@@ -42,13 +42,13 @@ class SkinBlueSpiceSkin extends SkinTemplate {
 			'icomoon-style',
 			"\n<link rel=\"stylesheet\" href=\"" .
 				htmlspecialchars( $wgLocalStylePath ) .
-				"/{$this->stylename}/resources/icomoon/icomoon.icons.css\">\n"
+				"/BlueSpiceSkin/resources/icomoon/icomoon.icons.css\">\n"
 			."<!--[if lt IE 8]>\n<link rel=\"stylesheet\" href=\"" .
 				htmlspecialchars( $wgLocalStylePath ) .
-				"/{$this->stylename}/resources/icomoon/icomoon.icons.ie7.css\">\n<![endif]-->\n"
+				"/BlueSpiceSkin/resources/icomoon/icomoon.icons.ie7.css\">\n<![endif]-->\n"
 			. "<!--[if lt IE 8]>\n<script src=\"" .
 				htmlspecialchars( $wgLocalStylePath ) .
-				"/{$this->stylename}/resources/icomoon/icomoon.icons.ie7.js\"></script>\n<![endif]-->\n"
+				"/BlueSpiceSkin/resources/icomoon/icomoon.icons.ie7.js\"></script>\n<![endif]-->\n"
 		);
 
 		$out->addModules('skins.bluespiceskin.scripts');
