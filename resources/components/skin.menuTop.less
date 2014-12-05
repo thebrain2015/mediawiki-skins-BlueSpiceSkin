@@ -26,7 +26,7 @@
 #bs-apps li a:hover {
 	color:#717171;
 	/*@embed*/
-	background:url(images/desktop/appsbar-active.png) no-repeat center top;
+	background:url("@{bs-skin-path}images/desktop/appsbar-active.png") no-repeat center top;
 }
 
 #bs-apps ul {
@@ -183,7 +183,8 @@ ul#bs-personal-info > li > a {
 			}
 		}
 		div.bs-personal-menu-top{
-			background-image: url(images/desktop/usermneu-marker.png);
+			/* @embed */
+			background-image: url("@{bs-skin-path}images/desktop/usermneu-marker.png");
 			background-color: transparent;
 			background-repeat: no-repeat;
 			background-position: right top;
