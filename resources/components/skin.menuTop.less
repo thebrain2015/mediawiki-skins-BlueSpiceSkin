@@ -60,8 +60,8 @@
 	width: auto;
 }
 
-ul#bs-personal-menu {
-	display:none;
+
+#bs-button-user ul#bs-personal-menu, #bs-cactions-button ul.bs-personal-menu{
 	position: absolute;
 	z-index: 1000;
 	background-color: @bs-color-neutral3;
@@ -69,7 +69,6 @@ ul#bs-personal-menu {
 	margin: 0;
 
 	li {
-		padding: 0.5em;
 		a {
 			text-decoration: none;
 		}
@@ -155,45 +154,54 @@ ul#bs-personal-info > li > a {
 		padding: 9px 10px 4px 10px;
 		background-color: @bs-color-dark-grey;
 	}
-	#bs-personal-menu-container{
-		margin-top: 29px;
+}
+#bs-button-user #bs-personal-menu-container{
+	margin-top: 29px;
+}
+#bs-button-user #bs-personal-menu-container, #bs-cactions-button > div.menu{
+	background-color: transparent;
+	display: none;
+	clear: both;
+	float: none;
+	#bs-personal-menu, .bs-personal-menu{
+		box-shadow:@bs-box-shadow;
 		background-color: transparent;
-		display: none;
-		clear: both;
-		float: none;
-		#bs-personal-menu{
-			box-shadow:@bs-box-shadow;
-			background-color: transparent;
+		display: block;
+		position: relative;
+		min-width: 220px;
+		padding: 10px 0;
+		background-color: @bs-color-dark-grey;
+	}
+	li{
+		margin-bottom: 0;
+		padding: 0;
+		a{
 			display: block;
-			position: relative;
-			min-width: 220px;
-			padding: 10px 0;
+			padding: 2px 20px;
 			background-color: @bs-color-dark-grey;
 		}
-		li{
-			margin-bottom: 0;
-			padding: 0;
-			a{
-				display: block;
-				padding: 2px 20px;
-				background-color: @bs-color-dark-grey;
-			}
-			a:hover{
-				background-color: rgb(177, 177, 177);
-			}
+		a:hover{
+			background-color: rgb(177, 177, 177);
 		}
-		div.bs-personal-menu-top{
-			/* @embed */
-			background-image: url("@{bs-skin-path}images/desktop/usermneu-marker.png");
-			background-color: transparent;
-			background-repeat: no-repeat;
-			background-position: right top;
-			display: block;
-			height: 10px;
-			width: 21px;
-			position: relative;
-			z-index: 9999999;
-		}
+	}
+	div.bs-personal-menu-top{
+		/* @embed */
+		background-image: url("@{bs-skin-path}images/desktop/usermneu-marker.png");
+		background-color: transparent;
+		background-repeat: no-repeat;
+		background-position: right top;
+		display: block;
+		height: 10px;
+		width: 21px;
+		position: relative;
+		z-index: 9999999;
+		margin-left: 0px;
+	}
+}
+#bs-cactions-button > div.menu{
+	margin-left: -95px;
+	> div.bs-personal-menu-top{
+		margin-left: 100px;
 	}
 }
 
