@@ -3,8 +3,7 @@ $(document).ready(function(){
 		$("#bs-data-after-content").tabs({
 			cookie: {
 				expires: 30
-			},
-			selected: 0
+			}
 		});
 	});
 	$(document).on("onBsShoutboxAfterUpdated", function(e, BsShoutbox){
