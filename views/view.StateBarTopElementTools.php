@@ -38,13 +38,13 @@ class ViewStateBarTopElementTools extends ViewStateBarTopElement {
 		$aOut[] = "<div id='bs-tools'>";
 			$aOut[] = "<div id='bs-tools-btn'>";
 				$aOut[] = "<div id='bs-tools-img'></div>";
-				$aOut[] = "<span>".wfMessage( 'bs-tools-button' )->escaped()."</span>";
+				$aOut[] = "<span>".wfMessage( 'bs-tools-button' )->plain()."</span>";
 			$aOut[] = "</div>";
 			$aOut[] = "<div id='bs-tools-container'>";
 				$aOut[] = "<div id='bs-tools-top'>";
 					$aOut[] = "<div id='bs-tools-shadow-left'></div>";
 					$aOut[] = "<div id='bs-tools-widgets'>";
-						$aOut[] = "<h3 id='bs-tools-widgets-headline' class='bs-tools-headline'>" . wfMessage('bs-tools-widgets-headline')->escaped()."</h3>";
+						$aOut[] = "<h3 id='bs-tools-widgets-headline' class='bs-tools-headline'>" . wfMessage('bs-tools-widgets-headline')->plain()."</h3>";
 						$aOut[] = "<div id='bs-tools-widgets-column-0' class='bs-tools-widgets-column'></div>";
 						$aOut[] = "<div id='bs-tools-widgets-column-1' class='bs-tools-widgets-column'></div>";
 						$aOut[] = "<div id='bs-tools-widgets-column-2' class='bs-tools-widgets-column'></div>";
@@ -58,7 +58,7 @@ class ViewStateBarTopElementTools extends ViewStateBarTopElement {
 
 					$aOut[ ] = '<div id="bs-tools-more">';
 						$aOut[ ] = "<div class='bs-widget-head'>";
-							$aOut[ ] = "<h5 class='bs-widget-title '>" . wfMessage( 'bs-tools-headline' )->escaped()."</h5>";
+							$aOut[ ] = "<h5 class='bs-widget-title '>" . wfMessage( 'bs-tools-headline' )->plain()."</h5>";
 						$aOut[ ] = "</div>";
 						$aOut[ ] = '<ul id="ca-more-menu">';
 						$aOut[ ] = implode( "\n", $this->mOptions['skinTemplate']->data['more_menu'] );

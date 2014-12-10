@@ -6,4 +6,7 @@ $(document).ready(function(){
 			}
 		});
 	});
+	$(document).on("onBsShoutboxAfterUpdated", function(e, BsShoutbox){
+		$(".bs-sb-archive").addClass("icon-cancel-circle");
+	});
 });

@@ -28,13 +28,14 @@ $wgAutoloadClasses['BlueSpiceSkinHooks'] = __DIR__ . '/includes/BlueSpiceSkinHoo
 $wgAutoloadClasses['ViewStateBarTopElementTools'] = __DIR__ . '/views/view.StateBarTopElementTools.php';
 $wgAutoloadClasses['ViewStateBarTopElementWatch'] = __DIR__ . '/views/view.StateBarTopElementWatch.php';
 
+$wgMessagesDirs['BlueSpiceSkin'] = __DIR__ . '/i18n';
+
 $wgExtensionMessagesFiles['BlueSpiceSkin'] = __DIR__ . '/BlueSpiceSkin.i18n.php';
 
 //$wgHooks['BSStateBarBeforeTopViewAdd'][] = "BlueSpiceSkinHooks::onBSStateBarBeforeTopViewAdd";
 $wgHooks['DoEditSectionLink'][] = "BlueSpiceSkinHooks::onDoEditSectionLink";
 $wgHooks['SkinBuildSidebar'][] = 'BlueSpiceSkinHooks::onSkinBuildSidebar';
-
-$wgExtensionFunctions[] = 'BlueSpiceSkinHooks::setup';
+$wgHooks['SkinTemplateNavigation::Universal'][] = 'BlueSpiceSkinHooks::onSkinTemplateNavigationUniversal';
 
 $wgAjaxExportList[] = 'BlueSpiceSkinHooks::ajaxGetDiscussionCount';
 
@@ -50,35 +51,39 @@ $wgResourceModules['skins.bluespiceskin.scripts'] = array(
 		'BlueSpiceSkin/resources/components/skin.menuTop.js',
 		'BlueSpiceSkin/resources/components/skin.dataAfterContent.js',
 		'BlueSpiceSkin/resources/components/extension.widgetbar.js',
+		'BlueSpiceSkin/resources/components/special.preferences.js'
+	),
+	'messages' => array(
+		'bs-tools-button'
 	),
 	'styles' => array(),
 	'dependencies' => array(
 		'ext.bluespice',
 		'mediawiki.jqueryMsg',
 		'jquery.ui.tabs',
-		'ext.echo.overlay'
-	),
-	'messages' => array(
-		'bs-top-bar-messages',
-		'bs-top-bar-review'
 	),
 ) + $aResourceModuleTemplate;
 
 $wgResourceModules['skins.bluespiceskin'] = array(
 	'styles' => array(
-		'common/commonElements.css' => array('media' => 'screen'),
-		'common/commonContent.css' => array('media' => 'screen'),
-		'common/commonInterface.css' => array('media' => 'screen'),
-		'common/commonPrint.css' => array( 'media' => 'print' ),
-
 		'BlueSpiceSkin/resources/screen.less',
-		'BlueSpiceSkin/resources/print.less' => array('media' => 'print'),
-
+		'BlueSpiceSkin/resources/print.less' => array( 'media' => 'print' ),
+		'BlueSpiceSkin/resources/bs.icons.css',
+		'BlueSpiceSkin/resources/fonts.css'
 	)
-)+$aResourceModuleTemplate;
+) + $aResourceModuleTemplate;
 
-unset($aResourceModuleTemplate);
+if ( version_compare( $GLOBALS['wgVersion'], '1.23', '<' ) ) {
+	$wgResourceModules['skins.bluespiceskin']['styles'] += array(
+		'common/commonElements.css' => array( 'media' => 'screen' ),
+		'common/commonContent.css' => array( 'media' => 'screen' ),
+		'common/commonInterface.css' => array( 'media' => 'screen' ),
+		'common/commonPrint.css' => array( 'media' => 'print' )
+	);
+}
+
+unset( $aResourceModuleTemplate );
 
 $wgDefaultSkin = 'bluespiceskin';
 $wgSkipSkins = array( 'chick', 'cologneblue', 'common', 'modern', 'monobook',
-	'myskin', 'nostalgia', 'simple', 'standard', 'vector' );
+	'myskin', 'nostalgia', 'simple', 'standard' );

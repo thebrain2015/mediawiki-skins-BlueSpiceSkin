@@ -2,27 +2,6 @@
 
 class BlueSpiceSkinHooks {
 
-	public static function setup() {
-		global $wgStylePath, $wgScriptPath;
-		$sStylePath = ( $wgStylePath ? $wgStylePath : $wgScriptPath ) . "/BlueSpiceSkin/resources/images/";
-
-		if( BsConfig::get('MW::LogoPath') === '' ) {
-			BsConfig::set( 'MW::LogoPath', $sStylePath . '/desktop/bs-logo.png' );
-		}
-		if( BsConfig::get('MW::FaviconPath') === '' ) {
-			BsConfig::set( 'MW::FaviconPath', $sStylePath . '/desktop/favicon.ico' );
-		}
-		if( BsConfig::get('MW::DefaultUserImage') === '' ) {
-			BsConfig::set( 'MW::DefaultUserImage', $sStylePath . '/desktop/bs-user-default-image.png' );
-		}
-		if( BsConfig::get('MW::AnonUserImage') === '' ) {
-			BsConfig::set( 'MW::AnonUserImage', $sStylePath . '/desktop/bs-user-anon-image.png' );
-		}
-		if( BsConfig::get('MW::DeletedUserImage') === '' ) {
-			BsConfig::set( 'MW::DeletedUserImage', $sStylePath . '/desktop/bs-user-deleted-image.png' );
-		}
-	}
-
 	/**
 	 *
 	 * @param StateBar $oStatebar
@@ -156,5 +135,23 @@ class BlueSpiceSkinHooks {
 		$oResponse->setSuccess( true );
 
 		return $oResponse;
+	}
+
+	public static function onSkinTemplateNavigationUniversal( &$sktemplate, &$links ) {
+		if (isset($links['views']['view']))
+			unset($links['views']['view']);
+		if (isset($links['actions']['watch'])){
+			$links['actions']['watch']['class'] = 'icon-star';
+			$aTmp = $links['actions']['watch'];
+			$links['views'] = array("watch" => $aTmp) + $links['views'];
+			unset($links['actions']['watch']);
+		}
+		if (isset($links['actions']['unwatch'])){
+			$links['actions']['unwatch']['class'] = 'icon-star3';
+			$aTmp = $links['actions']['unwatch'];
+			$links['views'] = array("unwatch" => $aTmp) + $links['views'];
+			unset($links['actions']['unwatch']);
+		}
+		return true;
 	}
 }

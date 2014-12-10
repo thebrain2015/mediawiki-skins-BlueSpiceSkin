@@ -1,13 +1,22 @@
-#bs-statebar {
-	background-color: #eee;
-	padding: 0.5em;
-	height: 2em;
+.bs-statebar-top-item{
+	span, a,a:visited{
+		color: @bs-color-dark-blue;
+	}
+	img{
+		margin-right: 5px;
+	}
 }
 
-#bs-statebar-viewtoggler {
-	float: right;
+#bs-statebar-viewtoggler.open{
+	color: @bs-color-primary;
 }
 
-#bs-statebar-view .bs-statebar-body-item {
-	float: left;
+#bs-statebar-viewtoggler span{
+	font-family: @bs-font-default;
+}
+
+#bs-statebar-view{
+	h4{
+		font-weight: normal;
+	}
 }

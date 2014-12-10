@@ -25,10 +25,10 @@
  */
 class SkinBlueSpiceSkin extends SkinTemplate {
 
-	var $skinname = 'bluespiceskin';
-	var $stylename = 'BlueSpiceSkin';
-	var $template = 'BlueSpiceSkinTemplate';
-	var $useHeadElement = true;
+	public $skinname = 'bluespiceskin';
+	public $stylename = 'BlueSpiceSkin';
+	public $template = 'BlueSpiceSkinTemplate';
+	public $useHeadElement = true;
 
 	/**
 	 * @param $out OutputPage object
@@ -42,13 +42,13 @@ class SkinBlueSpiceSkin extends SkinTemplate {
 			'icomoon-style',
 			"\n<link rel=\"stylesheet\" href=\"" .
 				htmlspecialchars( $wgLocalStylePath ) .
-				"/{$this->stylename}/resources/icomoon/icomoon.icons.css\">\n"
+				"/BlueSpiceSkin/resources/icomoon/icomoon.icons.css\">\n"
 			."<!--[if lt IE 8]>\n<link rel=\"stylesheet\" href=\"" .
 				htmlspecialchars( $wgLocalStylePath ) .
-				"/{$this->stylename}/resources/icomoon/icomoon.icons.ie7.css\">\n<![endif]-->\n"
+				"/BlueSpiceSkin/resources/icomoon/icomoon.icons.ie7.css\">\n<![endif]-->\n"
 			. "<!--[if lt IE 8]>\n<script src=\"" .
 				htmlspecialchars( $wgLocalStylePath ) .
-				"/{$this->stylename}/resources/icomoon/icomoon.icons.ie7.js\"></script>\n<![endif]-->\n"
+				"/BlueSpiceSkin/resources/icomoon/icomoon.icons.ie7.js\"></script>\n<![endif]-->\n"
 		);
 
 		$out->addModules('skins.bluespiceskin.scripts');
@@ -60,7 +60,18 @@ class SkinBlueSpiceSkin extends SkinTemplate {
 	 */
 	function setupSkinUserCss( OutputPage $out ) {
 		parent::setupSkinUserCss($out);
-		$out->addModuleStyles('skins.bluespiceskin');
+		$out->addModuleStyles( 'skins.bluespiceskin' );
+
+		if ( version_compare( $GLOBALS['wgVersion'], '1.23', '>=' ) ) {
+			$out->addModuleStyles( 'mediawiki.skinning.interface' );
+		}
+	}
+
+	public function addToSidebarPlain(&$bar, $text) {
+		$item = parent::addToSidebarPlain($bar, $text);
+		//TODO: read-in potential icon configs; Maybe do this in hook or
+		//base class
+		return $item;
 	}
 
 }
@@ -80,8 +91,8 @@ class BlueSpiceSkinTemplate extends BsBaseTemplate {
 				</div>
 				<div id="bs-menu-top-right">
 					<?php $this->printPersonalTools(); ?>
+					<?php $this->printSearchBox(); ?>
 				</div>
-				<?php $this->printSearchBox(); ?>
 			</div>
 			<div id="bs-application">
 				<!-- #bs-content-column START -->
@@ -115,11 +126,11 @@ class BlueSpiceSkinTemplate extends BsBaseTemplate {
 								<?php $this->html('bodytext') ?>
 							</div>
 							<!-- end content -->
-							<?php $this->printDataAfterContent(); ?>
 							<div class="visualClear"></div>
 							<?php $this->html( 'debughtml' ); ?>
 						</div>
 					</div>
+					<?php $this->printDataAfterContent(); ?>
 				</div>
 				<!-- #bs-content-column END -->
 				<!-- #bs-left-column START -->
