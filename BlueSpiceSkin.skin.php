@@ -456,7 +456,7 @@ class BlueSpiceSkinTemplate extends BaseTemplate {
 			$aOut[] = '<div id="bs-button-user">';
 			$aOut[] = '  <span>' . wfMessage( 'bs-my-account' )->plain() . '</span>';
 
-			$aOut[] = BsCore::getInstance()->getUserMiniProfile( $oUser, array( "width" => "19", "height" => "16" ) )->execute();
+			$aOut[] = BsCore::getInstance()->getUserMiniProfile( $oUser, array( "width" => "16", "height" => "16" ) )->execute();
 			$aOut[] = '  <ul id="bs-personal-menu">';
 
 			$oTitleUser = Title::makeTitle( NS_USER, $oUser->getName() );
