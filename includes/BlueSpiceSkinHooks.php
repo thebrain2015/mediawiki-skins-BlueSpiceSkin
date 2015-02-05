@@ -3,7 +3,7 @@
 class BlueSpiceSkinHooks {
 
 	/**
-	 * 
+	 *
 	 * @param SkinTemplate $sktemplate
 	 * @param BaseTemplate $tpl
 	 * @return boolean Always true to keep Hook running
@@ -24,7 +24,7 @@ class BlueSpiceSkinHooks {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param type $oStatebar
 	 * @param type $aTopViews
 	 * @param type $oUser
@@ -49,7 +49,7 @@ class BlueSpiceSkinHooks {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param SkinTemplate $skin
 	 * @param Title $title
 	 * @param int $section
@@ -125,14 +125,19 @@ class BlueSpiceSkinHooks {
 		$bar['TOOLBOX'] = array();
 		return true;
 	}
-	public static function onBSGetLogo(&$sImg){
-		$sLogoPath = BsConfig::get('MW::LogoPath');
-		if (substr($sLogoPath,0,1) != '/' && substr($sLogoPath,0,4) != 'http')
-				$sLogoPath = "/" . $sLogoPath;
-		$sImg = "<img src='".$sLogoPath."' alt='' />";
+	public static function onBSGetLogo( &$sImg ) {
+		global $wgSitename;
+		$sLogoPath = wfExpandUrl(BsConfig::get( 'MW::LogoPath' ));
+		$sPageName = "";
+		$oTitle = Title::newMainPage();
+		if ( !is_null( $oTitle ) ) {
+			$sPageName = $oTitle->getText() . " - ";
+		}
+		$sPageName .= $wgSitename;
+		$sImg = "<img src='" . $sLogoPath . "' alt='" . $sPageName . "' />";
 		return true;
 	}
-	
+
 	public static function onVisualEditorConfig(&$aStandardConf, &$aDefaultConf){
 		global $wgStylePath, $wgServer;
 		if (isset($aStandardConf['content_css']) && $aStandardConf['content_css'] != "")
