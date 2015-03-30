@@ -1,12 +1,13 @@
 {
 	"@metadata": {
 		"authors": [
-			"Gazimagomedov"
+			"Gazimagomedov",
+			"Аль-Гимравий"
 		]
 	},
 	"bluespiceskin-desc": "Расширениялъул сипат-сурат гьабиялъул куц BӀueSpice",
 	"bs-tools-widgets-headline": "ВИДЖЕТАЛ",
 	"bs-tools-button": "ЖЕГИ",
 	"bs-title-actions-print-text": "КIутIизе",
-	"bs-title-actions-print-title": "КӀутӀизе бегьулеб гьумералъул версия бихьизабула"
+	"bs-title-actions-print-title": "Басмаялда бахъизе версия бихьизабула"
 }
