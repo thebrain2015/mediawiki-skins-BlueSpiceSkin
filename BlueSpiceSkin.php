@@ -89,11 +89,6 @@ $wgSkipSkins = array( 'chick', 'cologneblue', 'common', 'modern', 'monobook',
 	'myskin', 'nostalgia', 'simple', 'standard' );
 
 // Set LESS global variables
-	$localBasePath = dirname( __DIR__ );
-	$wgResourceLoaderLESSImportPaths = array_merge( $wgResourceLoaderLESSImportPaths, array(
-		"$localBasePath/resources/",
-	) );
-
 $wgResourceLoaderLESSVars += array(
 	'body-font-size' => '1em',
 	'bs-color-primary' => '#3e5389', //blue
