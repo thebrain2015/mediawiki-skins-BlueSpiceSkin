@@ -83,7 +83,7 @@ class BlueSpiceSkinHooks {
 					'text' => wfMessage( 'bs-navigation-contact' )->plain(),
 					'href' => 'http://www.blue-spice.org/de/ueber-uns/kontakt-anfahrt/',
 					'id' => 'contact'
-					),
+				)
 			)
 		);
 
