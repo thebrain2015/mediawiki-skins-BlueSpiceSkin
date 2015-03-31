@@ -56,9 +56,9 @@ $wgResourceModules['skins.bluespiceskin.scripts'] = array(
 	'messages' => array(
 		'bs-tools-button'
 	),
+	'position' => 'top',
 	'styles' => array(),
 	'dependencies' => array(
-		'ext.bluespice',
 		'mediawiki.jqueryMsg',
 		'jquery.ui.tabs',
 	),
