@@ -18,47 +18,81 @@ a[class*=" icon-"]:hover {
 	color: @bs-color-primary;
 }
 
+.icon24 {
+	display: inline-block;
+	height: 24px;
+	width: 24px;
+	margin-right: 4px;
+}
+
+.icon-mixin() {
+	> a .icon24 {
+		background-position: 0 @bg-pos-top;
+	}
+	> a:hover .icon24 {
+		background-position: -24px @bg-pos-top;
+	}
+}
+
 #bs-nav-sections {
-	#p-help, #p-navigation {
-		li > a {
-			display: table-cell;
-			vertical-align: middle;
-			height: 24px;
-			padding-left: 32px;
-			box-sizing: border-box;
+	.bs-nav-links {
+		.icon24 {
 			/*@embed*/
 			background-image: url("@{bs-skin-path}images/desktop/bs-nav-icon-sprite.png");
-			background-repeat: no-repeat;
-			background-position: 0 -144px;
+			display: block;
+			float: left;
+		}
+		li > a {
+			display: block;
+			min-height: 24px;
+		}
+
+		@bg-pos-top: -192px;
+		li {
+			.icon-mixin();
+		}
+
+		.bs-nav-item-text {
+			line-height: 22px; /* Has to be lower than icon height. Otherwise the text may break ugly */
 		}
 	}
 
-	li#n-mainpage > a {
-		background-position: 0 -72px;
+	li#n-mainpage,
+	li#n-mainpage-description {
+		@bg-pos-top: -120px;
+		.icon-mixin();
 	}
 
-	li#n-special-allpages > a {
-		background-position: 0 -24px;
+	li#n-special-allpages{
+		@bg-pos-top: -72px;
+		.icon-mixin();
 	}
 
-	li#n-special-categories > a {
-		background-position: 0 0;
+	li#n-special-categories {
+		@bg-pos-top: -48px;
+		.icon-mixin();
 	}
 
-	li#n-special-recentchanges > a {
-		background-position: 0 -120px;
+	li#n-special-recentchanges,
+	li#n-recentchanges {
+		@bg-pos-top: -168px;
+		.icon-mixin();
 	}
 
-	li#n-external-manuals > a {
-		background-position: 0 -48px;
+	li#n-external-manuals,
+	li#n-help{
+		@bg-pos-top: -96px;
+		.icon-mixin();
 	}
 
-	li#n-external-support > a {
-		background-position: 0 -168px;
+	li#n-external-support {
+		@bg-pos-top: -216px;
+		.icon-mixin();
 	}
 
-	li#n-external-contact > a {
-		background-position: 0 -96px;
+	li#n-external-contact {
+		@bg-pos-top: -144px;
+		.icon-mixin();
 	}
 	#bs-nav-tabs a{
 		font-size: 210%;
