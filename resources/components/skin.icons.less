@@ -25,7 +25,7 @@ a[class*=" icon-"]:hover {
 	margin-right: 4px;
 }
 
-.icon-mixin() {
+.icon-mixin( @bg-pos-top ) {
 	> a .icon24 {
 		background-position: 0 @bg-pos-top;
 	}
@@ -47,9 +47,8 @@ a[class*=" icon-"]:hover {
 			min-height: 24px;
 		}
 
-		@bg-pos-top: -192px;
 		li {
-			.icon-mixin();
+			.icon-mixin( -192px );
 		}
 
 		.bs-nav-item-text {
@@ -59,40 +58,33 @@ a[class*=" icon-"]:hover {
 
 	li#n-mainpage,
 	li#n-mainpage-description {
-		@bg-pos-top: -120px;
-		.icon-mixin();
+		.icon-mixin( -120px );
 	}
 
 	li#n-special-allpages{
-		@bg-pos-top: -72px;
-		.icon-mixin();
+		.icon-mixin( -72px );
 	}
 
 	li#n-special-categories {
-		@bg-pos-top: -48px;
-		.icon-mixin();
+		.icon-mixin( -48px );
 	}
 
 	li#n-special-recentchanges,
 	li#n-recentchanges {
-		@bg-pos-top: -168px;
-		.icon-mixin();
+		.icon-mixin( -168px );
 	}
 
 	li#n-external-manuals,
 	li#n-help{
-		@bg-pos-top: -96px;
-		.icon-mixin();
+		.icon-mixin( -96px );
 	}
 
 	li#n-external-support {
-		@bg-pos-top: -216px;
-		.icon-mixin();
+		.icon-mixin( -216px );
 	}
 
 	li#n-external-contact {
-		@bg-pos-top: -144px;
-		.icon-mixin();
+		.icon-mixin( -144px );
 	}
 	#bs-nav-tabs a{
 		font-size: 210%;
