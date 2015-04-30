@@ -1,0 +1,39 @@
+#bs-top {
+	font-size: 300%;
+	position: fixed;
+	bottom: 100px;
+	right: 10px;
+	z-index: 10;
+	visibility: hidden;
+	opacity: 0;
+	-webkit-transition: opacity .3s 0s, visibility 0s .3s;
+	-moz-transition: opacity .3s 0s, visibility 0s .3s;
+	transition: opacity .3s 0s, visibility 0s .3s;
+	color: @bs-color-primary;
+	&:hover{
+		color: @bs-color-secondary;
+	}
+}
+#bs-top.bs-top-is-visible, .bs-top-is-visible, .bs-top:hover {
+	-webkit-transition: opacity .3s 0s, visibility 0s 0s;
+	-moz-transition: opacity .3s 0s, visibility 0s 0s;
+	transition: opacity .3s 0s, visibility 0s 0s;
+}
+#bs-top.bs-top-is-visible, .bs-top-is-visible {
+	visibility: visible;
+	opacity: 1;
+}
+@media only screen and (min-width: 768px) {
+	#bs-top {
+		right: 20px;
+		bottom: 20px;
+	}
+}
+@media only screen and (min-width: 1024px) {
+	#bs-top {
+		height: 60px;
+		width: 60px;
+		right: 30px;
+		bottom: 30px;
+	}
+}

@@ -49,15 +49,19 @@ $wgResourceModules['skins.bluespiceskin.scripts'] = array(
 		'BlueSpiceSkin/resources/components/skin.navigationTabs.js',
 		'BlueSpiceSkin/resources/components/skin.contentActions.js',
 		'BlueSpiceSkin/resources/components/skin.menuTop.js',
+		'BlueSpiceSkin/resources/components/skin.scrollToTop.js',
 		'BlueSpiceSkin/resources/components/skin.dataAfterContent.js',
 		'BlueSpiceSkin/resources/components/extension.widgetbar.js',
 		'BlueSpiceSkin/resources/components/special.preferences.js'
 	),
 	'messages' => array(
-		'bs-tools-button'
+		'bs-tools-button',
+		'bs-to-top-desc'
 	),
 	'position' => 'top',
-	'styles' => array(),
+	'styles' => array(
+		'BlueSpiceSkin/resources/components/skin.scrollToTop.less'
+	),
 	'dependencies' => array(
 		'mediawiki.jqueryMsg',
 		'jquery.ui.tabs',
