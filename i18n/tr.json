@@ -2,9 +2,11 @@
 	"@metadata": {
 		"authors": [
 			"Sayginer",
-			"Sucsuzz"
+			"Sucsuzz",
+			"Captantrips"
 		]
 	},
 	"bs-tools-button": "DAHA FAZLA",
-	"bs-title-actions-print-text": "Yazdır"
+	"bs-title-actions-print-text": "Yazdır",
+	"bs-to-top-desc": "Sayfanın başına git"
 }
