@@ -8,5 +8,6 @@
 	"bs-tools-widgets-headline": "ВИДЖЕТЫ",
 	"bs-tools-button": "ЕЩЁ",
 	"bs-title-actions-print-text": "Печать",
-	"bs-title-actions-print-title": "Отображает версию страницы для печати"
+	"bs-title-actions-print-title": "Отображает версию страницы для печати",
+	"bs-to-top-desc": "Пролистать к верхней части страницы"
 }
