@@ -2,12 +2,14 @@
 	"@metadata": {
 		"authors": [
 			"FRacco",
-			"Beta16"
+			"Beta16",
+			"Gianfranco"
 		]
 	},
 	"bluespiceskin-desc": "Skin dell'estensione BlueSpice",
 	"bs-tools-widgets-headline": "WIDGET",
 	"bs-tools-button": "ALTRO",
 	"bs-title-actions-print-text": "Stampa",
-	"bs-title-actions-print-title": "Mostra la versione stampabile della pagina"
+	"bs-title-actions-print-title": "Mostra la versione stampabile della pagina",
+	"bs-to-top-desc": "Torna a inizio pagina"
 }
