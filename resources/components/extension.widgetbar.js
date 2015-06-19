@@ -1,6 +1,7 @@
 $(document).ready(function() {
 	var widgetBarToggler = $('#bs-cactions-button > a');
-	widgetBarToggler.click(function(e){
+	widgetBarToggler.click( function ( e ) {
+		e.preventDefault();
 		$(this).toggleClass("open");
 		if ($('#bs-flyout').length !== 0)
 			$("#bs-flyout").fadeToggle(200);
