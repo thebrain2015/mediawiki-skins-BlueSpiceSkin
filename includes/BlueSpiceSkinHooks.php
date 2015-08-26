@@ -3,6 +3,16 @@
 class BlueSpiceSkinHooks {
 
 	/**
+	 * Add BlueSpice skin to VisualEditor supported skins
+	 */
+	public static function setup() {
+		global $wgVisualEditorSupportedSkins;
+		if( is_array( $wgVisualEditorSupportedSkins ) ) {
+			$wgVisualEditorSupportedSkins[] = 'bluespiceskin';
+		}
+	}
+
+	/**
 	 *
 	 * @param StateBar $oStatebar
 	 * @param array $aTopViews

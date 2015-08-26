@@ -39,6 +39,8 @@ $wgHooks['SkinTemplateNavigation::Universal'][] = 'BlueSpiceSkinHooks::onSkinTem
 
 $wgAjaxExportList[] = 'BlueSpiceSkinHooks::ajaxGetDiscussionCount';
 
+$wgExtensionFunctions[] = 'BlueSpiceSkinHooks::setup';
+
 $aResourceModuleTemplate = array(
 	'localBasePath' => &$GLOBALS['wgStyleDirectory'],
 	'remoteBasePath' => &$GLOBALS['wgStylePath']
