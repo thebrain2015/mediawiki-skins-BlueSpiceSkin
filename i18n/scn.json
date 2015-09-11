@@ -1,13 +1,14 @@
 {
 	"@metadata": {
 		"authors": [
-			"Pippinu"
+			"Pippinu",
+			"Sarvaturi"
 		]
 	},
-	"bluespiceskin-desc": "Peddi di l’estinsioni BlueSpice",
+	"bluespiceskin-desc": "Peddi dâ stinzioni BlueSpice",
 	"bs-tools-widgets-headline": "WIDGET",
-	"bs-tools-button": "AUTRU",
+	"bs-tools-button": "ÀUTRU",
 	"bs-title-actions-print-text": "Stampa",
-	"bs-title-actions-print-title": "Ammustra na virsioni di sta pàggina bona pi’ stampari",
-	"bs-to-top-desc": "Nchiana ô principiu"
+	"bs-title-actions-print-title": "Ammustra na virsioni di sta pàggina bona pi stampari",
+	"bs-to-top-desc": "Acchiana a l'accuminzagghia"
 }
