@@ -1,9 +1,13 @@
 {
 	"@metadata": {
 		"authors": [
-			"Strainu"
+			"Strainu",
+			"Minisarm"
 		]
 	},
+	"bluespiceskin-desc": "Aspectul pentru extensia BlueSpice",
+	"bs-tools-widgets-headline": "WIDGETURI",
+	"bs-tools-button": "MAI MULT",
 	"bs-title-actions-print-text": "Tipărește",
 	"bs-title-actions-print-title": "Arată versiunea tipăribilă a paginii",
 	"bs-to-top-desc": "Derulează la începutul paginii"
