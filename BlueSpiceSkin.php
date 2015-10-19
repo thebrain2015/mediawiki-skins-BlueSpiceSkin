@@ -61,7 +61,8 @@ $wgResourceModules['skins.bluespiceskin.scripts'] = array(
 	'dependencies' => array(
 		'mediawiki.jqueryMsg',
 		'jquery.ui.tabs',
-		'jquery.cookie'
+		'jquery.cookie',
+		'ext.bluespice'
 	),
 ) + $aResourceModuleTemplate;
 
