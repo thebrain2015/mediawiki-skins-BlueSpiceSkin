@@ -36,6 +36,7 @@ $wgExtensionMessagesFiles['BlueSpiceSkin'] = __DIR__ . '/BlueSpiceSkin.i18n.php'
 $wgHooks['DoEditSectionLink'][] = "BlueSpiceSkinHooks::onDoEditSectionLink";
 $wgHooks['SkinBuildSidebar'][] = 'BlueSpiceSkinHooks::onSkinBuildSidebar';
 $wgHooks['SkinTemplateNavigation::Universal'][] = 'BlueSpiceSkinHooks::onSkinTemplateNavigationUniversal';
+$wgHooks['SkinTemplateOutputPageBeforeExec'][] = 'BlueSpiceSkinHooks::onSkinTemplateOutputPageBeforeExec';
 
 $wgAjaxExportList[] = 'BlueSpiceSkinHooks::ajaxGetDiscussionCount';
 
