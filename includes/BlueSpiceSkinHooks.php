@@ -165,7 +165,7 @@ class BlueSpiceSkinHooks {
 		return true;
 	}
 
-	public function onSkinTemplateOutputPageBeforeExec( &$sktemplate, &$tpl ){
+	public static function onSkinTemplateOutputPageBeforeExec( &$sktemplate, &$tpl ){
 		if ( !isset( $tpl->data['personal_urls']['notifications'] )
 				|| $tpl instanceof BsBaseTemplate != true ) {
 			return true;
