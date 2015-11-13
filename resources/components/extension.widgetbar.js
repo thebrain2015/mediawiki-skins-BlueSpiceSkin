@@ -31,6 +31,7 @@ $(document).ready(function() {
 	moreContent.attr("title", title);
 	moreContent.find("h5").first().text(title);
 	moreContent.find("div.bs-widget-body").first().html("");
+	moreContent.find("div.bs-widget-body").first().removeAttr('class').addClass("bs-widget-body");
 	moreContent.find("div.bs-widget-body").first().append($("li#bs-cactions-button div.menu"));
 
 	var moreContainer = $("<div>");
