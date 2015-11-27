@@ -1,6 +1,6 @@
 (function(mw, $){
 	$(function(){
-		if ( wgIsArticle === true && wgArticleId !== 0 ) {
+		if ( mw.config.get('wgIsArticle') === true && mw.config.get('wgArticleId') !== 0 ) {
 			$.getJSON(
 				bs.util.getAjaxDispatcherUrl('BlueSpiceSkinHooks::ajaxGetDiscussionCount', [], true),
 				function( data ) {

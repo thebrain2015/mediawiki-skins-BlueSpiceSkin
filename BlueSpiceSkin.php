@@ -78,7 +78,8 @@ $wgResourceModules['skins.bluespiceskin'] = array(
 		'BlueSpiceSkin/resources/screen.less',
 		'BlueSpiceSkin/resources/print.less' => array( 'media' => 'print' ),
 		'BlueSpiceSkin/resources/fonts.css'
-	)
+	),
+	'position' => 'top'
 ) + $aResourceModuleTemplate;
 
 if ( version_compare( $GLOBALS['wgVersion'], '1.23', '<' ) ) {

@@ -1,5 +1,5 @@
 $( document ).ready( function() {
-	if (wgCanonicalSpecialPageName !== "WikiAdmin" || mw.util.getParamValue("mode") !== "Preferences")
+	if ( mw.config.get('wgCanonicalSpecialPageName') !== "WikiAdmin" || mw.util.getParamValue("mode") !== "Preferences")
 		return;
 	$( '.bs-prefs .bs-prefs-head' ).each( function( i, v ) {
 		var parentEl = $( v ).parent( "fieldset.bs-prefs" );
