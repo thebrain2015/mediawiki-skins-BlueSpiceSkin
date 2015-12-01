@@ -36,8 +36,11 @@ $wgExtensionMessagesFiles['BlueSpiceSkin'] = __DIR__ . '/BlueSpiceSkin.i18n.php'
 $wgHooks['DoEditSectionLink'][] = "BlueSpiceSkinHooks::onDoEditSectionLink";
 $wgHooks['SkinBuildSidebar'][] = 'BlueSpiceSkinHooks::onSkinBuildSidebar';
 $wgHooks['SkinTemplateNavigation::Universal'][] = 'BlueSpiceSkinHooks::onSkinTemplateNavigationUniversal';
+$wgHooks['SkinTemplateOutputPageBeforeExec'][] = 'BlueSpiceSkinHooks::onSkinTemplateOutputPageBeforeExec';
 
 $wgAjaxExportList[] = 'BlueSpiceSkinHooks::ajaxGetDiscussionCount';
+
+$wgExtensionFunctions[] = 'BlueSpiceSkinHooks::setup';
 
 $aResourceModuleTemplate = array(
 	'localBasePath' => &$GLOBALS['wgStyleDirectory'],
@@ -49,15 +52,19 @@ $wgResourceModules['skins.bluespiceskin.scripts'] = array(
 		'BlueSpiceSkin/resources/components/skin.navigationTabs.js',
 		'BlueSpiceSkin/resources/components/skin.contentActions.js',
 		'BlueSpiceSkin/resources/components/skin.menuTop.js',
+		'BlueSpiceSkin/resources/components/skin.scrollToTop.js',
 		'BlueSpiceSkin/resources/components/skin.dataAfterContent.js',
 		'BlueSpiceSkin/resources/components/extension.widgetbar.js',
 		'BlueSpiceSkin/resources/components/special.preferences.js'
 	),
 	'messages' => array(
-		'bs-tools-button'
+		'bs-tools-button',
+		'bs-to-top-desc'
 	),
 	'position' => 'top',
-	'styles' => array(),
+	'styles' => array(
+		'BlueSpiceSkin/resources/components/skin.scrollToTop.less'
+	),
 	'dependencies' => array(
 		'mediawiki.jqueryMsg',
 		'jquery.ui.tabs',
@@ -70,9 +77,9 @@ $wgResourceModules['skins.bluespiceskin'] = array(
 	'styles' => array(
 		'BlueSpiceSkin/resources/screen.less',
 		'BlueSpiceSkin/resources/print.less' => array( 'media' => 'print' ),
-		'BlueSpiceSkin/resources/bs.icons.css',
 		'BlueSpiceSkin/resources/fonts.css'
-	)
+	),
+	'position' => 'top'
 ) + $aResourceModuleTemplate;
 
 if ( version_compare( $GLOBALS['wgVersion'], '1.23', '<' ) ) {

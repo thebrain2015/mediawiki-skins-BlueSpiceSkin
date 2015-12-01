@@ -3,6 +3,16 @@
 class BlueSpiceSkinHooks {
 
 	/**
+	 * Add BlueSpice skin to VisualEditor supported skins
+	 */
+	public static function setup() {
+		global $wgVisualEditorSupportedSkins;
+		if( is_array( $wgVisualEditorSupportedSkins ) ) {
+			$wgVisualEditorSupportedSkins[] = 'bluespiceskin';
+		}
+	}
+
+	/**
 	 *
 	 * @param StateBar $oStatebar
 	 * @param array $aTopViews
@@ -152,6 +162,27 @@ class BlueSpiceSkinHooks {
 			$links['views'] = array("unwatch" => $aTmp) + $links['views'];
 			unset($links['actions']['unwatch']);
 		}
+		return true;
+	}
+
+	public static function onSkinTemplateOutputPageBeforeExec( &$sktemplate, &$tpl ){
+		if ( !isset( $tpl->data['personal_urls']['notifications'] )
+				|| $tpl instanceof BsBaseTemplate != true ) {
+			return true;
+		}
+
+		$tpl->data['bs_personal_info'][10] = array(
+				'id' => 'pt-notifications',
+				'class' => 'icon-bell2',
+			) + $tpl->data['personal_urls']['notifications'];
+
+		if( isset( $tpl->data['personal_urls']['notifications']['text'] )
+				&& $tpl->data['personal_urls']['notifications']['text'] > 0 ) {
+			$tpl->data['bs_personal_info'][10]['active'] = true;
+		}
+
+		unset( $tpl->data['personal_urls']['notifications'] );
+
 		return true;
 	}
 }

@@ -8,5 +8,6 @@
 	"bs-tools-widgets-headline": "WIDGETS",
 	"bs-tools-button": "PLUS",
 	"bs-title-actions-print-text": "Imprimer",
-	"bs-title-actions-print-title": "Monstra un version imprimibile del pagina"
+	"bs-title-actions-print-title": "Monstra un version imprimibile del pagina",
+	"bs-to-top-desc": "Rolar al initio del pagina"
 }

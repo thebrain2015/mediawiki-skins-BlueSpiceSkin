@@ -1,12 +1,14 @@
 {
 	"@metadata": {
 		"authors": [
-			"아라"
+			"아라",
+			"SeoJeongHo"
 		]
 	},
 	"bluespiceskin-desc": "블루스파이스 확장 기능의 스킨",
 	"bs-tools-widgets-headline": "위젯",
 	"bs-tools-button": "더 보기",
 	"bs-title-actions-print-text": "인쇄",
-	"bs-title-actions-print-title": "문서의 인쇄용 판 보기"
+	"bs-title-actions-print-title": "문서의 인쇄용 판 보기",
+	"bs-to-top-desc": "페이지의 윗 부분으로 스크롤"
 }

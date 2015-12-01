@@ -37,20 +37,6 @@ class SkinBlueSpiceSkin extends SkinTemplate {
 		global $wgLocalStylePath;
 		parent::initPage($out);
 
-		// Append CSS  for icon font support
-		$out->addHeadItem(
-			'icomoon-style',
-			"\n<link rel=\"stylesheet\" href=\"" .
-				htmlspecialchars( $wgLocalStylePath ) .
-				"/BlueSpiceSkin/resources/icomoon/icomoon.icons.css\">\n"
-			."<!--[if lt IE 8]>\n<link rel=\"stylesheet\" href=\"" .
-				htmlspecialchars( $wgLocalStylePath ) .
-				"/BlueSpiceSkin/resources/icomoon/icomoon.icons.ie7.css\">\n<![endif]-->\n"
-			. "<!--[if lt IE 8]>\n<script src=\"" .
-				htmlspecialchars( $wgLocalStylePath ) .
-				"/BlueSpiceSkin/resources/icomoon/icomoon.icons.ie7.js\"></script>\n<![endif]-->\n"
-		);
-
 		$out->addModules('skins.bluespiceskin.scripts');
 	}
 

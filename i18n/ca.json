@@ -1,11 +1,14 @@
 {
 	"@metadata": {
 		"authors": [
-			"Fitoschido"
+			"Fitoschido",
+			"Toniher"
 		]
 	},
+	"bluespiceskin-desc": "Aparença de l'extensió BlueSpice",
 	"bs-tools-widgets-headline": "GINYS",
 	"bs-tools-button": "MÉS",
 	"bs-title-actions-print-text": "Imprimeix",
-	"bs-title-actions-print-title": "Mostra una versió imprimible de la pàgina"
+	"bs-title-actions-print-title": "Mostra una versió imprimible de la pàgina",
+	"bs-to-top-desc": "Desplaça a l'inici la pàgina"
 }

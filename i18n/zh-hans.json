@@ -8,5 +8,6 @@
 	"bs-tools-widgets-headline": "窗口小部件",
 	"bs-tools-button": "更多",
 	"bs-title-actions-print-text": "打印",
-	"bs-title-actions-print-title": "显示页面的打印版本"
+	"bs-title-actions-print-title": "显示页面的打印版本",
+	"bs-to-top-desc": "滚动至页面顶部"
 }

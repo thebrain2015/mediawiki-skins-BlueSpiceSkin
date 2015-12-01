@@ -1,12 +1,14 @@
 {
 	"@metadata": {
 		"authors": [
-			"Lokal Profil"
+			"Lokal Profil",
+			"Josve05a"
 		]
 	},
 	"bluespiceskin-desc": "Utseende för BlueSpice-tillägget",
 	"bs-tools-widgets-headline": "WIDGETS",
 	"bs-tools-button": "MER",
 	"bs-title-actions-print-text": "Skriv ut",
-	"bs-title-actions-print-title": "Visar en utskrivbar version av sidan"
+	"bs-title-actions-print-title": "Visar en utskrivbar version av sidan",
+	"bs-to-top-desc": "Bläddra till toppen av sidan"
 }
