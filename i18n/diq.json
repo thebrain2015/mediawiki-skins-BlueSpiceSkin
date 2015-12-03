@@ -1,12 +1,13 @@
 {
 	"@metadata": {
 		"authors": [
-			"Gorizon"
+			"Gorizon",
+			"Mirzali"
 		]
 	},
 	"bs-tools-widgets-headline": "WIDGETS",
-	"bs-tools-button": "DEHANA",
-	"bs-title-actions-print-text": "Nusten ke",
-	"bs-title-actions-print-title": "Çapyaye versiyona perer bıvin",
-	"bs-to-top-desc": "Şo ser de perer"
+	"bs-tools-button": "ZÊDE",
+	"bs-title-actions-print-text": "Çap ke",
+	"bs-title-actions-print-title": "Versiyonê pela çapbiyayışi bıvêne",
+	"bs-to-top-desc": "Şo serê pele"
 }
