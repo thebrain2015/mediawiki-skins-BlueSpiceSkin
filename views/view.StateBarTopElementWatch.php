@@ -18,7 +18,7 @@ class ViewStateBarTopElementWatch extends ViewStateBarTopElement {
 			$sClass = "class='watched'";
 		$aOut[] = '<div id="ca-watch" class="icon">';
 		if ($wgTitle instanceof Title)
-		$sName = $wgTitle->userIsWatching () ? 'unwatch' : 'watch';
+		$sName = $wgUser->isWatched( $wgTitle ) ? 'unwatch' : 'watch';
 		
 		$aOut[] = '  <a href="' . $wgTitle->getFullUrl(array('action' => $sName)) . '" title="' . wfMessage($sName)->plain() . '" '.$sClass.'>'.wfMessage($sName)->plain().'</a>';
 		$aOut[] = '</div>';
