@@ -81,17 +81,17 @@ class BlueSpiceSkinHooks {
 			'help' => array(
 				array(
 					'text' => wfMessage( 'bs-navigation-instructions' )->plain(),
-					'href' => 'http://help.blue-spice.org/index.php/Wiki/de',
+					'href' => wfMessage( 'bs-navigation-instructions-url' )->plain(),
 					'id' => 'manuals'
 				),
 				array(
 					'text' => wfMessage( 'bs-navigation-support' )->plain(),
-					'href' => 'http://www.blue-spice.org/de/service/support/business-support/',
+					'href' => wfMessage( 'bs-navigation-support-url' )->plain(),
 					'id' => 'support'
 				),
 				array(
 					'text' => wfMessage( 'bs-navigation-contact' )->plain(),
-					'href' => 'http://www.blue-spice.org/de/ueber-uns/kontakt-anfahrt/',
+					'href' => wfMessage( 'bs-navigation-contact-url' )->plain(),
 					'id' => 'contact'
 				)
 			)
