@@ -125,34 +125,7 @@ class BlueSpiceSkinTemplate extends BsBaseTemplate {
 				</div>
 				<!-- #bs-left-column END -->
 				<!-- #bs-footer START -->
-				<div id="footer" <?php $this->html('userlangattributes') ?>>
-		<?php
-		$aFooterIcons = $this->getFooterIcons("icononly");
-		$aFooterLinks = $this->getFooterLinks();
-		foreach ($aFooterLinks as $sCategory => $aLinks):
-			?>
-						<ul id="footer-<?php echo $sCategory ?>">
-							<?php
-							foreach ($aLinks as $sLink) {
-								echo '<li id="footer-' . $sCategory . '-' . $sLink . '">' . $this->data[$sLink] . '</li>';
-							}
-							?>
-						</ul>
-					<?php endforeach; ?>
-					<?php
-					if (count($aFooterIcons) > 0):
-						?>
-						<ul id="footer-icons" class="noprint">
-								<?php foreach ( $aFooterIcons as $blockName => $aFooterIconBlock ): ?>
-								<li id="footer-<?php echo htmlspecialchars($blockName); ?>ico">
-									<?php foreach ( $aFooterIconBlock as $icon ): ?>
-										<?php echo $this->getSkin()->makeFooterIcon($icon); ?>
-								<?php endforeach; ?>
-								</li>
-						<?php endforeach; ?>
-						</ul>
-		<?php endif; ?>
-				</div>
+				<?php $this->printFooter(); ?>
 				<!-- #bs-footer END -->
 			</div>
 			<?php $this->printSkyScraper(); ?>
