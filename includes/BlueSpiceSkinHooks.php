@@ -46,22 +46,24 @@ class BlueSpiceSkinHooks {
 	 * @return boolean Always true to keep Hook running
 	 */
 	public static function onDoEditSectionLink($skin, $title, $section, $tooltip, &$result, $lang = false) {
-		$result = Linker::link(
-			$title,
-			Html::element(
-				'span',
-				array(),
-				wfMessage( 'editsection' )->inLanguage( $lang )->text()
-			),
-			array(
-				'class' => 'mw-editsection icon-pencil',
-				'title' => $tooltip
-			),
-			array(
-				'action' => 'edit',
-				'section' => $section
-			)
-		);
+		if ( $skin->getSkin() instanceof SkinBlueSpiceSkin ) {
+			$result = Linker::link(
+				$title,
+				Html::element(
+					'span',
+					array(),
+					wfMessage( 'editsection' )->inLanguage( $lang )->text()
+				),
+				array(
+					'class' => 'mw-editsection icon-pencil',
+					'title' => $tooltip
+				),
+				array(
+					'action' => 'edit',
+					'section' => $section
+				)
+			);
+		}
 		return true;
 	}
 
