@@ -100,13 +100,6 @@ $wgSkipSkins = array( 'chick', 'cologneblue', 'common', 'modern', 'monobook',
 // Set LESS global variables
 $wgResourceLoaderLESSVars += array(
 	'body-font-size' => '1em',
-	'bs-color-primary' => '#3e5389', //blue
-	'bs-color-secondary' => '#ffae00', //orange
-	'bs-color-tertiary' => '#b73a3a', //red
-	'bs-color-neutral' => '#929292', //grey
-	'bs-color-neutral2' => '#ABABAB', //lighten(@bs-color-neutral1, 10%); - LESS / RL issue
-	'bs-color-neutral3' => '#C4C4C4', //lighten(@bs-color-neutral1, 20%)',
-	'bs-color-neutral4' => '#787878', //darken(@bs-color-neutral1, 10%)',
 	'bs-color-dark-blue' => 'rgb(62, 83, 137)',
 	'bs-color-bright-blue-a' => 'rgba(205, 223, 242, 0.6)',
 	'bs-color-middle-blue-a' => 'rgba(62, 83, 137, 0.44)',
