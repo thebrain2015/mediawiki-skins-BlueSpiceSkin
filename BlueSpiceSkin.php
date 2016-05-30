@@ -89,6 +89,10 @@ if ( version_compare( $GLOBALS['wgVersion'], '1.23', '<' ) ) {
 		'common/commonInterface.css' => array( 'media' => 'screen' ),
 		'common/commonPrint.css' => array( 'media' => 'print' )
 	);
+} elseif ( version_compare( $GLOBALS['wgVersion'], '1.27', '>=' ) ) {
+	$wgResourceModules['skins.bluespiceskin']['styles'] += array(
+		'BlueSpiceSkin/resources/components/skin.w1.27.fixes.css' => array( 'media' => 'screen' ),
+	);
 }
 
 unset( $aResourceModuleTemplate );
