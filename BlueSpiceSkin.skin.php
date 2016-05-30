@@ -34,7 +34,6 @@ class SkinBlueSpiceSkin extends SkinTemplate {
 	 * @param $out OutputPage object
 	 */
 	function initPage( \OutputPage $out ) {
-		global $wgLocalStylePath;
 		parent::initPage($out);
 
 		$out->addModules('skins.bluespiceskin.scripts');
