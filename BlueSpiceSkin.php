@@ -15,7 +15,7 @@ if (!defined('MEDIAWIKI')) {
 $wgExtensionCredits['skin'][] = array(
 	'path' => __FILE__,
 	'name' => 'BlueSpiceSkin',
-	'url' => 'http://www.blue-spice.org',
+	'url' => 'http://bluespice.com',
 	'author' => 'Radovan Kubani, Robert Vogel, Patric Wirth, Tobias Weichart et. al.',
 	'descriptionmsg' => 'bluespiceskin-desc',
 );
