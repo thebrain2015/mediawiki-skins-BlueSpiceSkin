@@ -4,7 +4,7 @@
  * BlueSpice for MediaWiki
  * Authors: Radovan Kubani, Sebastian Ulbricht, Tobias Weichart, Robert Vogel
  *
- * Copyright (C) 2014 Hallo Welt! – Medienwerkstatt GmbH, All rights reserved.
+ * Copyright (C) 2016 Hallo Welt! GmbH, All rights reserved.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
