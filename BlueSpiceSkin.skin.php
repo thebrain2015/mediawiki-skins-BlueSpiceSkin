@@ -4,7 +4,7 @@
  * BlueSpice for MediaWiki
  * Authors: Radovan Kubani, Sebastian Ulbricht, Tobias Weichart, Robert Vogel
  *
- * Copyright (C) 2014 Hallo Welt! – Medienwerkstatt GmbH, All rights reserved.
+ * Copyright (C) 2016 Hallo Welt! GmbH, All rights reserved.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -21,7 +21,7 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  * http://www.gnu.org/copyleft/gpl.html
  *
- * For further information visit http://www.blue-spice.org
+ * For further information visit http://bluespice.com
  */
 class SkinBlueSpiceSkin extends SkinTemplate {
 
@@ -34,7 +34,6 @@ class SkinBlueSpiceSkin extends SkinTemplate {
 	 * @param $out OutputPage object
 	 */
 	function initPage( \OutputPage $out ) {
-		global $wgLocalStylePath;
 		parent::initPage($out);
 
 		$out->addModules('skins.bluespiceskin.scripts');

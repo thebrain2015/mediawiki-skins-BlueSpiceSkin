@@ -1,12 +1,14 @@
 {
 	"@metadata": {
 		"authors": [
-			"Khaled"
+			"Khaled",
+			"Maroen1990"
 		]
 	},
 	"bluespiceskin-desc": "تصميم أضافة بلوسبايس",
 	"bs-tools-widgets-headline": "برمجيات صغيرة",
 	"bs-tools-button": "المزيد",
 	"bs-title-actions-print-text": "أطبع",
-	"bs-title-actions-print-title": "أعرض الصفحة القابلة للطباعة"
+	"bs-title-actions-print-title": "أعرض الصفحة القابلة للطباعة",
+	"bs-to-top-desc": "انتقل إلى أعلى الصفحة"
 }

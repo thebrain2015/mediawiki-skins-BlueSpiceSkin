@@ -15,7 +15,7 @@ if (!defined('MEDIAWIKI')) {
 $wgExtensionCredits['skin'][] = array(
 	'path' => __FILE__,
 	'name' => 'BlueSpiceSkin',
-	'url' => 'http://www.blue-spice.org',
+	'url' => 'http://bluespice.com',
 	'author' => 'Radovan Kubani, Robert Vogel, Patric Wirth, Tobias Weichart et. al.',
 	'descriptionmsg' => 'bluespiceskin-desc',
 );
@@ -89,6 +89,10 @@ if ( version_compare( $GLOBALS['wgVersion'], '1.23', '<' ) ) {
 		'common/commonInterface.css' => array( 'media' => 'screen' ),
 		'common/commonPrint.css' => array( 'media' => 'print' )
 	);
+} elseif ( version_compare( $GLOBALS['wgVersion'], '1.27', '>=' ) ) {
+	$wgResourceModules['skins.bluespiceskin']['styles'] += array(
+		'BlueSpiceSkin/resources/components/skin.w1.27.fixes.css' => array( 'media' => 'screen' ),
+	);
 }
 
 unset( $aResourceModuleTemplate );
@@ -100,13 +104,6 @@ $wgSkipSkins = array( 'chick', 'cologneblue', 'common', 'modern', 'monobook',
 // Set LESS global variables
 $wgResourceLoaderLESSVars += array(
 	'body-font-size' => '1em',
-	'bs-color-primary' => '#3e5389', //blue
-	'bs-color-secondary' => '#ffae00', //orange
-	'bs-color-tertiary' => '#b73a3a', //red
-	'bs-color-neutral' => '#929292', //grey
-	'bs-color-neutral2' => '#ABABAB', //lighten(@bs-color-neutral1, 10%); - LESS / RL issue
-	'bs-color-neutral3' => '#C4C4C4', //lighten(@bs-color-neutral1, 20%)',
-	'bs-color-neutral4' => '#787878', //darken(@bs-color-neutral1, 10%)',
 	'bs-color-dark-blue' => 'rgb(62, 83, 137)',
 	'bs-color-bright-blue-a' => 'rgba(205, 223, 242, 0.6)',
 	'bs-color-middle-blue-a' => 'rgba(62, 83, 137, 0.44)',

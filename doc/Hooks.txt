@@ -1,6 +1,6 @@
 +------------------------------------------------------------------------------+
 | Technical documentation: BlueSpice-Hooks.txt                                 |
-| Copyright (C) 2010 Hallo Welt! – Medienwerkstatt GmbH, All rights reserved.  |
+| Copyright (C) 2016 Hallo Welt! GmbH, All rights reserved.                    |
 +------------------------------------------------------------------------------+
 
 This document describes available hooks in the BlueSpice skin. For further

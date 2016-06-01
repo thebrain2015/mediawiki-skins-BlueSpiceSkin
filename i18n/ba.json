@@ -1,11 +1,14 @@
 {
 	"@metadata": {
 		"authors": [
-			"Рустам Нурыев"
+			"Рустам Нурыев",
+			"Sagan"
 		]
 	},
+	"bluespiceskin-desc": "BlueSpice ҡушымтаһының биҙәү темаһы",
 	"bs-tools-widgets-headline": "ВИДЖЕТТАР",
 	"bs-tools-button": "ТАҒЫ",
 	"bs-title-actions-print-text": "Баҫыу",
-	"bs-title-actions-print-title": "Баҫма өсөн өлгө"
+	"bs-title-actions-print-title": "Баҫма өсөн өлгө",
+	"bs-to-top-desc": "Өҫтәрәк урынлашҡан биттәрҙе ҡарау"
 }
