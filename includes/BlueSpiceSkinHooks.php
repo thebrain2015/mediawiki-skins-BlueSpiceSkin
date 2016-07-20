@@ -168,22 +168,40 @@ class BlueSpiceSkinHooks {
 	}
 
 	public static function onSkinTemplateOutputPageBeforeExec( &$sktemplate, &$tpl ){
-		if ( !isset( $tpl->data['personal_urls']['notifications'] )
+		if ( !isset( $tpl->data['personal_urls']['notifications-alert'] )
 				|| $tpl instanceof BsBaseTemplate != true ) {
 			return true;
 		}
 
 		$tpl->data['bs_personal_info'][10] = array(
-				'id' => 'pt-notifications',
-				'class' => 'icon-bell2',
-			) + $tpl->data['personal_urls']['notifications'];
+				'id' => 'pt-notifications-alert',
+				'class' => 'mw-echo-notification-badge-nojs oo-ui-icon-bell oo-ui-widget-enabled mw-echo-notifications-badge',
+			) + $tpl->data['personal_urls']['notifications-alert'];
 
-		if( isset( $tpl->data['personal_urls']['notifications']['text'] )
-				&& $tpl->data['personal_urls']['notifications']['text'] > 0 ) {
+		if( isset( $tpl->data['personal_urls']['notifications-alert']['text'] )
+				&& $tpl->data['personal_urls']['notifications-alert']['text'] > 0 ) {
 			$tpl->data['bs_personal_info'][10]['active'] = true;
 		}
 
-		unset( $tpl->data['personal_urls']['notifications'] );
+		unset( $tpl->data['personal_urls']['notifications-alert'] );
+
+
+		if ( !isset( $tpl->data['personal_urls']['notifications-message'] )
+				|| $tpl instanceof BsBaseTemplate != true ) {
+			return true;
+		}
+
+		$tpl->data['bs_personal_info'][] = array(
+				'id' => 'pt-notifications-message',
+				'class' => 'mw-echo-notification-badge-nojs oo-ui-icon-speechBubbles oo-ui-widget-enabled mw-echo-notifications-badge',
+			) + $tpl->data['personal_urls']['notifications-message'];
+
+		if( isset( $tpl->data['personal_urls']['notifications-message']['text'] )
+				&& $tpl->data['personal_urls']['notifications-message']['text'] > 0 ) {
+			$tpl->data['bs_personal_info'][10]['active'] = true;
+		}
+
+		unset( $tpl->data['personal_urls']['notifications-message'] );
 
 		return true;
 	}
