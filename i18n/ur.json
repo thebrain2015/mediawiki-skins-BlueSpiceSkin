@@ -1,11 +1,14 @@
 {
 	"@metadata": {
 		"authors": [
-			"Obaid Raza"
+			"Obaid Raza",
+			"Muhammad Shuaib"
 		]
 	},
+	"bluespiceskin-desc": "پلواسپائس توسیع کی پوشاک",
+	"bs-tools-widgets-headline": "وجیٹ",
 	"bs-tools-button": "مزید",
 	"bs-title-actions-print-text": "طباعت",
 	"bs-title-actions-print-title": "اس صفحے کا قابل طبع نسخہ دیکھیے",
-	"bs-to-top-desc": "صفحہ کے شروع پر جائیے"
+	"bs-to-top-desc": "صفحہ کے اوپر جائیے"
 }
