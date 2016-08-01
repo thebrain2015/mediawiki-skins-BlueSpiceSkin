@@ -1,0 +1,92 @@
+{
+	"name": "BlueSpiceSkin",
+	"author": "Radovan Kubani, Robert Vogel, Patric Wirth, Tobias Weichart et. al.",
+	"url": "http://bluespice.com",
+	"descriptionmsg": "bluespiceskin-desc",
+	"type": "skin",
+	"ResourceLoaderLESSVars": {
+		"body-font-size": "1em",
+		"bs-color-dark-blue": "rgb(62, 83, 137)",
+		"bs-color-bright-blue-a": "rgba(205, 223, 242, 0.6)",
+		"bs-color-middle-blue-a": "rgba(62, 83, 137, 0.44)",
+		"bs-color-middle-blue": "rgb(152, 167, 196)",
+		"bs-color-light-grey": "rgb(211, 211, 211)",
+		"bs-color-dark-grey": "rgb(186, 186, 186)",
+		"bs-color-darker-grey": "#494949",
+		"bs-color-content-default": "#252525",
+		"bs-color-redlink": "#ba0000",
+		"bs-font-default": "\"Source Sans Pro\", sans-serif",
+		"bs-font-roboto": "\"RobotoSlab\"",
+		"bs-box-shadow": "0px 4px 20px 0px rgba(9, 7, 9, 0.45)",
+		"bs-width-page": "1222px",
+		"bs-width-navcol": "276px",
+		"bs-margin-left-content": "302px"
+	},
+	"ExtensionFunctions": [
+		"BlueSpiceSkinHooks::setup"
+	],
+	"ValidSkinNames": {
+		"bluespiceskin": "BlueSpiceSkin"
+	},
+	"MessagesDirs": {
+		"BlueSpiceSkin": [
+			"i18n"
+		]
+	},
+	"AutoloadClasses": {
+		"SkinBlueSpiceSkin": "BlueSpiceSkin.skin.php",
+		"BlueSpiceSkinTemplate": "BlueSpiceSkin.skin.php",
+		"BlueSpiceSkinHooks": "includes/BlueSpiceSkinHooks.php",
+		"ViewStateBarTopElementTools": "views/view.StateBarTopElementTools.php",
+		"ViewStateBarTopElementWatch": "views/view.StateBarTopElementWatch.php"
+	},
+	"ResourceModules": {
+		"skins.bluespiceskin.scripts": {
+			"scripts": [
+				"components/skin.navigationTabs.js",
+				"components/skin.contentActions.js",
+				"components/skin.menuTop.js",
+				"components/skin.scrollToTop.js",
+				"components/skin.dataAfterContent.js",
+				"components/extension.widgetbar.js",
+				"components/special.preferences.js"
+			],
+			"messages": [
+				"bs-tools-button",
+				"bs-to-top-desc"
+			],
+			"styles": [
+				"components/skin.scrollToTop.less"
+			],
+			"dependencies": [
+				"mediawiki.jqueryMsg",
+				"jquery.ui.tabs",
+				"jquery.cookie",
+				"ext.bluespice"
+			]
+		},
+		"skins.bluespiceskin": {
+			"styles": {
+				"0": "screen.less",
+				"print.less": {
+					"media": "print"
+				},
+				"1": "fonts.css",
+				"components/skin.w1.27.fixes.css": {
+					"media": "screen"
+				}
+			}
+		}
+	},
+	"ResourceFileModulePaths": {
+		"localBasePath": "resources",
+		"remoteSkinPath": "BlueSpiceSkin/resources"
+	},
+	"Hooks": {
+		"DoEditSectionLink": "BlueSpiceSkinHooks::onDoEditSectionLink",
+		"SkinBuildSidebar": "BlueSpiceSkinHooks::onSkinBuildSidebar",
+		"SkinTemplateNavigation::Universal": "BlueSpiceSkinHooks::onSkinTemplateNavigationUniversal",
+		"SkinTemplateOutputPageBeforeExec": "BlueSpiceSkinHooks::onSkinTemplateOutputPageBeforeExec"
+	},
+	"manifest_version": 1
+}
