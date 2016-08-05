@@ -2,7 +2,8 @@ $(document).ready(function(){
 	mw.loader.using('jquery.ui.tabs', function() {
 		$("#bs-data-after-content").tabs({
 			cookie: {
-				expires: 30
+				expires: 30,
+				name: mw.config.get( 'wgCookiePrefix' ) + 'bs-skin-tab-dataAfterContent'
 			}
 		});
 	});

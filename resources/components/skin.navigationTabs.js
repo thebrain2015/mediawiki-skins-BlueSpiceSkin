@@ -1,9 +1,8 @@
 $(document).ready(function(){
-	mw.loader.using('jquery.ui.tabs', function() {
 		$("#bs-nav-sections").tabs({
 			cookie: {
-				expires: 30
+				expires: 30,
+				name: mw.config.get( 'wgCookiePrefix' ) + 'bs-skin-tab-navigationTabs'
 			}
 		});
-	});
 });
