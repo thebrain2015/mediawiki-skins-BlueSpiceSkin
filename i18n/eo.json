@@ -1,8 +1,10 @@
 {
 	"@metadata": {
 		"authors": [
-			"Fitoschido"
+			"Fitoschido",
+			"Robin van der Vliet"
 		]
 	},
-	"bs-tools-button": "PLI"
+	"bs-tools-button": "PLI",
+	"bs-title-actions-print-text": "Presi"
 }
