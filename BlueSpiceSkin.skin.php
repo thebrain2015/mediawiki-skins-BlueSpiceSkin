@@ -105,7 +105,6 @@ class BlueSpiceSkinTemplate extends BsBaseTemplate {
 									<a href="#searchInput"><?php $this->msg('jumptosearch') ?></a>
 								</div>
 							<?php } ?>
-							<?php $this->printTitleActions(); ?>
 							<!-- start content -->
 							<div id="bs-bodytext">
 								<?php $this->html('bodytext') ?>

@@ -7,7 +7,6 @@
 	"bluespiceskin-desc": "Skin of the BlueSpice extension",
 	"bs-tools-widgets-headline": "WIDGETS",
 	"bs-tools-button": "MORE",
-	"bs-title-actions-print-text": "Print",
-	"bs-title-actions-print-title": "Displays printable version of the page",
+	"bs-export-button": "EXPORT",
 	"bs-to-top-desc": "Scroll to the top of the page"
 }
