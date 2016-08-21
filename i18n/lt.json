@@ -1,8 +1,13 @@
 {
 	"@metadata": {
 		"authors": [
-			"Zygimantus"
+			"Zygimantus",
+			"Eitvys200"
 		]
 	},
-	"bs-title-actions-print-text": "Spausdinti"
+	"bluespiceskin-desc": "BlueSpice plėtinio išvaizda",
+	"bs-tools-button": "DAUGIAU",
+	"bs-title-actions-print-text": "Spausdinti",
+	"bs-title-actions-print-title": "Rodo puslapio versiją spausdinimui",
+	"bs-to-top-desc": "Pereiti prie puslapio viršaus"
 }
