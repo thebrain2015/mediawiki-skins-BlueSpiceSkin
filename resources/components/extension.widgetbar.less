@@ -79,7 +79,7 @@
 				}
 			}
 			.bs-widget {
-				width: 33.2%;
+				width: 32.9%;
 				display: inline-block;
 				border-right: 1px solid @bs-color-light-grey;
 			}
@@ -109,8 +109,8 @@
 //ff fix, 2nd and 3rd element show some weird behaviour, only way to fix them is with negative margin
 @-moz-document url-prefix() {
 	#bs-flyout #bs-flyout-content #bs-flyout-content-widgets .bs-widget:nth-child(-n+4){
-		margin-left: -4px;
-	}
+                margin-left: 0px;
+        }
 	#bs-flyout #bs-flyout-content #bs-flyout-content-widgets .bs-widget:nth-child(2){
 		margin-left: 0px;
 	}
