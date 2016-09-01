@@ -3,6 +3,7 @@ $(document).ready(function(){
 		e.preventDefault();
 		var event = e;
 		$('#bs-personal-menu-container').fadeToggle(200);
+		$( '#bs-personal-name' ).toggleClass( 'open' );
 		//needs to be done here, bs-personal-menu-top got a width of 0px before the click due to display none
 		if ($("#bs-button-user div.bs-personal-menu-top").css('margin-left') === "0px"){
 			var marginLeft = $("#bs-button-user div.bs-userminiprofile").outerWidth();
@@ -17,6 +18,7 @@ $(document).ready(function(){
 			$('#bs-personal-menu-container').fadeOut(200);
 			$('#bs-flyout').fadeOut(200);
 			$("#bs-cactions-button > a").removeClass("open");
+			$( '#bs-personal-name' ).removeClass( 'open' );
 		}
 	});
 	var menuTop = $("<div>");
