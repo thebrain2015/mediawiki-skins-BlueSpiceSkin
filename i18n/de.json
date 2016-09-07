@@ -8,7 +8,6 @@
 	"bluespiceskin-desc": "Benutzeroberfläche der Erweiterung „BlueSpice“",
 	"bs-tools-widgets-headline": "WIDGETS",
 	"bs-tools-button": "MEHR",
-	"bs-title-actions-print-text": "Drucken",
-	"bs-title-actions-print-title": "Öffnet die für den Ausdruck optimierte Ansicht der Seite",
+	"bs-export-button": "EXPORTIEREN",
 	"bs-to-top-desc": "Scrolle an den Seitenanfang"
 }

@@ -1,13 +1,13 @@
 {
 	"@metadata": {
 		"authors": [
-			"Xuacu"
+			"Xuacu",
+			"Crucifunked"
 		]
 	},
 	"bluespiceskin-desc": "Tema de la estensión BlueSpice",
 	"bs-tools-widgets-headline": "WIDGETS",
 	"bs-tools-button": "MÁS",
-	"bs-title-actions-print-text": "Imprentar",
-	"bs-title-actions-print-title": "Amuesa la versión imprentable de la páxina",
+	"bs-export-button": "ESPORTAR",
 	"bs-to-top-desc": "Movese al principiu de la páxina"
 }
