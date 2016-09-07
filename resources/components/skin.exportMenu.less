@@ -1,56 +1,75 @@
 #right-navigation #bs-cexport-button{
 	margin-top: 2px;
 }
-#bs-cexport-button > div.menu{
-	background-color: transparent;
-	display: none;
-	clear: both;
-	float: none;
-	#bs-export-menu, .bs-export-menu{
-		box-shadow:@bs-box-shadow;
-		background-color: transparent;
-		display: block;
-		position: relative;
-		min-width: 220px;
-		padding: 10px 0;
-		background-color: @bs-color-dark-grey;
+
+
+
+#bs-cexport-button {
+	a.menuToggler{
+		padding-top: 0px;
+		color: #bababa;
 	}
-	li{
-		margin-bottom: 0;
-		padding: 0;
-		a{
+	a.menuToggler:hover{
+		color: #3e5389;
+	}
+	a.open{
+		color: #3e5389;
+	}
+	div.menu{
+		background-color: transparent;
+		display: none;
+		clear: both;
+		float: none;
+		#bs-export-menu, .bs-export-menu{
+			box-shadow:@bs-box-shadow;
+			background-color: transparent;
 			display: block;
-			padding: 2px 20px;
-			background-color: @bs-color-dark-grey;
+			position: relative;
+			min-width: 220px;
+			padding: 10px 0;
+			background-color: @bs-color-white;
+			li{
+				margin-bottom: 0;
+				padding: 0;
+				a{
+					display: block;
+					padding: 2px 20px;
+					background-color: @bs-color-white;
+					color: @bs-color-text-color;
+					font-size: 90%;
+					line-height: 21px;
+				}
+				a:hover{
+					background-color: @bs-color-mediawiki-grey;
+				}
+			}
 		}
-		a:hover{
-			background-color: rgb(177, 177, 177);
+
+		div.bs-export-menu-top{
+			/* @embed */
+			background-image: url("@{bs-skin-path}images/desktop/usermneu-marker-white.png");
+			background-color: transparent;
+			background-repeat: no-repeat;
+			background-position: right top;
+			display: block;
+			height: 10px;
+			width: 21px;
+			position: relative;
+			z-index: 9999999;
+			margin-left: 0px;
 		}
-	}
-	div.bs-export-menu-top{
-		/* @embed */
-		background-image: url("@{bs-skin-path}images/desktop/usermneu-marker.png");
-		background-color: transparent;
-		background-repeat: no-repeat;
-		background-position: right top;
-		display: block;
-		height: 10px;
-		width: 21px;
-		position: relative;
-		z-index: 9999999;
-		margin-left: 0px;
 	}
 }
+
 #bs-cexport-button > div.menu{
-	margin-left: -95px;
+	margin-left: -180px;
 	> div.bs-export-menu-top{
-		margin-left: 100px;
+		margin-left: 182px;
 	}
 }
 #bs-export-menu, .bs-export-menu{
 	li a{
 		font-size: 90%;
-		color: black !important;
 		font-family: @bs-font-default;
 	}
 }
