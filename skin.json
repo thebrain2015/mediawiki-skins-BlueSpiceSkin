@@ -46,9 +46,10 @@
 				"components/skin.navigationTabs.js",
 				"components/skin.contentActions.js",
 				"components/skin.menuTop.js",
+				"components/skin.exportMenu.js",
+				"components/skin.moreMenu.js",
 				"components/skin.scrollToTop.js",
 				"components/skin.dataAfterContent.js",
-				"components/extension.widgetbar.js",
 				"components/special.preferences.js"
 			],
 			"messages": [
