@@ -57,14 +57,31 @@
 	margin: 0 auto;
 }
 
-#bs-left-column #bs-nav-tabs li.ui-tabs-selected a,
-#bs-left-column #bs-nav-tabs li.ui-state-active a,
-#bs-left-column #bs-nav-tabs li a:hover{
+#bs-left-column #bs-nav-tabs li.ui-state-default.ui-tabs-selected a,
+#bs-left-column #bs-nav-tabs li.ui-state-default.ui-state-active a,
+#bs-left-column #bs-nav-tabs li.ui-state-default.ui-state-hover a,
+#bs-left-column #bs-nav-tabs li.ui-state-default.ui-state-hover a:hover{
 	text-decoration:none;
 	cursor:pointer;
 	color: @bs-color-dark-blue;
-	background: url("@{bs-skin-path}images/desktop/navi-header-marker.png") center bottom no-repeat;
+	line-height: 50px;
 }
+#bs-left-column #bs-nav-tabs li.ui-state-default a{
+	line-height: 15px;
+}
+
+#bs-left-column #bs-nav-tabs li.ui-state-default.ui-state-selected::after,
+#bs-left-column #bs-nav-tabs li.ui-state-default.ui-state-active::after,
+#bs-left-column #bs-nav-tabs li.ui-state-default.ui-state-hover::after{
+	font-family: 'icomoon';
+	content: '\e88f';
+	color: @bs-color-dark-blue;
+	font-size: 100%;
+	line-height: 30%;
+	vertical-align: bottom;
+	text-align: center;
+}
+
 .ui-tabs .ui-tabs-nav li.ui-tabs-selected{
 	padding-bottom: 0 !important;
 }
@@ -132,6 +149,7 @@ div.bs-nav-tab {
 
 #bs-left-column div.bs-nav-tab ul{
 	margin-left: 15px;
+	line-height: 22px;
 }
 /* This would hide all navigation, changing just the 'type' of flickering
 div[id^="bs-nav-section-"] {
