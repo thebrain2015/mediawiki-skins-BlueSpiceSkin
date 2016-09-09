@@ -2,13 +2,13 @@
 	"@metadata": {
 		"authors": [
 			"Lokal Profil",
-			"Josve05a"
+			"Josve05a",
+			"WikiPhoenix"
 		]
 	},
 	"bluespiceskin-desc": "Utseende för BlueSpice-tillägget",
 	"bs-tools-widgets-headline": "WIDGETS",
 	"bs-tools-button": "MER",
-	"bs-title-actions-print-text": "Skriv ut",
-	"bs-title-actions-print-title": "Visar en utskrivbar version av sidan",
+	"bs-export-button": "EXPORTERA",
 	"bs-to-top-desc": "Bläddra till toppen av sidan"
 }

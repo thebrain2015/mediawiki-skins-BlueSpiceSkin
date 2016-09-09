@@ -9,6 +9,6 @@
 	"bluespiceskin-desc": "Used in [[Special:Version]], description of bluespice skin",
 	"bs-tools-widgets-headline": "Headline of widget container.\n{{Identical|Widget}}",
 	"bs-tools-button": "Anchor alternative text for more.\n{{Identical|More}}",
-	"bs-export-button": "Anchor alternative text for export.",
+	"bs-export-button": "Anchor alternative text for export.\n{{Identical|Export}}",
 	"bs-to-top-desc": "Tooltip for a link that scrolls to the top of the page"
 }
