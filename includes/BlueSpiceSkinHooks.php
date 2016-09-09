@@ -38,31 +38,17 @@ class BlueSpiceSkinHooks {
 	/**
 	 * Removes brackets and other markup from edit section links
 	 * @param SkinTemplate $skin
-	 * @param Title $title
+	 * @param Title $nt
 	 * @param int $section
 	 * @param string $tooltip
 	 * @param string $result
 	 * @param Language $lang
 	 * @return boolean Always true to keep Hook running
 	 */
-	public static function onDoEditSectionLink($skin, $title, $section, $tooltip, &$result, $lang = false) {
+	public static function onSkinEditSectionLinks( $skin, $nt, $section, $tooltip, &$links, $lang ) {
 		if ( $skin->getSkin() instanceof SkinBlueSpiceSkin ) {
-			$result = Linker::link(
-				$title,
-				Html::element(
-					'span',
-					array(),
-					wfMessage( 'editsection' )->inLanguage( $lang )->text()
-				),
-				array(
-					'class' => 'mw-editsection icon-pencil',
-					'title' => $tooltip
-				),
-				array(
-					'action' => 'edit',
-					'section' => $section
-				)
-			);
+			$links['editsection']['attribs']['class'] = 'mw-editsection icon-pencil';
+			$links['editsection']['text'] = '';
 		}
 		return true;
 	}

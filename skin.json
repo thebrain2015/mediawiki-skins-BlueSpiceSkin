@@ -84,7 +84,7 @@
 		"remoteSkinPath": "BlueSpiceSkin/resources"
 	},
 	"Hooks": {
-		"DoEditSectionLink": "BlueSpiceSkinHooks::onDoEditSectionLink",
+		"SkinEditSectionLinks": "BlueSpiceSkinHooks::onSkinEditSectionLinks",
 		"SkinBuildSidebar": "BlueSpiceSkinHooks::onSkinBuildSidebar",
 		"SkinTemplateNavigation::Universal": "BlueSpiceSkinHooks::onSkinTemplateNavigationUniversal",
 		"SkinTemplateOutputPageBeforeExec": "BlueSpiceSkinHooks::onSkinTemplateOutputPageBeforeExec"
