@@ -36,15 +36,16 @@ a[class*=" icon-"]:hover {
 
 #bs-nav-sections {
 	.bs-nav-links {
-		.icon24 {
-			/*@embed*/
-			background-image: url("@{bs-skin-path}images/desktop/bs-nav-icon-sprite.png");
+		.icon24::before {
+			font-family: 'icomoon';
+			content: '\e85b';
 			display: block;
-			float: left;
+			text-align: center;
+			font-size: 130%;
 		}
 		li > a {
 			display: block;
-			min-height: 24px;
+			line-height: 22px;
 		}
 
 		li {
@@ -60,36 +61,57 @@ a[class*=" icon-"]:hover {
 		}
 	}
 
-	li#n-mainpage,
-	li#n-mainpage-description {
-		.icon-mixin( -120px );
+	li#n-mainpage span.icon24::before,
+	li#n-mainpage-description span.icon24::before {
+		content: '\e602';
 	}
 
-	li#n-special-allpages{
-		.icon-mixin( -72px );
+	li#n-special-allpages span.icon24::before {
+		content: '\e85e';
 	}
 
-	li#n-special-categories {
-		.icon-mixin( -48px );
+	li#n-special-categories span.icon24::before {
+		content: '\e7f1';
 	}
 
-	li#n-special-recentchanges,
-	li#n-recentchanges {
-		.icon-mixin( -168px );
+	li#n-special-recentchanges span.icon24::before,
+	li#n-recentchanges span.icon24::before {
+		content: '\e649';
 	}
 
-	li#n-external-manuals,
-	li#n-help{
-		.icon-mixin( -96px );
+	li#n-external-manuals span.icon24::before,
+	li#n-help span.icon24::before {
+		content: '\e7c7';
 	}
 
-	li#n-external-support {
-		.icon-mixin( -216px );
+	li#n-external-support span.icon24::before {
+		content: '\e66c';
 	}
 
-	li#n-external-contact {
-		.icon-mixin( -144px );
+	li#n-external-contact span.icon24::before {
+		content: '\e7c8';
 	}
+
+	li#n-randompage span.icon24::before {
+	content: "\e616";
+	}
+
+	.icon24.custom-icon::before,
+	li#n-mainpage span.icon24.custom-icon::before,
+	li#n-mainpage-description span.icon24.custom-icon::before,
+	li#n-special-allpages span.icon24.custom-icon::before,
+	li#n-special-categories span.icon24.custom-icon::before,
+	li#n-special-recentchanges span.icon24.custom-icon::before,
+	li#n-recentchanges span.icon24.custom-icon::before,
+	li#n-external-support span.icon24.custom-icon::before,
+	li#n-external-contact span.icon24.custom-icon::before {
+		content: "";
+	}
+	li#n-randompage span.icon24.custom-icon {
+		display: block;
+		float: left;
+	}
+
 	#bs-nav-tabs a{
 		font-size: 210%;
 	}
