@@ -1,1 +1,41 @@
-/* This is a placeholder file for some more stylings to come */
+#bs-cactions-button{
+	a.menuToggler{
+		padding: 2px;
+		color: #bababa
+	}
+	a.menuToggler:hover{
+		color: #3e5389;
+	}
+	a.open{
+		color: #3e5389;
+	}
+	div.menu{
+		div.bs-personal-menu-top{
+			background-image: url("@{bs-skin-path}images/desktop/usermneu-marker-white.png");
+		}
+		ul.bs-personal-menu{
+			background-color: @bs-color-white;
+			li{
+				a{
+					background-color: @bs-color-white;
+					color: @bs-color-text-color;
+					font-size: 90%;
+					line-height: 22px;
+					span{
+						font-size: 90%;
+					}
+				}
+				a:hover{
+					background-color: @bs-color-mediawiki-grey
+				}
+			}
+		}
+	}
+}
+
+#bs-cactions-button > div.menu{
+	margin-left: -203px;
+	> div.bs-personal-menu-top{
+		margin-left: 200px;
+	}
+}

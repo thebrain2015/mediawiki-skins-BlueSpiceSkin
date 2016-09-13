@@ -38,7 +38,6 @@ class ViewStateBarTopElementTools extends ViewStateBarTopElement {
 		$aOut[] = "<div id='bs-tools'>";
 			$aOut[] = "<div id='bs-tools-btn'>";
 				$aOut[] = "<div id='bs-tools-img'></div>";
-				$aOut[] = "<span>".wfMessage( 'bs-tools-button' )->plain()."</span>";
 			$aOut[] = "</div>";
 			$aOut[] = "<div id='bs-tools-container'>";
 				$aOut[] = "<div id='bs-tools-top'>";
