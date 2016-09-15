@@ -28,6 +28,7 @@
 	"ExtensionFunctions": [
 		"BlueSpiceSkinHooks::setup"
 	],
+	"callback": "BlueSpiceSkinHooks::onRegistration",
 	"ValidSkinNames": {
 		"bluespiceskin": "BlueSpiceSkin"
 	},

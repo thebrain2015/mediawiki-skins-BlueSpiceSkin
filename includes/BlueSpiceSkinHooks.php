@@ -13,6 +13,29 @@ class BlueSpiceSkinHooks {
 	}
 
 	/**
+	 * extension.json callback
+	 */
+	public static function onRegistration() {
+		$GLOBALS['wgValidSkinNames']['bluespiceskin'] = 'BlueSpiceSkin';
+
+		//TODO: Move to Foundation and use API instead.
+		$GLOBALS['wgAjaxExportList'][] = 'BlueSpiceSkinHooks::ajaxGetDiscussionCount';
+
+		$GLOBALS['wgDefaultSkin'] = 'bluespiceskin';
+		$GLOBALS['wgSkipSkins'] = array(
+			'chick',
+			'cologneblue',
+			'common',
+			'modern',
+			'monobook',
+			'myskin',
+			'nostalgia',
+			'simple',
+			'standard'
+		);
+	}
+
+	/**
 	 *
 	 * @param StateBar $oStatebar
 	 * @param array $aTopViews

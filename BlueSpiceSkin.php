@@ -13,21 +13,3 @@ if (!defined('MEDIAWIKI')) {
 }
 
 wfLoadSkin( 'BlueSpiceSkin' );
-
-$wgValidSkinNames['bluespiceskin'] = 'BlueSpiceSkin';
-
-//TODO: Move to Foundation and use API instead.
-$wgAjaxExportList[] = 'BlueSpiceSkinHooks::ajaxGetDiscussionCount';
-
-$wgDefaultSkin = 'bluespiceskin';
-$wgSkipSkins = array(
-	'chick',
-	'cologneblue',
-	'common',
-	'modern',
-	'monobook',
-	'myskin',
-	'nostalgia',
-	'simple',
-	'standard'
-);
