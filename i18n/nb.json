@@ -1,13 +1,13 @@
 {
 	"@metadata": {
 		"authors": [
-			"Chameleon222"
+			"Chameleon222",
+			"Jon Harald Søby"
 		]
 	},
 	"bluespiceskin-desc": "Drakta til BlueSpice-utvidelsen",
 	"bs-tools-widgets-headline": "WIDGETS",
 	"bs-tools-button": "MER",
-	"bs-title-actions-print-text": "Skriv ut",
-	"bs-title-actions-print-title": "Viser en utskriftsvennlig versjon av siden",
+	"bs-export-button": "EKSPORTER",
 	"bs-to-top-desc": "Rull til toppen av siden"
 }
