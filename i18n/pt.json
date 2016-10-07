@@ -1,11 +1,13 @@
 {
 	"@metadata": {
 		"authors": [
-			"Vitorvicentevalente"
+			"Vitorvicentevalente",
+			"Hamilton Abreu"
 		]
 	},
 	"bluespiceskin-desc": "Tema da extensão BlueSpice",
 	"bs-tools-widgets-headline": "WIDGETS",
 	"bs-tools-button": "MAIS",
-	"bs-export-button": "EXPORTAR"
+	"bs-export-button": "EXPORTAR",
+	"bs-to-top-desc": "Deslizar até o topo da página"
 }
