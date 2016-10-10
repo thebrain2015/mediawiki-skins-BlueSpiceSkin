@@ -1,13 +1,13 @@
 {
 	"@metadata": {
 		"authors": [
-			"McSalama"
+			"McSalama",
+			"01miki10"
 		]
 	},
 	"bluespiceskin-desc": "BlueSpice-laajennuksen teema",
 	"bs-tools-widgets-headline": "PIENOISOHJELMAT",
 	"bs-tools-button": "LISÄÄ",
-	"bs-title-actions-print-text": "Tulosta",
-	"bs-title-actions-print-title": "Näyttää tulostettavan version sivusta",
+	"bs-export-button": "VIE",
 	"bs-to-top-desc": "Siirry sivun alkuun"
 }
